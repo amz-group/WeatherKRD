@@ -3,957 +3,342 @@
 <html lang="ckb" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>کەش و هەوای کوردستان</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-:root {
-–sky-deep: #0a1628;
-–sky-mid: #0d2147;
-–sky-light: #1a3a6b;
-–aurora1: #00c9ff;
-–aurora2: #4fc3f7;
-–gold: #ffd54f;
-–gold-light: #fff9c4;
-–cloud: rgba(255,255,255,0.12);
-–card-bg: rgba(255,255,255,0.07);
-–card-border: rgba(255,255,255,0.15);
-–text-main: #e8f4fd;
-–text-soft: rgba(232,244,253,0.65);
-–accent: #00c9ff;
-–warm: #ff8f00;
-–cool: #40c4ff;
-–radius: 20px;
-–shadow: 0 8px 32px rgba(0,0,0,0.4);
-}
-
-body {
-font-family: ‘Noto Sans Arabic’, sans-serif;
-background: var(–sky-deep);
-color: var(–text-main);
-min-height: 100vh;
-overflow-x: hidden;
-direction: rtl;
-}
-
-.sky-bg {
-position: fixed;
-inset: 0;
-z-index: 0;
-background: radial-gradient(ellipse at 20% 0%, #1a4080 0%, transparent 55%),
-radial-gradient(ellipse at 80% 10%, #0d2d5a 0%, transparent 50%),
-linear-gradient(180deg, #0a1628 0%, #0d2147 40%, #0a1f3d 100%);
-}
-
-.stars {
-position: fixed;
-inset: 0;
-z-index: 1;
-pointer-events: none;
-}
-
-.star {
-position: absolute;
-background: #fff;
-border-radius: 50%;
-animation: twinkle 3s infinite alternate;
-}
-
-@keyframes twinkle {
-0% { opacity: 0.2; transform: scale(1); }
-100% { opacity: 1; transform: scale(1.3); }
-}
-
-.aurora {
-position: fixed;
-top: -60%;
-left: -20%;
-width: 140%;
-height: 80%;
-background: radial-gradient(ellipse at 50% 60%, rgba(0,201,255,0.08) 0%, transparent 70%),
-radial-gradient(ellipse at 30% 40%, rgba(79,195,247,0.05) 0%, transparent 60%);
-z-index: 1;
-animation: auroraShift 12s ease-in-out infinite alternate;
-pointer-events: none;
-}
-
-@keyframes auroraShift {
-0% { transform: translateX(-5%) rotate(-2deg); opacity: 0.6; }
-100% { transform: translateX(5%) rotate(2deg); opacity: 1; }
-}
-
-.container {
-position: relative;
-z-index: 10;
-max-width: 1200px;
-margin: 0 auto;
-padding: 0 16px 60px;
-}
-
-/* HEADER */
-header {
-padding: 28px 0 20px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-gap: 16px;
-flex-wrap: wrap;
-}
-
-.logo-wrap {
-display: flex;
-align-items: center;
-gap: 12px;
-}
-
-.logo-icon {
-width: 52px;
-height: 52px;
-background: linear-gradient(135deg, #ffd54f, #ff8f00);
-border-radius: 14px;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 26px;
-box-shadow: 0 4px 20px rgba(255,213,79,0.4);
-flex-shrink: 0;
-}
-
-.logo-text h1 {
-font-size: clamp(18px, 3vw, 26px);
-font-weight: 900;
-color: var(–gold);
-line-height: 1.2;
-letter-spacing: -0.5px;
-}
-
-.logo-text p {
-font-size: 12px;
-color: var(–text-soft);
-font-weight: 300;
-}
-
-.last-update {
-background: var(–card-bg);
-border: 1px solid var(–card-border);
-border-radius: 30px;
-padding: 8px 18px;
-font-size: 12px;
-color: var(–aurora1);
-display: flex;
-align-items: center;
-gap: 8px;
-backdrop-filter: blur(10px);
-white-space: nowrap;
-}
-
-.live-dot {
-width: 8px;
-height: 8px;
-background: #00e676;
-border-radius: 50%;
-animation: pulse 1.5s infinite;
-flex-shrink: 0;
-}
-
-@keyframes pulse {
-0%, 100% { box-shadow: 0 0 0 0 rgba(0,230,118,0.6); }
-50% { box-shadow: 0 0 0 6px rgba(0,230,118,0); }
-}
-
-/* SEARCH */
-.search-wrap {
-margin: 10px 0 28px;
-}
-
-.search-box {
-display: flex;
-align-items: center;
-background: var(–card-bg);
-border: 1px solid var(–card-border);
-border-radius: 50px;
-padding: 12px 20px;
-gap: 12px;
-backdrop-filter: blur(15px);
-transition: border-color 0.3s;
-}
-
-.search-box:focus-within {
-border-color: var(–aurora1);
-box-shadow: 0 0 0 3px rgba(0,201,255,0.12);
-}
-
-.search-box input {
-background: none;
-border: none;
-outline: none;
-color: var(–text-main);
-font-family: ‘Noto Sans Arabic’, sans-serif;
-font-size: 15px;
-width: 100%;
-direction: rtl;
-}
-
-.search-box input::placeholder { color: var(–text-soft); }
-
-.search-icon { font-size: 18px; color: var(–text-soft); flex-shrink: 0; }
-
-/* SECTION TITLE */
-.section-title {
-font-size: clamp(13px, 2vw, 15px);
-color: var(–text-soft);
-font-weight: 600;
-margin-bottom: 16px;
-display: flex;
-align-items: center;
-gap: 8px;
-text-transform: uppercase;
-letter-spacing: 1px;
-}
-
-.section-title::after {
-content: ‘’;
-flex: 1;
-height: 1px;
-background: linear-gradient(to left, transparent, var(–card-border));
-}
-
-/* FEATURED CITY */
-.featured-card {
-background: linear-gradient(135deg, rgba(0,201,255,0.15) 0%, rgba(13,33,71,0.8) 60%);
-border: 1px solid rgba(0,201,255,0.3);
-border-radius: 24px;
-padding: clamp(24px, 4vw, 36px);
-margin-bottom: 32px;
-backdrop-filter: blur(20px);
-position: relative;
-overflow: hidden;
-box-shadow: var(–shadow), inset 0 1px 0 rgba(255,255,255,0.1);
-}
-
-.featured-card::before {
-content: ‘’;
-position: absolute;
-top: -40%;
-left: -10%;
-width: 60%;
-height: 180%;
-background: radial-gradient(ellipse, rgba(0,201,255,0.08) 0%, transparent 70%);
-pointer-events: none;
-}
-
-.featured-top {
-display: flex;
-justify-content: space-between;
-align-items: flex-start;
-gap: 16px;
-flex-wrap: wrap;
-}
-
-.featured-city-name {
-font-size: clamp(28px, 6vw, 52px);
-font-weight: 900;
-line-height: 1;
-color: #fff;
-text-shadow: 0 2px 20px rgba(0,201,255,0.4);
-}
-
-.featured-country {
-font-size: 14px;
-color: var(–aurora1);
-margin-top: 6px;
-font-weight: 400;
-}
-
-.featured-temp {
-font-size: clamp(56px, 10vw, 88px);
-font-weight: 900;
-line-height: 1;
-color: #fff;
-text-align: left;
-text-shadow: 0 4px 30px rgba(255,213,79,0.3);
-}
-
-.featured-temp span {
-font-size: 0.4em;
-color: var(–gold);
-vertical-align: super;
-font-weight: 600;
-}
-
-.featured-desc {
-font-size: clamp(14px, 2vw, 18px);
-color: var(–text-soft);
-margin-top: 8px;
-}
-
-.featured-emoji {
-font-size: clamp(50px, 8vw, 80px);
-display: block;
-line-height: 1;
-filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
-animation: floatIcon 4s ease-in-out infinite;
-}
-
-@keyframes floatIcon {
-0%, 100% { transform: translateY(0); }
-50% { transform: translateY(-8px); }
-}
-
-.featured-meta {
-display: flex;
-gap: clamp(12px, 3vw, 28px);
-margin-top: 20px;
-flex-wrap: wrap;
-}
-
-.meta-item {
-display: flex;
-align-items: center;
-gap: 6px;
-font-size: 13px;
-color: var(–text-soft);
-background: rgba(255,255,255,0.06);
-border-radius: 20px;
-padding: 6px 14px;
-}
-
-.meta-icon { font-size: 16px; }
-
-/* GRID */
-.cities-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
-gap: 16px;
-margin-bottom: 32px;
-}
-
-.city-card {
-background: var(–card-bg);
-border: 1px solid var(–card-border);
-border-radius: var(–radius);
-padding: 20px;
-backdrop-filter: blur(15px);
-cursor: pointer;
-transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-position: relative;
-overflow: hidden;
-}
-
-.city-card:hover {
-transform: translateY(-4px);
-border-color: rgba(0,201,255,0.4);
-box-shadow: 0 16px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,201,255,0.15);
-}
-
-.city-card-top {
-display: flex;
-justify-content: space-between;
-align-items: flex-start;
-}
-
-.city-name-krd {
-font-size: 18px;
-font-weight: 700;
-color: #fff;
-line-height: 1.2;
-}
-
-.city-name-en {
-font-size: 11px;
-color: var(–text-soft);
-margin-top: 2px;
-direction: ltr;
-text-align: right;
-}
-
-.city-emoji {
-font-size: 36px;
-line-height: 1;
-filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
-}
-
-.city-temp {
-font-size: 38px;
-font-weight: 900;
-color: #fff;
-line-height: 1;
-margin-top: 12px;
-}
-
-.city-temp sup {
-font-size: 0.45em;
-color: var(–gold);
-font-weight: 600;
-}
-
-.city-desc {
-font-size: 12px;
-color: var(–text-soft);
-margin-top: 4px;
-}
-
-.city-stats {
-display: flex;
-gap: 10px;
-margin-top: 14px;
-padding-top: 14px;
-border-top: 1px solid rgba(255,255,255,0.08);
-}
-
-.stat {
-flex: 1;
-text-align: center;
-font-size: 11px;
-color: var(–text-soft);
-}
-
-.stat-val {
-display: block;
-font-size: 15px;
-font-weight: 700;
-color: var(–aurora2);
-margin-bottom: 2px;
-}
-
-/* TEMP COLOR VARIANTS */
-.hot .city-temp { color: #ffb74d; }
-.hot { background: linear-gradient(135deg, rgba(255,87,34,0.12) 0%, rgba(10,22,40,0.6) 100%); }
-.warm .city-temp { color: #fff176; }
-.warm { background: linear-gradient(135deg, rgba(255,193,7,0.1) 0%, rgba(10,22,40,0.6) 100%); }
-.cool { background: linear-gradient(135deg, rgba(0,201,255,0.1) 0%, rgba(10,22,40,0.6) 100%); }
-.cold { background: linear-gradient(135deg, rgba(100,181,246,0.12) 0%, rgba(10,22,40,0.6) 100%); }
-
-/* HOURLY */
-.hourly-scroll {
-display: flex;
-gap: 10px;
-overflow-x: auto;
-padding-bottom: 8px;
-margin-bottom: 32px;
-scrollbar-width: none;
-}
-.hourly-scroll::-webkit-scrollbar { display: none; }
-
-.hour-card {
-background: var(–card-bg);
-border: 1px solid var(–card-border);
-border-radius: 14px;
-padding: 14px 18px;
-text-align: center;
-flex-shrink: 0;
-backdrop-filter: blur(10px);
-min-width: 72px;
-transition: border-color 0.2s;
-}
-
-.hour-card.active {
-background: linear-gradient(135deg, rgba(0,201,255,0.2), rgba(0,201,255,0.05));
-border-color: var(–aurora1);
-}
-
-.hour-time { font-size: 11px; color: var(–text-soft); margin-bottom: 8px; }
-.hour-icon { font-size: 22px; margin-bottom: 6px; }
-.hour-temp { font-size: 16px; font-weight: 700; }
-
-/* LOADING */
-.loading-overlay {
-position: fixed;
-inset: 0;
-z-index: 999;
-background: var(–sky-deep);
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-gap: 20px;
-transition: opacity 0.5s ease;
-}
-
-.loading-overlay.hide {
-opacity: 0;
-pointer-events: none;
-}
-
-.loader-icon { font-size: 64px; animation: spinY 2s linear infinite; }
-
-@keyframes spinY {
-0% { transform: rotateY(0deg); }
-100% { transform: rotateY(360deg); }
-}
-
-.loader-text {
-font-size: 16px;
-color: var(–aurora1);
-animation: fadeInOut 1.5s infinite;
-}
-
-@keyframes fadeInOut {
-0%, 100% { opacity: 0.4; }
-50% { opacity: 1; }
-}
-
-/* ERROR BANNER */
-.error-banner {
-background: rgba(255, 82, 82, 0.12);
-border: 1px solid rgba(255, 82, 82, 0.3);
-border-radius: 12px;
-padding: 14px 20px;
-color: #ff8a80;
-font-size: 14px;
-margin-bottom: 20px;
-display: none;
-align-items: center;
-gap: 10px;
-}
-
-.error-banner.show { display: flex; }
-
-/* FOOTER */
-footer {
-text-align: center;
-color: var(–text-soft);
-font-size: 12px;
-padding-top: 20px;
-border-top: 1px solid rgba(255,255,255,0.06);
-}
-
-/* RESPONSIVE */
-@media (max-width: 480px) {
-header { flex-direction: column; align-items: flex-start; gap: 12px; }
-.last-update { align-self: flex-end; }
-}
-
-/* FADE IN ANIMATION */
-.fade-in {
-animation: fadeIn 0.6s ease forwards;
-opacity: 0;
-}
-
-@keyframes fadeIn {
-from { opacity: 0; transform: translateY(16px); }
-to { opacity: 1; transform: translateY(0); }
-}
-
-.fade-in:nth-child(1) { animation-delay: 0.05s; }
-.fade-in:nth-child(2) { animation-delay: 0.1s; }
-.fade-in:nth-child(3) { animation-delay: 0.15s; }
-.fade-in:nth-child(4) { animation-delay: 0.2s; }
-.fade-in:nth-child(5) { animation-delay: 0.25s; }
-.fade-in:nth-child(6) { animation-delay: 0.3s; }
-.fade-in:nth-child(7) { animation-delay: 0.35s; }
-.fade-in:nth-child(8) { animation-delay: 0.4s; }
-.refresh-btn {
-background: linear-gradient(135deg, rgba(0,201,255,0.2), rgba(0,201,255,0.05));
-border: 1px solid rgba(0,201,255,0.3);
-border-radius: 30px;
-color: var(–aurora1);
-font-family: ‘Noto Sans Arabic’, sans-serif;
-font-size: 13px;
-padding: 8px 18px;
-cursor: pointer;
-display: flex;
-align-items: center;
-gap: 6px;
-transition: background 0.2s, transform 0.2s;
-}
-.refresh-btn:hover { background: rgba(0,201,255,0.25); transform: scale(1.04); }
-.refresh-btn.spinning span.spin-icon { animation: spinFull 0.8s linear infinite; }
-@keyframes spinFull { to { transform: rotate(360deg); } }
-.spin-icon { display: inline-block; }
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;min-height:100vh;overflow-x:hidden;background:#07111f}
+body{font-family:'Noto Naskh Arabic',serif;direction:rtl;color:#e8f4ff}
+
+#bg{position:fixed;inset:0;z-index:0;background:linear-gradient(160deg,#071828 0%,#0c2240 40%,#071828 100%)}
+#bg-glow{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(56,189,248,.13) 0%,transparent 70%)}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.st{position:absolute;border-radius:50%;background:#fff;animation:tw var(–d,3s) var(–dl,0s) infinite alternate}
+@keyframes tw{0%{opacity:.15}100%{opacity:.9}}
+
+#app{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:20px 16px 60px}
+
+.hdr{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:20px}
+.hdr-left{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
+.hdr-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(140deg,#fbbf24,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 16px rgba(251,191,36,.35)}
+.hdr-title{font-size:16px;font-weight:700;color:#fcd34d;line-height:1.2}
+.hdr-sub{font-size:11px;color:rgba(232,244,255,.4);margin-top:2px}
+.hdr-right{display:flex;flex-direction:column;align-items:flex-end;gap:7px;flex-shrink:0}
+.live-badge{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:5px 11px;font-size:11px;color:rgba(232,244,255,.55);white-space:nowrap}
+.live-dot{width:6px;height:6px;border-radius:50%;background:#22d3a0;flex-shrink:0;animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,211,160,.5)}60%{box-shadow:0 0 0 5px rgba(34,211,160,0)}}
+.refresh-btn{border:1px solid rgba(56,189,248,.3);background:rgba(56,189,248,.1);border-radius:20px;color:#38bdf8;font-family:‘Noto Naskh Arabic’,serif;font-size:12px;padding:5px 12px;cursor:pointer;display:flex;align-items:center;gap:5px;transition:background .2s}
+.refresh-btn:hover{background:rgba(56,189,248,.2)}
+.spin{display:inline-block}
+.spinning .spin{animation:ro .7s linear infinite}
+@keyframes ro{to{transform:rotate(360deg)}}
+
+.search-wrap{margin-bottom:20px}
+.search-inner{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:11px 15px;transition:border-color .25s}
+.search-inner:focus-within{border-color:rgba(56,189,248,.45)}
+.search-inner input{background:none;border:none;outline:none;width:100%;font-family:‘Noto Naskh Arabic’,serif;font-size:14px;color:#e8f4ff;direction:rtl}
+.search-inner input::placeholder{color:rgba(232,244,255,.3)}
+.search-icon{font-size:15px;color:rgba(232,244,255,.3);flex-shrink:0}
+
+.sec-label{font-size:11px;font-weight:600;letter-spacing:.8px;color:rgba(232,244,255,.35);margin-bottom:11px;display:flex;align-items:center;gap:8px;text-transform:uppercase}
+.sec-label::after{content:’’;flex:1;height:1px;background:rgba(255,255,255,.07)}
+
+.feat{border-radius:18px;padding:20px;margin-bottom:20px;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(56,189,248,.16) 0%,rgba(7,17,31,.92) 65%);border:1px solid rgba(56,189,248,.22);box-shadow:0 8px 28px rgba(0,0,0,.4)}
+.feat::before{content:’’;position:absolute;top:-50px;right:-50px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,.1),transparent 70%);pointer-events:none}
+.feat-row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.feat-info{flex:1;min-width:0}
+.feat-name{font-size:26px;font-weight:700;color:#fff;line-height:1.1}
+.feat-country{font-size:12px;color:rgba(232,244,255,.45);margin-top:4px}
+.feat-cond{font-size:13px;color:rgba(232,244,255,.5);margin-top:5px}
+.feat-right{text-align:center;flex-shrink:0}
+.feat-emoji{font-size:48px;display:block;line-height:1;filter:drop-shadow(0 3px 8px rgba(0,0,0,.3));animation:fl 4s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.feat-temp{font-size:50px;font-weight:700;color:#fff;line-height:1.05;text-shadow:0 2px 16px rgba(56,189,248,.25)}
+.feat-temp sup{font-size:.36em;color:#fcd34d;vertical-align:super;font-weight:600}
+.feat-pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.pill{display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:5px 11px;font-size:12px;color:rgba(232,244,255,.65)}
+
+.err{display:none;align-items:center;gap:8px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.22);border-radius:11px;padding:11px 15px;font-size:13px;color:#fca5a5;margin-bottom:16px}
+.err.show{display:flex}
+
+.hourly{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:20px;scrollbar-width:none}
+.hourly::-webkit-scrollbar{display:none}
+.hr-card{flex-shrink:0;width:62px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:10px 0;text-align:center}
+.hr-card.now{background:rgba(56,189,248,.13);border-color:rgba(56,189,248,.38)}
+.hr-time{font-size:10px;color:rgba(232,244,255,.38);margin-bottom:5px}
+.hr-icon{font-size:18px;margin-bottom:4px;line-height:1.2}
+.hr-temp{font-size:13px;font-weight:600;color:#e8f4ff}
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
+@media(min-width:460px){.grid{grid-template-columns:repeat(3,1fr)}}
+
+.city-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:15px;padding:15px;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s;animation:fadeUp .45s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.city-card:hover{transform:translateY(-3px);border-color:rgba(56,189,248,.32);box-shadow:0 10px 24px rgba(0,0,0,.35)}
+.cc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:7px}
+.cc-name{font-size:15px;font-weight:700;color:#fff;line-height:1.2}
+.cc-en{font-size:10px;color:rgba(232,244,255,.28);margin-top:2px;direction:ltr;text-align:right}
+.cc-emoji{font-size:30px;line-height:1;flex-shrink:0}
+.cc-temp{font-size:28px;font-weight:700;color:#fff;line-height:1}
+.cc-temp sup{font-size:.4em;color:#fcd34d;vertical-align:super;font-weight:600}
+.cc-desc{font-size:11px;color:rgba(232,244,255,.4);margin-top:2px;margin-bottom:9px}
+.cc-stats{display:flex;border-top:1px solid rgba(255,255,255,.07);padding-top:9px}
+.cc-stat{flex:1;text-align:center;font-size:10px;color:rgba(232,244,255,.38);line-height:1.4}
+.cc-stat-val{display:block;font-size:12px;font-weight:600;color:#7dd3fc;margin-bottom:1px}
+.cc-err{color:rgba(239,68,68,.65);font-size:11px;margin-top:6px}
+
+.v-hot{background:linear-gradient(135deg,rgba(239,68,68,.11),rgba(7,17,31,.85));border-color:rgba(239,68,68,.16)}
+.v-hot .cc-temp{color:#fca5a5}
+.v-warm{background:linear-gradient(135deg,rgba(251,191,36,.09),rgba(7,17,31,.85));border-color:rgba(251,191,36,.16)}
+.v-warm .cc-temp{color:#fde68a}
+.v-cool{background:linear-gradient(135deg,rgba(56,189,248,.08),rgba(7,17,31,.85))}
+.v-cold{background:linear-gradient(135deg,rgba(147,197,253,.09),rgba(7,17,31,.85))}
+
+#loader{position:fixed;inset:0;z-index:999;background:#07111f;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .5s}
+#loader.out{opacity:0;pointer-events:none}
+.ld-icon{font-size:52px;animation:spin2 2.5s linear infinite}
+@keyframes spin2{0%{transform:rotateY(0)}100%{transform:rotateY(360deg)}}
+.ld-txt{font-size:14px;color:#38bdf8;animation:blink 1.4s infinite}
+@keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
+
+footer{text-align:center;color:rgba(232,244,255,.18);font-size:11px;margin-top:28px;padding-top:14px;border-top:1px solid rgba(255,255,255,.05)}
 </style>
 
 </head>
 <body>
 
-<!-- LOADING OVERLAY -->
+<div id="bg"></div>
+<div id="bg-glow"></div>
+<div id="stars"></div>
 
-<div class="loading-overlay" id="loadingOverlay">
-  <div class="loader-icon">🌤️</div>
-  <div class="loader-text">داتای کەش و هەوا بارکردنە...</div>
+<div id="loader">
+  <div class="ld-icon">🌤️</div>
+  <div class="ld-txt">داتای کەش و هەوا بارکردنە…</div>
 </div>
 
-<!-- BACKGROUND -->
+<div id="app">
 
-<div class="sky-bg"></div>
-<div class="aurora"></div>
-<div class="stars" id="starsContainer"></div>
-
-<div class="container">
-  <header>
-    <div class="logo-wrap">
-      <div class="logo-icon">☀️</div>
-      <div class="logo-text">
-        <h1>کەش و هەوای کوردستان</h1>
-        <p>نوێترین داتای کەش و هەوا بۆ شارەکانی کوردستان</p>
+  <div class="hdr">
+    <div class="hdr-left">
+      <div class="hdr-icon">☀️</div>
+      <div>
+        <div class="hdr-title">کەش و هەوای کوردستان</div>
+        <div class="hdr-sub">نوێترین داتای کەش و هەوا</div>
       </div>
     </div>
-    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-      <button class="refresh-btn" id="refreshBtn" onclick="refreshData()">
-        <span class="spin-icon" id="spinIcon">🔄</span>
+    <div class="hdr-right">
+      <div class="live-badge">
+        <span class="live-dot"></span>
+        <span id="updateTime">بارکردن…</span>
+      </div>
+      <button class="refresh-btn" id="refBtn" onclick="refreshAll()">
+        <span class="spin" id="spinIcon">🔄</span>
         <span>نوێکردنەوە</span>
       </button>
-      <div class="last-update">
-        <span class="live-dot"></span>
-        <span id="lastUpdateText">بارکردن...</span>
-      </div>
     </div>
-  </header>
-
-  <!-- SEARCH -->
+  </div>
 
   <div class="search-wrap">
-    <div class="search-box">
+    <div class="search-inner">
       <span class="search-icon">🔍</span>
-      <input type="text" id="searchInput" placeholder="گەڕان بە دوای شارێک..." oninput="filterCities(this.value)">
+      <input type="search" placeholder="گەڕان بە دوای شارێک…" id="searchBox" oninput="filterGrid(this.value)">
     </div>
   </div>
 
-  <!-- ERROR BANNER -->
-
-  <div class="error-banner" id="errorBanner">
-    <span>⚠️</span>
-    <span id="errorText">هەڵەیەک ڕوویدا لە بارکردنی داتا</span>
+  <div class="err" id="errBox">
+    <span>⚠️</span><span id="errMsg">هەڵەی بارکردن</span>
   </div>
 
-  <!-- FEATURED CITY -->
-
-  <div class="section-title">🏔️ هەولێر — پایتەخت</div>
-  <div class="featured-card" id="featuredCard">
-    <div class="featured-top">
-      <div>
-        <div class="featured-city-name" id="feat-name">هەولێر</div>
-        <div class="featured-country">کوردستان — عێراق</div>
-        <div class="featured-desc" id="feat-desc">بارکردن...</div>
+  <div class="sec-label">🏔️ هەولێر — پایتەخت</div>
+  <div class="feat">
+    <div class="feat-row">
+      <div class="feat-info">
+        <div class="feat-name" id="fName">هەولێر</div>
+        <div class="feat-country">کوردستان — عێراق</div>
+        <div class="feat-cond" id="fCond">بارکردن…</div>
       </div>
-      <div style="text-align:center;">
-        <span class="featured-emoji" id="feat-icon">🌤️</span>
-        <div class="featured-temp" id="feat-temp">—<span>°</span></div>
+      <div class="feat-right">
+        <span class="feat-emoji" id="fIcon">🌤️</span>
+        <div class="feat-temp" id="fTemp">—<sup>°C</sup></div>
       </div>
     </div>
-    <div class="featured-meta" id="feat-meta"></div>
+    <div class="feat-pills" id="fPills"></div>
   </div>
 
-  <!-- HOURLY FORECAST -->
+  <div class="sec-label">🕐 پێشبینی کاتژمێرانە — هەولێر</div>
+  <div class="hourly" id="hourlyRow"></div>
 
-  <div class="section-title">🕐 پێشبینی کاتژمێرانە — هەولێر</div>
-  <div class="hourly-scroll" id="hourlyScroll"></div>
+  <div class="sec-label">🏙️ شارەکانی کوردستان</div>
+  <div class="grid" id="cityGrid"></div>
 
-  <!-- ALL CITIES -->
-
-  <div class="section-title">🏙️ هەموو شارەکان</div>
-  <div class="cities-grid" id="citiesGrid"></div>
-
-  <footer>
-    <p>دیزاین و دروستکردن بۆ کوردستان ❤️ &nbsp;|&nbsp; داتا: Open-Meteo API (بەخۆڕایی)</p>
-  </footer>
+  <footer>کەش و هەوای کوردستان ❤️ &nbsp;|&nbsp; داتا: Open-Meteo</footer>
 </div>
 
 <script>
-// ============================================================
-// DATA DEFINITIONS
-// ============================================================
-const CITIES = [
-  { name: 'هەولێر',      en: 'Erbil',        lat: 36.19,  lon: 44.01,  featured: true },
-  { name: 'سلێمانی',    en: 'Sulaymaniyah', lat: 35.56,  lon: 45.43  },
-  { name: 'دهۆک',       en: 'Duhok',         lat: 36.87,  lon: 42.99  },
-  { name: 'کەرکوک',     en: 'Kirkuk',        lat: 35.47,  lon: 44.39  },
-  { name: 'زاخۆ',       en: 'Zakho',         lat: 37.14,  lon: 42.68  },
-  { name: 'ڕانیە',      en: 'Rania',         lat: 36.26,  lon: 44.89  },
-  { name: 'حەلەبجە',    en: 'Halabja',       lat: 35.18,  lon: 45.98  },
-  { name: 'چوارتا',     en: 'Chwarqurna',    lat: 36.55,  lon: 44.22  },
-  { name: 'شقلاوە',     en: 'Shaqlawa',      lat: 36.41,  lon: 44.32  },
-  { name: 'سۆران',      en: 'Soran',         lat: 36.65,  lon: 44.54  },
-  { name: 'پیرانشار',   en: 'Piranshahr',    lat: 36.70,  lon: 45.14  },
-  { name: 'مەریوان',    en: 'Marivan',       lat: 35.52,  lon: 46.18  },
-  { name: 'بانە',       en: 'Baneh',         lat: 35.99,  lon: 45.89  },
-  { name: 'سەنە',       en: 'Sanandaj',      lat: 35.31,  lon: 46.99  },
-  { name: 'کەمانگە',    en: 'Kamyaran',      lat: 34.80,  lon: 46.93  },
-  { name: 'موسڵ',       en: 'Mosul',         lat: 36.34,  lon: 43.13  },
+const CITIES=[
+  {n:'هەولێر',   e:'Erbil',         lat:36.19,lon:44.01,main:true},
+  {n:'سلێمانی',  e:'Sulaymaniyah',  lat:35.56,lon:45.43},
+  {n:'دهۆک',     e:'Duhok',         lat:36.87,lon:42.99},
+  {n:'کەرکوک',   e:'Kirkuk',        lat:35.47,lon:44.39},
+  {n:'زاخۆ',     e:'Zakho',         lat:37.14,lon:42.68},
+  {n:'ڕانیە',    e:'Rania',         lat:36.26,lon:44.89},
+  {n:'حەلەبجە',  e:'Halabja',       lat:35.18,lon:45.98},
+  {n:'شقلاوە',   e:'Shaqlawa',      lat:36.41,lon:44.32},
+  {n:'سۆران',    e:'Soran',         lat:36.65,lon:44.54},
+  {n:'موسڵ',     e:'Mosul',         lat:36.34,lon:43.13},
+  {n:'مەریوان',  e:'Marivan',       lat:35.52,lon:46.18},
+  {n:'بانە',     e:'Baneh',         lat:35.99,lon:45.89},
+  {n:'سەنە',     e:'Sanandaj',      lat:35.31,lon:46.99},
+  {n:'پیرانشار', e:'Piranshahr',    lat:36.70,lon:45.14},
+  {n:'ئاکرێ',    e:'Akre',          lat:36.74,lon:43.89},
+  {n:'خانەقین',  e:'Khanaqin',      lat:34.35,lon:45.37},
 ];
 
-const WMO_CODES = {
-  0:  { desc: 'ئاسمانی ڕوون',      emoji: '☀️'  },
-  1:  { desc: 'بەشێک ڕوون',        emoji: '🌤️' },
-  2:  { desc: 'کەمێ هەور',         emoji: '⛅'  },
-  3:  { desc: 'هەوری',             emoji: '☁️'  },
-  45: { desc: 'مێ',                emoji: '🌫️' },
-  48: { desc: 'مێی بەستوو',        emoji: '🌫️' },
-  51: { desc: 'باران کەم',         emoji: '🌦️' },
-  53: { desc: 'باران مامناوەند',   emoji: '🌧️' },
-  55: { desc: 'باران زۆر',         emoji: '🌧️' },
-  61: { desc: 'باران سووک',        emoji: '🌦️' },
-  63: { desc: 'باران مامناوەند',   emoji: '🌧️' },
-  65: { desc: 'باران بەهێز',       emoji: '🌧️' },
-  71: { desc: 'بەفر سووک',         emoji: '🌨️' },
-  73: { desc: 'بەفر مامناوەند',    emoji: '❄️'  },
-  75: { desc: 'بەفر بەهێز',        emoji: '❄️'  },
-  80: { desc: 'باران ئارام',       emoji: '🌦️' },
-  81: { desc: 'باران',             emoji: '🌧️' },
-  82: { desc: 'باران زۆر',         emoji: '⛈️'  },
-  95: { desc: 'هەوای گەمژە',      emoji: '⛈️'  },
-  96: { desc: 'گەمژە و تەرکە',    emoji: '⛈️'  },
-  99: { desc: 'گەمژە و تەرکەی زۆر',emoji: '⛈️' },
+const WMO={
+  0:{d:'ئاسمانی ڕوون',i:'☀️'},1:{d:'بەشێک ڕوون',i:'🌤️'},
+  2:{d:'کەمێک هەور',i:'⛅'},3:{d:'هەوری',i:'☁️'},
+  45:{d:'مێ',i:'🌫️'},48:{d:'مێی بەستوو',i:'🌫️'},
+  51:{d:'باران کەم',i:'🌦️'},53:{d:'باران',i:'🌧️'},55:{d:'باران زۆر',i:'🌧️'},
+  61:{d:'باران سووک',i:'🌦️'},63:{d:'باران',i:'🌧️'},65:{d:'باران بەهێز',i:'🌧️'},
+  71:{d:'بەفر سووک',i:'🌨️'},73:{d:'بەفر',i:'❄️'},75:{d:'بەفر بەهێز',i:'❄️'},
+  80:{d:'باران ئارام',i:'🌦️'},81:{d:'باران',i:'🌧️'},82:{d:'باران زۆر',i:'⛈️'},
+  95:{d:'گەمژەدار',i:'⛈️'},96:{d:'گەمژە و تەرکە',i:'⛈️'},99:{d:'گەمژەی بەهێز',i:'⛈️'},
 };
 
-function getWMO(code) {
-  return WMO_CODES[code] || WMO_CODES[Math.floor(code / 10) * 10] || { desc: 'نادیار', emoji: '🌡️' };
-}
+function wmo(c){return WMO[c]||WMO[Math.floor(c/10)*10]||{d:'نادیار',i:'🌡️'}}
+function tClass(t){if(t>=38)return 'v-hot';if(t>=28)return 'v-warm';if(t>=12)return 'v-cool';return 'v-cold'}
 
-function getTempClass(t) {
-  if (t >= 38) return 'hot';
-  if (t >= 28) return 'warm';
-  if (t >= 15) return '';
-  if (t >= 5)  return 'cool';
-  return 'cold';
-}
-
-// ============================================================
-// STAR FIELD
-// ============================================================
-(function createStars() {
-  const container = document.getElementById('starsContainer');
-  for (let i = 0; i < 120; i++) {
-    const s = document.createElement('div');
-    s.className = 'star';
-    const size = Math.random() * 2 + 1;
-    s.style.cssText = [
-      'width:' + size + 'px',
-      'height:' + size + 'px',
-      'top:' + Math.random() * 100 + '%',
-      'left:' + Math.random() * 100 + '%',
-      'animation-delay:' + Math.random() * 4 + 's',
-      'animation-duration:' + (2 + Math.random() * 3) + 's',
-    ].join(';');
-    container.appendChild(s);
+(function(){
+  const c=document.getElementById('stars');
+  for(let i=0;i<100;i++){
+    const s=document.createElement('div');s.className='st';
+    const sz=Math.random()*1.8+.5;
+    s.style.cssText='width:'+sz+'px;height:'+sz+'px;top:'+Math.random()*100+'%;left:'+Math.random()*100+'%;--d:'+(2+Math.random()*3)+'s;--dl:'+Math.random()*4+'s';
+    c.appendChild(s);
   }
 })();
 
-// ============================================================
-// API FETCH
-// ============================================================
-let allWeatherData = [];
-
-async function fetchWeatherForCity(city) {
-  const url = [
-    'https://api.open-meteo.com/v1/forecast?',
-    'latitude=' + city.lat,
-    '&longitude=' + city.lon,
-    '&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m',
-    '&hourly=temperature_2m,weather_code',
-    '&wind_speed_unit=kmh',
-    '&timezone=Asia%2FBaghdad',
-    '&forecast_days=1',
-  ].join('');
-
-  const res = await fetch(url);
-  if (!res.ok) throw new Error('HTTP ' + res.status);
-  const data = await res.json();
-  return { city, data };
+async function fetchCity(city){
+  const u='https://api.open-meteo.com/v1/forecast?latitude='+city.lat+'&longitude='+city.lon
+    +'&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m'
+    +'&hourly=temperature_2m,weather_code&wind_speed_unit=kmh&timezone=Asia%2FBaghdad&forecast_days=1';
+  const r=await fetch(u);
+  if(!r.ok)throw new Error(r.status);
+  return{city,data:await r.json()};
 }
 
-async function fetchAllCities() {
-  const results = await Promise.allSettled(CITIES.map(fetchWeatherForCity));
-  return results.map((r, i) => {
-    if (r.status === 'fulfilled') return r.value;
-    return { city: CITIES[i], data: null, error: true };
-  });
+async function fetchAll(){
+  const res=await Promise.allSettled(CITIES.map(fetchCity));
+  return res.map((r,i)=>r.status==='fulfilled'?r.value:{city:CITIES[i],data:null});
 }
 
-// ============================================================
-// RENDER FEATURED
-// ============================================================
-function renderFeatured(item) {
-  if (!item || !item.data) return;
-  const c = item.data.current;
-  const wmo = getWMO(c.weather_code);
-
-  document.getElementById('feat-name').textContent = item.city.name;
-  document.getElementById('feat-icon').textContent = wmo.emoji;
-  document.getElementById('feat-desc').textContent = wmo.desc;
-  document.getElementById('feat-temp').innerHTML = Math.round(c.temperature_2m) + '<span>°C</span>';
-
-  const meta = document.getElementById('feat-meta');
-  meta.innerHTML = [
-    '<div class="meta-item"><span class="meta-icon">🌡️</span><span>هەستکردن ' + Math.round(c.apparent_temperature) + '°</span></div>',
-    '<div class="meta-item"><span class="meta-icon">💧</span><span>شێ ' + c.relative_humidity_2m + '%</span></div>',
-    '<div class="meta-item"><span class="meta-icon">💨</span><span>با ' + Math.round(c.wind_speed_10m) + ' km/h</span></div>',
-  ].join('');
+function renderFeat(item){
+  if(!item?.data)return;
+  const c=item.data.current,w=wmo(c.weather_code);
+  document.getElementById('fName').textContent=item.city.n;
+  document.getElementById('fIcon').textContent=w.i;
+  document.getElementById('fCond').textContent=w.d;
+  document.getElementById('fTemp').innerHTML=Math.round(c.temperature_2m)+'<sup>°C</sup>';
+  document.getElementById('fPills').innerHTML=
+    '<div class="pill">🌡️ هەستکردن '+Math.round(c.apparent_temperature)+'°</div>'
+    +'<div class="pill">💧 شێ '+c.relative_humidity_2m+'%</div>'
+    +'<div class="pill">💨 با '+Math.round(c.wind_speed_10m)+' km/h</div>';
 }
 
-// ============================================================
-// RENDER HOURLY
-// ============================================================
-function renderHourly(item) {
-  if (!item || !item.data) return;
-  const now = new Date();
-  const curHour = now.getHours();
-  const hourly = item.data.hourly;
-  const scroll = document.getElementById('hourlyScroll');
-  scroll.innerHTML = '';
-
-  // Show next 12 hours
-  let shown = 0;
-  for (let i = 0; i < hourly.time.length && shown < 12; i++) {
-    const tStr = hourly.time[i]; // "2024-01-01T14:00"
-    const h = parseInt(tStr.split('T')[1].split(':')[0]);
-    const dayOffset = tStr.split('T')[0];
-    const todayStr = now.toISOString().split('T')[0];
-
-    // Only today or from current hour
-    if (dayOffset < todayStr) continue;
-    if (dayOffset === todayStr && h < curHour) continue;
-
-    const wmo = getWMO(hourly.weather_code[i]);
-    const isActive = h === curHour && dayOffset === todayStr;
-
-    const timeLabel = h === curHour ? 'ئێستا' : (h < 12 ? h + ':00' : h + ':00');
-    const ampm = h < 12 ? 'بەیانی' : h < 17 ? 'نیوەڕۆ' : 'ئێوارە';
-
-    const card = document.createElement('div');
-    card.className = 'hour-card' + (isActive ? ' active' : '');
-    card.innerHTML = [
-      '<div class="hour-time">' + (isActive ? 'ئێستا' : h + ':00') + '</div>',
-      '<div class="hour-icon">' + wmo.emoji + '</div>',
-      '<div class="hour-temp">' + Math.round(hourly.temperature_2m[i]) + '°</div>',
-    ].join('');
-    scroll.appendChild(card);
-    shown++;
+function renderHourly(item){
+  if(!item?.data)return;
+  const now=new Date(),curH=now.getHours(),todayStr=now.toISOString().split('T')[0];
+  const h=item.data.hourly,row=document.getElementById('hourlyRow');
+  row.innerHTML='';let shown=0;
+  for(let i=0;i<h.time.length&&shown<12;i++){
+    const[d,t]=h.time[i].split('T'),hr=parseInt(t);
+    if(d<todayStr||(d===todayStr&&hr<curH))continue;
+    const w=wmo(h.weather_code[i]),isNow=d===todayStr&&hr===curH;
+    const div=document.createElement('div');
+    div.className='hr-card'+(isNow?' now':'');
+    div.innerHTML='<div class="hr-time">'+(isNow?'ئێستا':hr+':00')+'</div>'
+      +'<div class="hr-icon">'+w.i+'</div>'
+      +'<div class="hr-temp">'+Math.round(h.temperature_2m[i])+'°</div>';
+    row.appendChild(div);shown++;
   }
 }
 
-// ============================================================
-// RENDER CITIES GRID
-// ============================================================
-let filteredData = [];
+let allData=[];
 
-function renderGrid(data) {
-  const grid = document.getElementById('citiesGrid');
-  grid.innerHTML = '';
-
-  const cities = data.filter(d => !d.city.featured);
-
-  if (cities.length === 0) {
-    grid.innerHTML = '<div style="color:var(--text-soft);padding:20px;grid-column:1/-1;text-align:center;">هیچ شارێک نەدۆزرایەوە</div>';
+function renderGrid(data){
+  const grid=document.getElementById('cityGrid');
+  grid.innerHTML='';
+  const cities=data.filter(d=>!d.city.main);
+  if(!cities.length){
+    grid.innerHTML='<div style="color:rgba(232,244,255,.3);grid-column:1/-1;text-align:center;padding:24px 0">هیچ شارێک نەدۆزرایەوە</div>';
     return;
   }
-
-  cities.forEach((item, idx) => {
-    const card = document.createElement('div');
-    const tempClass = item.data ? getTempClass(item.data.current.temperature_2m) : '';
-    card.className = 'city-card fade-in ' + tempClass;
-
-    if (!item.data) {
-      card.innerHTML = [
-        '<div class="city-card-top">',
-          '<div><div class="city-name-krd">' + item.city.name + '</div>',
-          '<div class="city-name-en">' + item.city.en + '</div></div>',
-          '<div class="city-emoji">❓</div>',
-        '</div>',
-        '<div class="city-temp">—<sup>°</sup></div>',
-        '<div class="city-desc" style="color:#ff8a80">هەڵەی بارکردن</div>',
-      ].join('');
-    } else {
-      const c = item.data.current;
-      const wmo = getWMO(c.weather_code);
-      card.innerHTML = [
-        '<div class="city-card-top">',
-          '<div><div class="city-name-krd">' + item.city.name + '</div>',
-          '<div class="city-name-en">' + item.city.en + '</div></div>',
-          '<div class="city-emoji">' + wmo.emoji + '</div>',
-        '</div>',
-        '<div class="city-temp">' + Math.round(c.temperature_2m) + '<sup>°C</sup></div>',
-        '<div class="city-desc">' + wmo.desc + '</div>',
-        '<div class="city-stats">',
-          '<div class="stat"><span class="stat-val">💧 ' + c.relative_humidity_2m + '%</span>شێ</div>',
-          '<div class="stat"><span class="stat-val">💨 ' + Math.round(c.wind_speed_10m) + '</span>km/h</div>',
-          '<div class="stat"><span class="stat-val">🌡️ ' + Math.round(c.apparent_temperature) + '°</span>هەست</div>',
-        '</div>',
-      ].join('');
+  cities.forEach((item,idx)=>{
+    const card=document.createElement('div');
+    const hasData=!!item.data,tc=hasData?tClass(item.data.current.temperature_2m):'';
+    card.className='city-card '+tc;
+    card.style.animationDelay=(idx*.04)+'s';
+    if(!hasData){
+      card.innerHTML='<div class="cc-top"><div><div class="cc-name">'+item.city.n+'</div>'
+        +'<div class="cc-en">'+item.city.e+'</div></div><div class="cc-emoji">❓</div></div>'
+        +'<div class="cc-temp">—<sup>°</sup></div><div class="cc-err">هەڵەی بارکردن</div>';
+    }else{
+      const c=item.data.current,w=wmo(c.weather_code);
+      card.innerHTML='<div class="cc-top"><div><div class="cc-name">'+item.city.n+'</div>'
+        +'<div class="cc-en">'+item.city.e+'</div></div>'
+        +'<div class="cc-emoji">'+w.i+'</div></div>'
+        +'<div class="cc-temp">'+Math.round(c.temperature_2m)+'<sup>°C</sup></div>'
+        +'<div class="cc-desc">'+w.d+'</div>'
+        +'<div class="cc-stats">'
+        +'<div class="cc-stat"><span class="cc-stat-val">💧'+c.relative_humidity_2m+'%</span>شێ</div>'
+        +'<div class="cc-stat"><span class="cc-stat-val">💨'+Math.round(c.wind_speed_10m)+'</span>km/h</div>'
+        +'<div class="cc-stat"><span class="cc-stat-val">🌡️'+Math.round(c.apparent_temperature)+'°</span>هەست</div>'
+        +'</div>';
     }
-
     grid.appendChild(card);
   });
 }
 
-// ============================================================
-// FILTER
-// ============================================================
-function filterCities(val) {
-  if (!val.trim()) {
-    renderGrid(allWeatherData);
-    return;
-  }
-  const filtered = allWeatherData.filter(d =>
-    d.city.name.includes(val) ||
-    d.city.en.toLowerCase().includes(val.toLowerCase())
-  );
-  renderGrid(filtered);
+function filterGrid(v){
+  if(!v.trim()){renderGrid(allData);return;}
+  const lv=v.toLowerCase();
+  renderGrid(allData.filter(d=>d.city.n.includes(v)||d.city.e.toLowerCase().includes(lv)));
 }
 
-// ============================================================
-// UPDATE TIME DISPLAY
-// ============================================================
-function updateTimeDisplay() {
-  const now = new Date();
-  const opts = { hour: '2-digit', minute: '2-digit', hour12: false };
-  const timeStr = now.toLocaleTimeString('en', opts);
-  const dateStr = now.toLocaleDateString('ar-IQ', { weekday: 'short', month: 'short', day: 'numeric' });
-  document.getElementById('lastUpdateText').textContent = 'نوێکرایەوە: ' + timeStr;
+function updateTime(){
+  const now=new Date();
+  document.getElementById('updateTime').textContent='نوێ: '
+    +now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
 }
 
-// ============================================================
-// MAIN LOAD
-// ============================================================
-async function loadWeather() {
-  try {
-    const results = await fetchAllCities();
-    allWeatherData = results;
-
-    const featured = results.find(r => r.city.featured);
-    renderFeatured(featured);
-    renderHourly(featured);
-    renderGrid(results);
-    updateTimeDisplay();
-
-    document.getElementById('errorBanner').classList.remove('show');
-  } catch (err) {
-    document.getElementById('errorBanner').classList.add('show');
-    document.getElementById('errorText').textContent = 'هەڵەیەک ڕوویدا: ' + err.message;
+async function load(){
+  try{
+    const res=await fetchAll();
+    allData=res;
+    const main=res.find(r=>r.city.main);
+    renderFeat(main);renderHourly(main);renderGrid(res);updateTime();
+    document.getElementById('errBox').classList.remove('show');
+  }catch(err){
+    document.getElementById('errBox').classList.add('show');
+    document.getElementById('errMsg').textContent='هەڵەی بارکردن: '+err.message;
   }
 }
 
-async function refreshData() {
-  const btn = document.getElementById('refreshBtn');
-  const icon = document.getElementById('spinIcon');
+async function refreshAll(){
+  const btn=document.getElementById('refBtn');
   btn.classList.add('spinning');
-  await loadWeather();
+  await load();
   btn.classList.remove('spinning');
 }
 
-// ============================================================
-// INIT
-// ============================================================
-(async function init() {
-  // Generate stars
-  // Fade out loading after data loads
-  try {
-    await loadWeather();
-  } finally {
-    const overlay = document.getElementById('loadingOverlay');
-    overlay.classList.add('hide');
-    setTimeout(() => overlay.remove(), 600);
-  }
-
-  // Auto refresh every 10 minutes
-  setInterval(loadWeather, 10 * 60 * 1000);
-
-  // Update time display every minute
-  setInterval(updateTimeDisplay, 60 * 1000);
+(async function init(){
+  await load();
+  const ldr=document.getElementById('loader');
+  ldr.classList.add('out');
+  setTimeout(()=>ldr.remove(),600);
+  setInterval(load,10*60*1000);
+  setInterval(updateTime,60*1000);
 })();
 </script>
 
