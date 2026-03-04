@@ -3,7 +3,7 @@
 <html lang="ckb" dir="rtl">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
 <title>کەش و هەوای کوردستان</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;700;800&display=swap" rel="stylesheet"/>
@@ -11,202 +11,219 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg1:#050d1a;--bg2:#0d2040;--bg3:#1a4080;
-  --card:rgba(255,255,255,0.07);--border:rgba(255,255,255,0.13);
+  --card:rgba(255,255,255,0.08);--border:rgba(255,255,255,0.12);
   --accent:#60a5fa;--gold:#fbbf24;--green:#34d399;--red:#f87171;
   --text:#e8f0ff;--muted:rgba(232,240,255,0.55);
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
 }
 html{scroll-behavior:smooth}
 body{
   font-family:'Noto Sans Arabic','Segoe UI',Tahoma,sans-serif;
   background:linear-gradient(160deg,var(--bg1) 0%,var(--bg2) 50%,var(--bg3) 100%);
   min-height:100vh;color:var(--text);overflow-x:hidden;
+  padding-bottom:calc(1rem + var(--safe-bottom));
 }
-
-/* Stars */
 #stars{position:fixed;inset:0;pointer-events:none;z-index:0}
-.star{position:absolute;background:#fff;border-radius:50%;animation:tw var(–d,3s) ease-in-out infinite}
-@keyframes tw{0%,100%{opacity:.15}50%{opacity:.9}}
-
-/* Clouds */
+.star{position:absolute;background:#fff;border-radius:50%;animation:tw var(--d,3s) ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.12}50%{opacity:.85}}
 #clouds{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.cloud{position:absolute;background:rgba(255,255,255,0.05);border-radius:60px;animation:drift linear infinite}
+.cloud{position:absolute;background:rgba(255,255,255,0.045);border-radius:60px;animation:drift linear infinite}
 @keyframes drift{from{transform:translateX(-250px)}to{transform:translateX(calc(100vw + 250px))}}
 
-/* Header */
+/* Header — single, no repeat */
 header{
 position:sticky;top:0;z-index:100;
-background:rgba(5,13,26,0.8);backdrop-filter:blur(20px);
-border-bottom:1px solid var(–border);padding:.9rem 1.5rem;
+background:rgba(5,13,26,0.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+border-bottom:1px solid var(–border);
+padding:.7rem 1.25rem;
+padding-top:calc(.7rem + var(–safe-top));
 }
-.hdr{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
-.logo{display:flex;align-items:center;gap:.6rem}
-.logo-icon{font-size:2.2rem}
-.logo h1{font-size:1.35rem;font-weight:800}
-.logo p{font-size:.75rem;color:var(–muted)}
-.last-updated{font-size:.75rem;color:var(–muted);display:flex;align-items:center;gap:.4rem}
-.live-dot{width:7px;height:7px;background:var(–green);border-radius:50%;animation:pulse 2s infinite}
+.hdr{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:.75rem}
+.logo{display:flex;align-items:center;gap:.5rem;min-width:0}
+.logo-icon{font-size:1.75rem;flex-shrink:0}
+.logo h1{font-size:1.05rem;font-weight:800;white-space:nowrap}
+.logo p{font-size:.65rem;color:var(–muted)}
+.hdr-right{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.live-badge{
+display:flex;align-items:center;gap:.3rem;
+background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.22);
+border-radius:9999px;padding:.25rem .7rem;font-size:.68rem;color:var(–green);white-space:nowrap;
+}
+.live-dot{width:6px;height:6px;background:var(–green);border-radius:50%;animation:pulse 2s infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.ios-hdr-btn{
+display:flex;align-items:center;gap:.28rem;
+background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.28);
+border-radius:9999px;padding:.25rem .75rem;
+color:var(–accent);font-family:inherit;font-size:.68rem;cursor:pointer;
+text-decoration:none;white-space:nowrap;transition:background .2s;
+}
+.ios-hdr-btn:hover{background:rgba(96,165,250,.22)}
 
 /* Hero */
-.hero{text-align:center;padding:4rem 1.5rem 2.5rem;position:relative;z-index:1}
+.hero{text-align:center;padding:2.2rem 1.25rem 1.4rem;position:relative;z-index:1}
 .hero-badge{
-display:inline-flex;align-items:center;gap:.4rem;
-background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.3);
-border-radius:9999px;padding:.35rem 1.1rem;font-size:.8rem;color:var(–accent);margin-bottom:1.5rem;
+display:inline-flex;align-items:center;gap:.35rem;
+background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.22);
+border-radius:9999px;padding:.28rem .95rem;font-size:.75rem;color:var(–accent);margin-bottom:1rem;
 }
-.hero h2{font-size:clamp(1.8rem,5vw,3.2rem);font-weight:800;line-height:1.2;margin-bottom:.8rem}
-.hero h2 span{color:var(–gold)}
-.hero p{font-size:1rem;color:var(–muted);max-width:560px;margin:0 auto}
+.hero p{font-size:.88rem;color:var(–muted);max-width:500px;margin:0 auto;line-height:1.65}
 
-/* City tabs */
-.tabs{display:flex;justify-content:center;gap:.4rem;flex-wrap:wrap;padding:1rem 1.5rem 0;position:relative;z-index:1}
+/* Tabs */
+.tabs{display:flex;justify-content:center;gap:.38rem;flex-wrap:wrap;padding:.7rem 1.25rem 0;position:relative;z-index:1}
 .tab-btn{
 background:var(–card);border:1px solid var(–border);
-border-radius:9999px;padding:.45rem 1.2rem;
-color:var(–muted);font-family:inherit;font-size:.85rem;cursor:pointer;transition:all .25s;
+border-radius:9999px;padding:.4rem 1rem;
+color:var(–muted);font-family:inherit;font-size:.82rem;cursor:pointer;transition:all .22s;flex-shrink:0;
 }
 .tab-btn:hover{border-color:var(–accent);color:var(–accent)}
-.tab-btn.active{background:var(–accent);border-color:var(–accent);color:#fff}
+.tab-btn.active{background:var(–accent);border-color:var(–accent);color:#fff;font-weight:600}
 
-/* Main grid */
-.container{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:2rem 1.5rem}
-.section-title{font-size:1.3rem;font-weight:700;margin-bottom:1.25rem;display:flex;align-items:center;gap:.5rem;color:var(–text)}
-.section-title::after{content:’’;flex:1;height:1px;background:var(–border);margin-right:.5rem}
+/* Container */
+.container{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:1.4rem 1.25rem}
+.section-title{font-size:1.1rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:.4rem}
+.section-title::after{content:’’;flex:1;height:1px;background:var(–border);margin-right:.35rem}
 
-.cities-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.2rem;margin-bottom:3rem}
+/* Grid */
+.cities-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.95rem;margin-bottom:2.25rem}
 
-/* City card */
+/* Card */
 .city-card{
 background:var(–card);border:1px solid var(–border);
-border-radius:1.25rem;padding:1.4rem;
-backdrop-filter:blur(14px);cursor:pointer;
-transition:transform .3s,box-shadow .3s,border-color .3s;
+border-radius:1.1rem;padding:1.2rem;
+backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+cursor:pointer;transition:transform .28s,box-shadow .28s,border-color .28s;
 position:relative;overflow:hidden;
 }
 .city-card::before{
 content:’’;position:absolute;inset:0;
-background:linear-gradient(135deg,var(–cc,rgba(96,165,250,.05)) 0%,transparent 65%);
-pointer-events:none;
+background:linear-gradient(135deg,rgba(96,165,250,.05) 0%,transparent 65%);pointer-events:none;
 }
-.city-card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.45);border-color:rgba(96,165,250,.4)}
-.city-card.loading{opacity:.6;cursor:default}
-.city-card.error-card{border-color:rgba(248,113,113,.3)}
-
-.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.8rem}
-.city-name{font-size:1.2rem;font-weight:700}
-.city-sub{font-size:.75rem;color:var(–muted);margin-top:.1rem}
-.w-icon{font-size:3rem;line-height:1;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
-
-.temp-main{font-size:2.8rem;font-weight:800;line-height:1}
-.temp-main sup{font-size:1rem;font-weight:400}
-.temp-range{font-size:.82rem;color:var(–muted);margin:.3rem 0 .7rem}
-.w-desc{font-size:.88rem;color:var(–accent);margin-bottom:.9rem;font-weight:500}
-
-.stats-row{display:flex;gap:.4rem;flex-wrap:wrap}
+.city-card:hover{transform:translateY(-5px);box-shadow:0 18px 48px rgba(0,0,0,.42);border-color:rgba(96,165,250,.35)}
+.city-card:active{transform:translateY(-2px)}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.65rem}
+.city-name{font-size:1.1rem;font-weight:700}
+.city-sub{font-size:.7rem;color:var(–muted);margin-top:.1rem}
+.w-icon{font-size:2.7rem;line-height:1;filter:drop-shadow(0 2px 8px rgba(0,0,0,.45))}
+.temp-main{font-size:2.5rem;font-weight:800;line-height:1}
+.temp-main sup{font-size:.9rem;font-weight:400}
+.temp-range{font-size:.75rem;color:var(–muted);margin:.25rem 0 .55rem}
+.w-desc{font-size:.82rem;color:var(–accent);margin-bottom:.75rem;font-weight:500}
+.stats-row{display:flex;gap:.32rem;flex-wrap:wrap}
 .stat{
-display:flex;align-items:center;gap:.25rem;
-background:rgba(255,255,255,.06);border-radius:9999px;
-padding:.28rem .65rem;font-size:.75rem;color:var(–muted);
+display:flex;align-items:center;gap:.2rem;
+background:rgba(255,255,255,.055);border-radius:9999px;
+padding:.22rem .55rem;font-size:.7rem;color:var(–muted);
 }
+.card-ios-btn{
+display:inline-flex;align-items:center;gap:.22rem;
+margin-top:.7rem;
+background:rgba(96,165,250,.09);border:1px solid rgba(96,165,250,.2);
+border-radius:9999px;padding:.2rem .6rem;
+color:var(–accent);font-size:.68rem;text-decoration:none;transition:background .2s;
+}
+.card-ios-btn:hover{background:rgba(96,165,250,.18)}
 
-/* Skeleton loader */
-.skel{background:linear-gradient(90deg,rgba(255,255,255,.05) 25%,rgba(255,255,255,.1) 50%,rgba(255,255,255,.05) 75%);background-size:200% 100%;animation:skel 1.5s infinite;border-radius:6px;height:16px;margin:.3rem 0}
-@keyframes skel{0%{background-position:200% 0}100%{background-position:-200% 0}}
-.skel-icon{width:50px;height:50px;border-radius:50%;margin-bottom:.5rem}
-.skel-temp{width:80px;height:40px}
-.skel-sm{width:60%;height:12px}
-.skel-xs{width:40%;height:10px}
+/* Skeleton */
+.skel{background:linear-gradient(90deg,rgba(255,255,255,.05) 25%,rgba(255,255,255,.1) 50%,rgba(255,255,255,.05) 75%);background-size:200% 100%;animation:sk 1.5s infinite;border-radius:5px;margin:.28rem 0}
+@keyframes sk{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
 /* Stats bar */
-.stats-section{margin-bottom:3rem}
-.stats-bar{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
-.stat-card{
-background:var(–card);border:1px solid var(–border);
-border-radius:1rem;padding:1.2rem;backdrop-filter:blur(14px);
-text-align:center;
-}
-.stat-card .si{font-size:2rem;margin-bottom:.3rem}
-.stat-card .sv{font-size:1.8rem;font-weight:800;color:var(–gold)}
-.stat-card .sl{font-size:.8rem;color:var(–muted);margin-top:.2rem}
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.8rem;margin-bottom:2.25rem}
+.stat-card{background:var(–card);border:1px solid var(–border);border-radius:.95rem;padding:1rem;backdrop-filter:blur(14px);text-align:center}
+.stat-card .si{font-size:1.7rem;margin-bottom:.22rem}
+.stat-card .sv{font-size:1.4rem;font-weight:800;color:var(–gold)}
+.stat-card .sl{font-size:.72rem;color:var(–muted);margin-top:.18rem}
 
-/* Modal */
+/* iOS section */
+.ios-section{
+background:var(–card);border:1px solid rgba(96,165,250,.18);
+border-radius:1.1rem;padding:1.3rem;margin-bottom:2.25rem;backdrop-filter:blur(14px);
+}
+.ios-section h3{font-size:1rem;font-weight:700;margin-bottom:.35rem;display:flex;align-items:center;gap:.38rem}
+.ios-section p{font-size:.8rem;color:var(–muted);margin-bottom:.9rem;line-height:1.6}
+.ios-links{display:flex;gap:.42rem;flex-wrap:wrap}
+.ios-link{
+display:inline-flex;align-items:center;gap:.25rem;
+background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.25);
+border-radius:9999px;padding:.35rem .85rem;
+color:var(–accent);font-family:inherit;font-size:.78rem;
+text-decoration:none;transition:all .2s;cursor:pointer;
+}
+.ios-link:hover{background:rgba(96,165,250,.2);transform:translateY(-1px)}
+
+/* Modal — bottom sheet on mobile */
 .overlay{
-position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.75);
-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;
-padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s;
+position:fixed;inset:0;z-index:200;
+background:rgba(0,0,0,.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+display:flex;align-items:flex-end;justify-content:center;
+padding:0;opacity:0;pointer-events:none;transition:opacity .3s;
 }
 .overlay.open{opacity:1;pointer-events:all}
 .modal{
-background:linear-gradient(135deg,#0a1e3d,#162f5a);
-border:1px solid var(–border);border-radius:1.5rem;
+background:linear-gradient(160deg,#0a1e3d,#162f5a);
+border:1px solid var(–border);border-radius:1.4rem 1.4rem 0 0;
 width:100%;max-width:680px;max-height:92vh;overflow-y:auto;
-padding:2rem;transform:scale(.94);transition:transform .3s;
+padding:1.4rem 1.2rem calc(1.4rem + var(–safe-bottom));
+transform:translateY(40px);transition:transform .35s cubic-bezier(.34,1.4,.64,1);
 }
+.overlay.open .modal{transform:translateY(0)}
+@media(min-width:640px){
+.overlay{align-items:center;padding:1rem}
+.modal{border-radius:1.4rem;padding:1.8rem;transform:scale(.95)}
 .overlay.open .modal{transform:scale(1)}
-.modal-close{
-float:left;background:rgba(255,255,255,.1);border:none;
-color:var(–text);border-radius:9999px;width:2.1rem;height:2.1rem;
-cursor:pointer;font-size:1.1rem;transition:background .2s;
 }
+.modal-handle{width:38px;height:4px;background:rgba(255,255,255,.18);border-radius:2px;margin:0 auto 1.1rem}
+.modal-close{float:left;background:rgba(255,255,255,.1);border:none;color:var(–text);border-radius:9999px;width:1.9rem;height:1.9rem;cursor:pointer;font-size:.95rem;transition:background .2s}
 .modal-close:hover{background:rgba(255,255,255,.2)}
-.modal-header{margin-bottom:1.2rem}
-.modal-header h3{font-size:1.9rem;font-weight:800}
-.modal-header p{color:var(–muted);font-size:.85rem}
-.modal-wi{font-size:4.5rem;margin:.5rem 0;line-height:1}
-.modal-temp{font-size:4rem;font-weight:800;line-height:1}
-.modal-desc{color:var(–accent);font-size:1rem;font-weight:500;margin:.4rem 0 1.5rem}
-
-.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:1.5rem}
-.di{
-background:rgba(255,255,255,.05);border-radius:.8rem;
-padding:.85rem 1rem;display:flex;align-items:center;gap:.6rem;
+.modal h3{font-size:1.65rem;font-weight:800}
+.modal-sub{color:var(–muted);font-size:.78rem;margin-top:.18rem;margin-bottom:.8rem}
+.modal-wi{font-size:3.8rem;line-height:1;margin:.4rem 0}
+.modal-temp{font-size:3.6rem;font-weight:800;line-height:1}
+.modal-desc{color:var(–accent);font-size:.9rem;font-weight:500;margin:.3rem 0 1.1rem}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-bottom:1.2rem}
+.di{background:rgba(255,255,255,.05);border-radius:.7rem;padding:.75rem .85rem;display:flex;align-items:center;gap:.5rem}
+.di-ico{font-size:1.25rem;flex-shrink:0}
+.di-lbl{font-size:.65rem;color:var(–muted)}
+.di-val{font-size:.9rem;font-weight:600}
+.fc-strip{margin-bottom:1.15rem}
+.fc-strip h4,.chart-wrap h4{color:var(–muted);font-weight:500;margin-bottom:.6rem;font-size:.82rem}
+.fc-days{display:flex;gap:.4rem;overflow-x:auto;padding-bottom:.3rem;-webkit-overflow-scrolling:touch}
+.fc-day{flex:0 0 auto;background:rgba(255,255,255,.05);border-radius:.7rem;padding:.6rem .75rem;text-align:center;min-width:64px}
+.fd-name{font-size:.65rem;color:var(–muted);margin-bottom:.18rem}
+.fd-icon{font-size:1.3rem;margin-bottom:.18rem}
+.fd-hi{font-size:.82rem;font-weight:600}
+.fd-lo{font-size:.68rem;color:var(–muted)}
+.chart-wrap{margin-bottom:1.15rem}
+.chart-bars{display:flex;gap:.22rem;align-items:flex-end;height:76px}
+.bar-w{flex:1;display:flex;flex-direction:column;align-items:center;gap:.15rem}
+.bar{width:100%;border-radius:3px 3px 0 0;background:linear-gradient(to top,#1d4ed8,#60a5fa);min-height:3px;transition:height .6s ease}
+.bar-lbl{font-size:.54rem;color:var(–muted)}
+.modal-ios-btn{
+display:flex;align-items:center;justify-content:center;gap:.35rem;
+background:rgba(96,165,250,.09);border:1px solid rgba(96,165,250,.22);
+border-radius:.8rem;padding:.7rem;margin-top:1.1rem;
+color:var(–accent);text-decoration:none;font-size:.82rem;font-weight:500;transition:background .2s;
 }
-.di-ico{font-size:1.4rem}
-.di-lbl{font-size:.72rem;color:var(–muted)}
-.di-val{font-size:1rem;font-weight:600}
+.modal-ios-btn:hover{background:rgba(96,165,250,.18)}
 
-/* Forecast strip */
-.forecast-strip{margin-bottom:1.5rem}
-.forecast-strip h4{color:var(–muted);font-weight:500;margin-bottom:.75rem;font-size:.9rem}
-.forecast-days{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.4rem}
-.forecast-day{
-flex:0 0 auto;background:rgba(255,255,255,.05);
-border-radius:.8rem;padding:.7rem .9rem;text-align:center;min-width:70px;
-}
-.fd-name{font-size:.72rem;color:var(–muted);margin-bottom:.25rem}
-.fd-icon{font-size:1.5rem;margin-bottom:.25rem}
-.fd-temp{font-size:.85rem;font-weight:600}
+footer{text-align:center;padding:1.6rem 1.25rem;border-top:1px solid var(–border);color:var(–muted);font-size:.76rem;position:relative;z-index:1}
 
-/* Chart */
-.monthly-chart h4{color:var(–muted);font-weight:500;margin-bottom:.75rem;font-size:.9rem}
-.chart-bars{display:flex;gap:.3rem;align-items:flex-end;height:90px}
-.bar-w{flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem}
-.bar{width:100%;border-radius:4px 4px 0 0;background:linear-gradient(to top,#1d4ed8,#60a5fa);min-height:4px;transition:height .6s ease}
-.bar-lbl{font-size:.6rem;color:var(–muted)}
-
-/* Footer */
-footer{
-text-align:center;padding:2rem 1.5rem;
-border-top:1px solid var(–border);color:var(–muted);font-size:.82rem;
-position:relative;z-index:1;
-}
-
-/* Responsive */
-@media(max-width:600px){
-.hero{padding:2.5rem 1rem 2rem}
+@media(max-width:420px){
+.hero{padding:1.8rem .9rem 1.2rem}
 .cities-grid{grid-template-columns:1fr}
-.detail-grid{grid-template-columns:1fr}
-.hdr{flex-direction:column;align-items:flex-start}
 .stats-bar{grid-template-columns:1fr 1fr}
+.detail-grid{grid-template-columns:1fr}
+.ios-hdr-btn{display:none}
 }
-::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:rgba(255,255,255,.04)}
-::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);border-radius:3px}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:2px}
 </style>
 
 </head>
 <body>
-
 <div id="stars"></div>
 <div id="clouds"></div>
 
@@ -219,21 +236,23 @@ position:relative;z-index:1;
         <p>داتای ڕاستەقینە — نوێکراوەتەوە بە خودکاری</p>
       </div>
     </div>
-    <div class="last-updated">
-      <div class="live-dot"></div>
-      <span id="updateTime">بارکردن...</span>
+    <div class="hdr-right">
+      <div class="live-badge">
+        <div class="live-dot"></div>
+        <span id="updateTime">بارکردن...</span>
+      </div>
+      <a class="ios-hdr-btn" href="#ios-section">🍎 Weather App</a>
     </div>
   </div>
 </header>
 
 <div class="hero">
-  <div class="hero-badge">🛰️ Open-Meteo API · داتای ئەمڕۆ</div>
-  <h2>کەش و هەوای <span>کوردستان</span></h2>
+  <div class="hero-badge">🛰️ Open-Meteo API · داتای ئەمڕۆ · نوێدەبێتەوە خودکاری</div>
   <p>زانیاری ڕاستەقینە و نوێی کەش و هەوای شارەکانی هەرێمی کوردستان — هەموو ڕۆژێک نوێدەبێتەوە</p>
 </div>
 
-<div class="tabs" id="tabs">
-  <button class="tab-btn active" onclick="filterCities('all',this)">هەموو</button>
+<div class="tabs">
+  <button class="tab-btn active" onclick="filterCities('all',this)">🌍 هەموو</button>
   <button class="tab-btn" onclick="filterCities('hewler',this)">هەولێر</button>
   <button class="tab-btn" onclick="filterCities('slemani',this)">سلێمانی</button>
   <button class="tab-btn" onclick="filterCities('duhok',this)">دهۆک</button>
@@ -244,280 +263,198 @@ position:relative;z-index:1;
   <div class="section-title">🏙️ شارەکانی کوردستان</div>
   <div class="cities-grid" id="grid"></div>
 
-  <div class="stats-section">
-    <div class="section-title">📊 ئامارەکانی ئەمڕۆ</div>
-    <div class="stats-bar" id="statsBar">
-      <div class="stat-card"><div class="si">🌡️</div><div class="sv" id="hotCity">—</div><div class="sl">گەرمترین شار</div></div>
-      <div class="stat-card"><div class="si">❄️</div><div class="sv" id="coldCity">—</div><div class="sl">سارترین شار</div></div>
-      <div class="stat-card"><div class="si">💧</div><div class="sv" id="humidCity">—</div><div class="sl">شێوی ئاوی زۆرترین</div></div>
-      <div class="stat-card"><div class="si">💨</div><div class="sv" id="windCity">—</div><div class="sl">بایەزگای زۆرترین</div></div>
-    </div>
+  <div class="section-title">📊 ئامارەکانی ئەمڕۆ</div>
+  <div class="stats-bar">
+    <div class="stat-card"><div class="si">🌡️</div><div class="sv" id="hotCity">—</div><div class="sl">گەرمترین شار</div></div>
+    <div class="stat-card"><div class="si">❄️</div><div class="sv" id="coldCity">—</div><div class="sl">سارترین شار</div></div>
+    <div class="stat-card"><div class="si">💧</div><div class="sv" id="humidCity">—</div><div class="sl">شێوداترین شار</div></div>
+    <div class="stat-card"><div class="si">💨</div><div class="sv" id="windCity">—</div><div class="sl">بایی زۆرترین</div></div>
+  </div>
+
+  <div class="section-title" id="ios-section">📱 ئەپی Weather ئەپڵ</div>
+  <div class="ios-section">
+    <h3>🍎 کرانەوە لە iOS Weather App</h3>
+    <p>
+      کلیک بکە لەسەر ناوی شار — ئەپی نەیچەری ئەپڵ دەکرێتەوە و شارەکە بە خودکاری دەخرێتەوە.
+      تەنها لە ئایفۆن و ئایپاد کاردەکات.
+    </p>
+    <div class="ios-links" id="iosLinks"></div>
   </div>
 </div>
 
 <div class="overlay" id="overlay" onclick="closeModal(event)">
-  <div class="modal" id="modalBody"></div>
+  <div class="modal" id="modalBody"><div class="modal-handle"></div></div>
 </div>
 
 <footer>
   <p>© ٢٠٢٥ کەش و هەوای کوردستان · داتا لە <strong>Open-Meteo.com</strong></p>
-  <p style="margin-top:.3rem;font-size:.72rem">کەش و هەوا هەر ٣٠ خولەک نوێدەبێتەوە بە خودکاری</p>
+  <p style="margin-top:.28rem;font-size:.67rem">هەر ٣٠ خولەک نوێدەبێتەوە بە خودکاری</p>
 </footer>
 
 <script>
-// ── City definitions ──
-const CITIES = [
-  {id:'hewler',  name:'هەولێر',   sub:'پایتەختی کوردستان',        region:'hewler',  lat:36.191, lon:44.009, elev:426,  pop:'1.5 ملیۆن'},
-  {id:'slemani', name:'سلێمانی',  sub:'پایتەختی کەلتووری',        region:'slemani', lat:35.557, lon:45.435, elev:831,  pop:'723 هەزار'},
-  {id:'duhok',   name:'دهۆک',     sub:'گەورەترین شاری باکوور',    region:'duhok',   lat:36.867, lon:42.983, elev:630,  pop:'380 هەزار'},
-  {id:'zakho',   name:'زاخۆ',     sub:'دەروازەی کوردستان',        region:'other',   lat:37.144, lon:42.685, elev:430,  pop:'150 هەزار'},
-  {id:'halabja', name:'هەڵەبجە',  sub:'شاری یاداوەری',            region:'other',   lat:35.178, lon:45.986, elev:720,  pop:'110 هەزار'},
-  {id:'soran',   name:'سۆران',    sub:'کرستاڵی کوردستان',         region:'other',   lat:36.651, lon:44.541, elev:850,  pop:'100 هەزار'},
-  {id:'kirkuk',  name:'کەرکووک',  sub:'شاری نەفت و کولتووری',     region:'other',   lat:35.468, lon:44.392, elev:331,  pop:'900 هەزار'},
-  {id:'rania',   name:'ڕانیە',    sub:'شاری چیا و دەریاچە',       region:'other',   lat:36.258, lon:44.714, elev:750,  pop:'60 هەزار'},
+const CITIES=[
+  {id:'hewler', name:'هەولێر',  sub:'پایتەختی کوردستان',     region:'hewler',  lat:36.191,lon:44.009,elev:426, pop:'1.5 ملیۆن'},
+  {id:'slemani',name:'سلێمانی', sub:'پایتەختی کەلتووری',     region:'slemani', lat:35.557,lon:45.435,elev:831, pop:'723 هەزار'},
+  {id:'duhok',  name:'دهۆک',    sub:'گەورەترین شاری باکوور', region:'duhok',   lat:36.867,lon:42.983,elev:630, pop:'380 هەزار'},
+  {id:'zakho',  name:'زاخۆ',    sub:'دەروازەی کوردستان',     region:'other',   lat:37.144,lon:42.685,elev:430, pop:'150 هەزار'},
+  {id:'halabja',name:'هەڵەبجە', sub:'شاری یاداوەری',         region:'other',   lat:35.178,lon:45.986,elev:720, pop:'110 هەزار'},
+  {id:'soran',  name:'سۆران',   sub:'کرستاڵی کوردستان',      region:'other',   lat:36.651,lon:44.541,elev:850, pop:'100 هەزار'},
+  {id:'kirkuk', name:'کەرکووک', sub:'شاری نەفت و کولتووری',  region:'other',   lat:35.468,lon:44.392,elev:331, pop:'900 هەزار'},
+  {id:'rania',  name:'ڕانیە',   sub:'شاری چیا و دەریاچە',    region:'other',   lat:36.258,lon:44.714,elev:750, pop:'60 هەزار'},
 ];
-
-// WMO weather code → Kurdish description + emoji
-function wmoInfo(code){
-  if(code===0) return{desc:'ئاسمانی روون',icon:'☀️'};
-  if(code<=2)  return{desc:'نیوەوەر',icon:'🌤️'};
-  if(code===3) return{desc:'داپۆشراو',icon:'☁️'};
-  if(code<=48) return{desc:'مەڵبەندی',icon:'🌫️'};
-  if(code<=55) return{desc:'نمی کەم',icon:'🌦️'};
-  if(code<=67) return{desc:'باران',icon:'🌧️'};
-  if(code<=77) return{desc:'بەفر',icon:'🌨️'};
-  if(code<=82) return{desc:'باران بووندەرە',icon:'🌧️'};
-  if(code<=99) return{desc:'گەوزە و باران',icon:'⛈️'};
-  return{desc:'نامەعلوم',icon:'🌡️'};
-}
-
-const DAY_NAMES = ['یەکشەممە','دووشەممە','سێشەممە','چوارشەممە','پێنجشەممە','هەینی','شەممە'];
-const MONTHS_S = ['ک.د','شو','ئا','نی','ئی','حو','تم','ئب','ئل','ت.ی','ت.د','ک.ی'];
-const MONTHLY_AVG = {
-  hewler:  [11,13,18,24,31,38,43,42,36,27,18,12],
-  slemani: [5,7,11,17,23,30,34,33,28,20,12,7],
-  duhok:   [7,9,14,20,27,34,39,38,33,24,15,9],
-  zakho:   [6,8,13,20,28,35,40,39,34,25,14,8],
-  halabja: [4,6,10,16,22,29,33,32,27,19,11,6],
-  soran:   [3,5,9,15,21,28,32,31,26,18,10,5],
-  kirkuk:  [9,11,16,22,30,37,43,42,36,27,17,11],
-  rania:   [4,6,10,16,22,29,33,32,27,19,11,6],
+const DAY_KU=['یەکشەممە','دووشەممە','سێشەممە','چوارشەممە','پێنجشەممە','هەینی','شەممە'];
+const MONS=['ک.د','شو','ئا','نی','ئی','حو','تم','ئب','ئل','ت.ی','ت.د','ک.ی'];
+const MAVG={
+  hewler:[11,13,18,24,31,38,43,42,36,27,18,12],
+  slemani:[5,7,11,17,23,30,34,33,28,20,12,7],
+  duhok:[7,9,14,20,27,34,39,38,33,24,15,9],
+  zakho:[6,8,13,20,28,35,40,39,34,25,14,8],
+  halabja:[4,6,10,16,22,29,33,32,27,19,11,6],
+  soran:[3,5,9,15,21,28,32,31,26,18,10,5],
+  kirkuk:[9,11,16,22,30,37,43,42,36,27,17,11],
+  rania:[4,6,10,16,22,29,33,32,27,19,11,6],
 };
 
-let weatherData = {}; // cityId → live data
-let forecastData = {}; // cityId → 7-day forecast
-let currentFilter = 'all';
+function wmo(c){
+  if(c===0)return{d:'ئاسمانی روون',i:'☀️'};
+  if(c<=2) return{d:'نیوەوەر',i:'🌤️'};
+  if(c===3)return{d:'داپۆشراو',i:'☁️'};
+  if(c<=48)return{d:'مەڵبەندی',i:'🌫️'};
+  if(c<=55)return{d:'نمی کەم',i:'🌦️'};
+  if(c<=67)return{d:'باران',i:'🌧️'};
+  if(c<=77)return{d:'بەفر',i:'🌨️'};
+  if(c<=82)return{d:'باران بووندەرە',i:'🌧️'};
+  if(c<=99)return{d:'گەوزە و باران',i:'⛈️'};
+  return{d:'نامەعلوم',i:'🌡️'};
+}
 
-// ── Background decorations ──
-(function initBg(){
+// iOS Weather deep link via Apple Maps (works on iPhone/iPad)
+function openIOS(name,lat,lon){
+  window.location.href=`maps://maps.apple.com/?ll=${lat},${lon}&q=${encodeURIComponent(name)}`;
+}
+
+let WD={},FD={},CF='all';
+
+// Background
+(function(){
   const s=document.getElementById('stars');
-  for(let i=0;i<130;i++){
-    const el=document.createElement('div');
-    el.className='star';
-    const sz=Math.random()*2.5+.5;
-    el.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${(Math.random()*3+2).toFixed(1)}s;animation-delay:-${(Math.random()*5).toFixed(1)}s`;
-    s.appendChild(el);
+  for(let i=0;i<120;i++){
+    const e=document.createElement('div');e.className='star';
+    const z=Math.random()*2.4+.5;
+    e.style.cssText=`width:${z}px;height:${z}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${(Math.random()*3+2).toFixed(1)}s;animation-delay:-${(Math.random()*5).toFixed(1)}s`;
+    s.appendChild(e);
   }
-  const c=document.getElementById('clouds');
+  const cl=document.getElementById('clouds');
   for(let i=0;i<7;i++){
-    const el=document.createElement('div');
-    el.className='cloud';
-    const w=100+Math.random()*220;
-    const dur=70+Math.random()*90;
-    el.style.cssText=`width:${w}px;height:${w*.3}px;top:${3+Math.random()*30}%;animation-duration:${dur}s;animation-delay:-${Math.random()*dur}s`;
-    c.appendChild(el);
+    const e=document.createElement('div');e.className='cloud';
+    const w=100+Math.random()*220,dur=70+Math.random()*90;
+    e.style.cssText=`width:${w}px;height:${w*.3}px;top:${3+Math.random()*30}%;animation-duration:${dur}s;animation-delay:-${Math.random()*dur}s`;
+    cl.appendChild(e);
   }
+  // iOS links
+  document.getElementById('iosLinks').innerHTML=CITIES.map(c=>
+    `<a class="ios-link" onclick="openIOS('${c.name}',${c.lat},${c.lon})" href="#">📍 ${c.name}</a>`
+  ).join('');
 })();
 
-// ── Fetch weather for all cities ──
 async function fetchAll(){
-  renderSkeletons();
-  const promises = CITIES.map(city => fetchCity(city));
-  await Promise.all(promises);
-  renderCities();
-  updateStats();
-  updateTime();
+  renderSkel();
+  await Promise.all(CITIES.map(async c=>{
+    try{
+      const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,apparent_temperature,precipitation&daily=temperature_2m_max,temperature_2m_min,weather_code,precipitation_sum&timezone=Asia%2FBaghdad&forecast_days=7`);
+      const d=await r.json();
+      WD[c.id]={temp:Math.round(d.current.temperature_2m),feels:Math.round(d.current.apparent_temperature),humidity:d.current.relative_humidity_2m,wind:Math.round(d.current.wind_speed_10m),code:d.current.weather_code,precip:d.current.precipitation};
+      FD[c.id]=d.daily;
+    }catch{WD[c.id]=null;}
+  }));
+  render();updateStats();
+  const n=new Date();
+  document.getElementById('updateTime').textContent=`نوێ: ${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`;
 }
 
-async function fetchCity(city){
-  const url = `https://api.open-meteo.com/v1/forecast?` +
-    `latitude=${city.lat}&longitude=${city.lon}` +
-    `&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,apparent_temperature,precipitation` +
-    `&daily=temperature_2m_max,temperature_2m_min,weather_code,precipitation_sum` +
-    `&timezone=Asia%2FBaghdad&forecast_days=7`;
-  try{
-    const res = await fetch(url);
-    const d = await res.json();
-    weatherData[city.id] = {
-      temp: Math.round(d.current.temperature_2m),
-      feels: Math.round(d.current.apparent_temperature),
-      humidity: d.current.relative_humidity_2m,
-      wind: Math.round(d.current.wind_speed_10m),
-      code: d.current.weather_code,
-      precip: d.current.precipitation,
-    };
-    forecastData[city.id] = d.daily;
-  } catch(e){
-    weatherData[city.id] = null;
-  }
-}
-
-// ── Render skeletons ──
-function renderSkeletons(){
-  const grid = document.getElementById('grid');
-  grid.innerHTML = CITIES.filter(c=>currentFilter==='all'||c.region===currentFilter).map(()=>`
-    <div class="city-card loading">
+function renderSkel(){
+  const list=CITIES.filter(c=>CF==='all'||c.region===CF);
+  document.getElementById('grid').innerHTML=list.map(()=>`
+    <div class="city-card" style="opacity:.45;cursor:default;pointer-events:none">
       <div class="card-top">
-        <div style="flex:1"><div class="skel" style="width:70%;height:18px"></div><div class="skel skel-xs" style="margin-top:.4rem"></div></div>
-        <div class="skel skel-icon"></div>
+        <div style="flex:1"><div class="skel" style="width:60%;height:17px"></div><div class="skel" style="width:40%;height:10px;margin-top:.3rem"></div></div>
+        <div class="skel" style="width:46px;height:46px;border-radius:50%"></div>
       </div>
-      <div class="skel skel-temp"></div>
-      <div class="skel skel-sm"></div>
-      <div class="skel skel-xs"></div>
+      <div class="skel" style="width:85px;height:38px;margin:.38rem 0"></div>
+      <div class="skel" style="width:52%;height:10px"></div>
+      <div class="skel" style="width:68%;height:10px;margin-top:.28rem"></div>
     </div>`).join('');
 }
 
-// ── Render city cards ──
-function renderCities(){
-  const grid = document.getElementById('grid');
-  const list = CITIES.filter(c=>currentFilter==='all'||c.region===currentFilter);
-  if(!list.length){grid.innerHTML='<p style="color:var(--muted);grid-column:1/-1;text-align:center;padding:2rem">هیچ شارێک نەدۆزرایەوە</p>';return;}
-  grid.innerHTML = list.map(city=>{
-    const w = weatherData[city.id];
-    if(!w) return errorCard(city);
-    const info = wmoInfo(w.code);
-    return `
-    <div class="city-card" onclick="openModal('${city.id}')">
-      <div class="card-top">
-        <div><div class="city-name">${city.name}</div><div class="city-sub">${city.sub}</div></div>
-        <div class="w-icon">${info.icon}</div>
-      </div>
+function render(){
+  const list=CITIES.filter(c=>CF==='all'||c.region===CF);
+  if(!list.length){document.getElementById('grid').innerHTML='<p style="color:var(--muted);grid-column:1/-1;text-align:center;padding:2rem">هیچ شارێک نەدۆزرایەوە</p>';return;}
+  document.getElementById('grid').innerHTML=list.map(city=>{
+    const w=WD[city.id];
+    if(!w)return`<div class="city-card" style="border-color:rgba(248,113,113,.3)"><div class="city-name">${city.name}</div><p style="color:var(--red);font-size:.78rem;margin-top:.5rem">❌ هەڵەی پەیوەندی</p><button onclick="fetchAll()" style="margin-top:.7rem;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.28);color:var(--red);border-radius:9999px;padding:.25rem .7rem;cursor:pointer;font-family:inherit;font-size:.73rem">دووبارە</button></div>`;
+    const{d,i}=wmo(w.code);const fd=FD[city.id];
+    return`<div class="city-card" onclick="openModal('${city.id}')">
+      <div class="card-top"><div><div class="city-name">${city.name}</div><div class="city-sub">${city.sub}</div></div><div class="w-icon">${i}</div></div>
       <div class="temp-main">${w.temp}<sup>°C</sup></div>
-      <div class="temp-range">
-        ${forecastData[city.id]? `کەمترین ${Math.round(forecastData[city.id].temperature_2m_min[0])}° · زۆرترین ${Math.round(forecastData[city.id].temperature_2m_max[0])}°` : ''}
-      </div>
-      <div class="w-desc">${info.desc}</div>
-      <div class="stats-row">
-        <div class="stat">💧 ${w.humidity}٪</div>
-        <div class="stat">💨 ${w.wind} km/h</div>
-        <div class="stat">🌡️ هەست ${w.feels}°</div>
-      </div>
+      <div class="temp-range">${fd?`کەمترین ${Math.round(fd.temperature_2m_min[0])}° · زۆرترین ${Math.round(fd.temperature_2m_max[0])}°`:''}</div>
+      <div class="w-desc">${d}</div>
+      <div class="stats-row"><div class="stat">💧 ${w.humidity}٪</div><div class="stat">💨 ${w.wind} km/h</div><div class="stat">🌡️ هەست ${w.feels}°</div></div>
+      <a class="card-ios-btn" onclick="event.stopPropagation();openIOS('${city.name}',${city.lat},${city.lon})" href="#">🍎 Weather App</a>
     </div>`;
   }).join('');
 }
 
-function errorCard(city){
-  return `<div class="city-card error-card">
-    <div class="city-name">${city.name}</div>
-    <div class="city-sub" style="color:var(--red);margin-top:.5rem">❌ هەڵەی پەیوەندی</div>
-    <button onclick="fetchAll()" style="margin-top:1rem;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);color:var(--red);border-radius:9999px;padding:.3rem .8rem;cursor:pointer;font-family:inherit;font-size:.8rem">دووبارە هەوڵبدەرەوە</button>
-  </div>`;
-}
-
-// ── Update stats bar ──
 function updateStats(){
-  const loaded = CITIES.filter(c=>weatherData[c.id]);
-  if(!loaded.length) return;
-  const hot  = loaded.reduce((a,b)=>weatherData[a.id].temp > weatherData[b.id].temp ? a : b);
-  const cold = loaded.reduce((a,b)=>weatherData[a.id].temp < weatherData[b.id].temp ? a : b);
-  const hum  = loaded.reduce((a,b)=>weatherData[a.id].humidity > weatherData[b.id].humidity ? a : b);
-  const wind = loaded.reduce((a,b)=>weatherData[a.id].wind > weatherData[b.id].wind ? a : b);
-  document.getElementById('hotCity').textContent  = `${hot.name} ${weatherData[hot.id].temp}°`;
-  document.getElementById('coldCity').textContent = `${cold.name} ${weatherData[cold.id].temp}°`;
-  document.getElementById('humidCity').textContent= `${hum.name} ${weatherData[hum.id].humidity}٪`;
-  document.getElementById('windCity').textContent = `${wind.name} ${weatherData[wind.id].wind}km/h`;
+  const ok=CITIES.filter(c=>WD[c.id]);if(!ok.length)return;
+  const hot=ok.reduce((a,b)=>WD[a.id].temp>WD[b.id].temp?a:b);
+  const cold=ok.reduce((a,b)=>WD[a.id].temp<WD[b.id].temp?a:b);
+  const hum=ok.reduce((a,b)=>WD[a.id].humidity>WD[b.id].humidity?a:b);
+  const wind=ok.reduce((a,b)=>WD[a.id].wind>WD[b.id].wind?a:b);
+  document.getElementById('hotCity').textContent=`${hot.name} ${WD[hot.id].temp}°`;
+  document.getElementById('coldCity').textContent=`${cold.name} ${WD[cold.id].temp}°`;
+  document.getElementById('humidCity').textContent=`${hum.name} ${WD[hum.id].humidity}٪`;
+  document.getElementById('windCity').textContent=`${wind.name} ${WD[wind.id].wind}km/h`;
 }
 
-// ── Update timestamp ──
-function updateTime(){
-  const now = new Date();
-  const h = now.getHours().toString().padStart(2,'0');
-  const m = now.getMinutes().toString().padStart(2,'0');
-  document.getElementById('updateTime').textContent = `دوایین نوێکردنەوە: ${h}:${m}`;
+function filterCities(r,btn){
+  CF=r;document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render();
 }
 
-// ── Filter ──
-function filterCities(region, btn){
-  currentFilter = region;
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderCities();
-}
-
-// ── Modal ──
 function openModal(id){
-  const city = CITIES.find(c=>c.id===id);
-  const w = weatherData[id];
-  if(!w) return;
-  const info = wmoInfo(w.code);
-  const fd = forecastData[id];
-  const monthly = MONTHLY_AVG[id] || MONTHLY_AVG.hewler;
-  const maxM = Math.max(...monthly);
-
-  // 7-day forecast strip
-  let forecastHTML = '';
-  if(fd){
-    const today = new Date();
-    forecastHTML = fd.temperature_2m_max.slice(0,7).map((_,i)=>{
-      const d = new Date(today); d.setDate(d.getDate()+i);
-      const code = fd.weather_code[i];
-      const fi = wmoInfo(code);
-      return `<div class="forecast-day">
-        <div class="fd-name">${i===0?'ئەمڕۆ':DAY_NAMES[d.getDay()]}</div>
-        <div class="fd-icon">${fi.icon}</div>
-        <div class="fd-temp">${Math.round(fd.temperature_2m_max[i])}° / ${Math.round(fd.temperature_2m_min[i])}°</div>
-      </div>`;
-    }).join('');
-  }
-
-  // Monthly avg chart
-  const barsHTML = monthly.map((t,i)=>`
-    <div class="bar-w">
-      <div class="bar" style="height:${(t/maxM*75+8).toFixed(0)}px"></div>
-      <div class="bar-lbl">${MONTHS_S[i]}</div>
-    </div>`).join('');
-
-  document.getElementById('modalBody').innerHTML = `
-    <button class="modal-close" onclick="document.getElementById('overlay').classList.remove('open');document.body.style.overflow=''">✕</button>
-    <div class="modal-header">
-      <h3>${city.name}</h3>
-      <p>${city.sub} · بەرزی: ${city.elev}م · نووفوس: ${city.pop}</p>
-    </div>
-    <div class="modal-wi">${info.icon}</div>
-    <div class="modal-temp">${w.temp}°<span style="font-size:1.4rem;font-weight:400">C</span></div>
-    <div class="modal-desc">${info.desc}</div>
+  const city=CITIES.find(c=>c.id===id);const w=WD[id];if(!w)return;
+  const{d,i}=wmo(w.code);const fd=FD[id];const mon=MAVG[id]||MAVG.hewler;const mx=Math.max(...mon);const today=new Date();
+  const fcH=fd?fd.temperature_2m_max.slice(0,7).map((_,idx)=>{
+    const dd=new Date(today);dd.setDate(dd.getDate()+idx);const fi=wmo(fd.weather_code[idx]);
+    return`<div class="fc-day"><div class="fd-name">${idx===0?'ئەمڕۆ':DAY_KU[dd.getDay()]}</div><div class="fd-icon">${fi.i}</div><div class="fd-hi">${Math.round(fd.temperature_2m_max[idx])}°</div><div class="fd-lo">${Math.round(fd.temperature_2m_min[idx])}°</div></div>`;
+  }).join(''):'';
+  const bH=mon.map((t,idx)=>`<div class="bar-w"><div class="bar" style="height:${(t/mx*68+8).toFixed(0)}px"></div><div class="bar-lbl">${MONS[idx]}</div></div>`).join('');
+  document.getElementById('modalBody').innerHTML=`
+    <div class="modal-handle"></div>
+    <button class="modal-close" onclick="closeModalD()">✕</button>
+    <h3>${city.name}</h3>
+    <div class="modal-sub">${city.sub} · بەرزی ${city.elev}م · نووفوس ${city.pop}</div>
+    <div class="modal-wi">${i}</div>
+    <div class="modal-temp">${w.temp}°<span style="font-size:1.2rem;font-weight:400">C</span></div>
+    <div class="modal-desc">${d}</div>
     <div class="detail-grid">
       <div class="di"><span class="di-ico">🌡️</span><div><div class="di-lbl">هەستی پلە</div><div class="di-val">${w.feels}°C</div></div></div>
       <div class="di"><span class="di-ico">💧</span><div><div class="di-lbl">شێوی ئاو</div><div class="di-val">${w.humidity}٪</div></div></div>
       <div class="di"><span class="di-ico">💨</span><div><div class="di-lbl">بایەزگا</div><div class="di-val">${w.wind} km/h</div></div></div>
       <div class="di"><span class="di-ico">🌧️</span><div><div class="di-lbl">باران</div><div class="di-val">${w.precip} mm</div></div></div>
-      ${fd?`
-      <div class="di"><span class="di-ico">☀️</span><div><div class="di-lbl">زۆرترین ئەمڕۆ</div><div class="di-val">${Math.round(fd.temperature_2m_max[0])}°C</div></div></div>
-      <div class="di"><span class="di-ico">🌙</span><div><div class="di-lbl">کەمترین ئەمڕۆ</div><div class="di-val">${Math.round(fd.temperature_2m_min[0])}°C</div></div></div>`:''}
+      ${fd?`<div class="di"><span class="di-ico">☀️</span><div><div class="di-lbl">زۆرترین ئەمڕۆ</div><div class="di-val">${Math.round(fd.temperature_2m_max[0])}°C</div></div></div><div class="di"><span class="di-ico">🌙</span><div><div class="di-lbl">کەمترین ئەمڕۆ</div><div class="di-val">${Math.round(fd.temperature_2m_min[0])}°C</div></div></div>`:''}
     </div>
-    ${fd?`<div class="forecast-strip"><h4>📅 پێشبینی ٧ ڕۆژ</h4><div class="forecast-days">${forecastHTML}</div></div>`:''}
-    <div class="monthly-chart">
-      <h4>📊 تەمەنی پلەی گەرمی مانگ بە مانگ (نێرگە ساڵانە)</h4>
-      <div class="chart-bars">${barsHTML}</div>
-    </div>
+    ${fd?`<div class="fc-strip"><h4>📅 پێشبینی ٧ ڕۆژ</h4><div class="fc-days">${fcH}</div></div>`:''}
+    <div class="chart-wrap"><h4>📊 نێرگەی پلەی گەرمی مانگ بە مانگ</h4><div class="chart-bars">${bH}</div></div>
+    <a class="modal-ios-btn" onclick="openIOS('${city.name}',${city.lat},${city.lon})" href="#">🍎 کرانەوە لە ئەپی Weather ئەپڵ — ${city.name}</a>
   `;
-  document.getElementById('overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.getElementById('overlay').classList.add('open');document.body.style.overflow='hidden';
 }
+function closeModalD(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
+function closeModal(e){if(e.target===document.getElementById('overlay'))closeModalD();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModalD();});
 
-function closeModal(e){
-  if(e.target===document.getElementById('overlay')){
-    document.getElementById('overlay').classList.remove('open');
-    document.body.style.overflow='';
-  }
-}
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
-});
-
-// ── Auto-refresh every 30 min ──
 fetchAll();
-setInterval(fetchAll, 30 * 60 * 1000);
+setInterval(fetchAll,30*60*1000);
 </script>
 
 </body>
