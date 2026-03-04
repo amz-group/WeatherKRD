@@ -8,453 +8,471 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;700;800&display=swap" rel="stylesheet"/>
 <style>
+/* ══════════════════════════════════════
+   RESET + TOKENS
+══════════════════════════════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-–bg1:#04101f;
-–bg2:#0b1d38;
-–bg3:#163560;
-–card:rgba(255,255,255,0.07);
-–border:rgba(255,255,255,0.11);
+–c1:#03091a;
+–c2:#071430;
+–c3:#0d2250;
+–card:rgba(255,255,255,0.06);
+–bdr:rgba(255,255,255,0.10);
 –accent:#60a5fa;
 –gold:#fbbf24;
 –green:#34d399;
 –red:#f87171;
-–text:#deeaff;
-–muted:rgba(222,234,255,0.5);
-–sat:env(safe-area-inset-top,0px);
-–sab:env(safe-area-inset-bottom,0px);
+–txt:#ddeeff;
+–mut:rgba(221,238,255,0.48);
+–si-top:env(safe-area-inset-top,0px);
+–si-bot:env(safe-area-inset-bottom,0px);
 }
 
-html{scroll-behavior:smooth}
+/* ══════════════════════════════════════
+BODY — dark background hardcoded, no JS needed
+══════════════════════════════════════ */
+html{scroll-behavior:smooth;background:var(–c1)}   /* fallback */
 
 body{
 font-family:‘Noto Sans Arabic’,‘Segoe UI’,Tahoma,sans-serif;
-background:linear-gradient(170deg,var(–bg1) 0%,var(–bg2) 55%,var(–bg3) 100%);
+color:var(–txt);
 min-height:100vh;
-color:var(–text);
 overflow-x:hidden;
-padding-bottom:calc(2rem + var(–sab));
+padding-bottom:calc(2.5rem + var(–si-bot));
+/* Full dark gradient — pure CSS, no JS, always renders */
+background:
+radial-gradient(ellipse 80% 50% at 70% -10%, rgba(30,60,140,.55) 0%, transparent 70%),
+radial-gradient(ellipse 60% 40% at 10% 80%,  rgba(10,40,100,.4)  0%, transparent 65%),
+linear-gradient(180deg, #03091a 0%, #071430 40%, #0d2250 80%, #122860 100%);
+background-attachment:fixed;
 }
 
-/* ── Stars ── */
-#stars{position:fixed;inset:0;pointer-events:none;z-index:0}
-.star{position:absolute;background:#fff;border-radius:50%;
-animation:tw var(–d,3s) ease-in-out infinite}
-@keyframes tw{0%,100%{opacity:.1}50%{opacity:.8}}
+/* ══════════════════════════════════════
+CSS-ONLY STARS (no JS)
+══════════════════════════════════════ */
+body::before{
+content:’’;
+position:fixed;inset:0;
+pointer-events:none;
+z-index:0;
+background-image:
+radial-gradient(1px 1px at  5%  8%, rgba(255,255,255,.7) 0%, transparent 100%),
+radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,.5) 0%, transparent 100%),
+radial-gradient(2px 2px at 25%  5%, rgba(255,255,255,.6) 0%, transparent 100%),
+radial-gradient(1px 1px at 35% 15%, rgba(255,255,255,.4) 0%, transparent 100%),
+radial-gradient(1px 1px at 45% 28%, rgba(255,255,255,.6) 0%, transparent 100%),
+radial-gradient(2px 2px at 55%  3%, rgba(255,255,255,.5) 0%, transparent 100%),
+radial-gradient(1px 1px at 65% 18%, rgba(255,255,255,.7) 0%, transparent 100%),
+radial-gradient(1px 1px at 75% 10%, rgba(255,255,255,.4) 0%, transparent 100%),
+radial-gradient(2px 2px at 85% 22%, rgba(255,255,255,.6) 0%, transparent 100%),
+radial-gradient(1px 1px at 92%  7%, rgba(255,255,255,.5) 0%, transparent 100%),
+radial-gradient(1px 1px at  8% 35%, rgba(255,255,255,.4) 0%, transparent 100%),
+radial-gradient(1px 1px at 18% 45%, rgba(255,255,255,.6) 0%, transparent 100%),
+radial-gradient(2px 2px at 28% 38%, rgba(255,255,255,.3) 0%, transparent 100%),
+radial-gradient(1px 1px at 38% 52%, rgba(255,255,255,.5) 0%, transparent 100%),
+radial-gradient(1px 1px at 48% 42%, rgba(255,255,255,.4) 0%, transparent 100%),
+radial-gradient(1px 1px at 58% 55%, rgba(255,255,255,.6) 0%, transparent 100%),
+radial-gradient(2px 2px at 68% 40%, rgba(255,255,255,.5) 0%, transparent 100%),
+radial-gradient(1px 1px at 78% 48%, rgba(255,255,255,.3) 0%, transparent 100%),
+radial-gradient(1px 1px at 88% 35%, rgba(255,255,255,.6) 0%, transparent 100%),
+radial-gradient(1px 1px at 95% 50%, rgba(255,255,255,.4) 0%, transparent 100%),
+radial-gradient(1px 1px at  3% 62%, rgba(255,255,255,.5) 0%, transparent 100%),
+radial-gradient(2px 2px at 13% 70%, rgba(255,255,255,.3) 0%, transparent 100%),
+radial-gradient(1px 1px at 23% 65%, rgba(255,255,255,.5) 0%, transparent 100%),
+radial-gradient(1px 1px at 33% 75%, rgba(255,255,255,.4) 0%, transparent 100%),
+radial-gradient(1px 1px at 43% 68%, rgba(255,255,255,.6) 0%, transparent 100%),
+radial-gradient(2px 2px at 53% 80%, rgba(255,255,255,.3) 0%, transparent 100%),
+radial-gradient(1px 1px at 63% 72%, rgba(255,255,255,.5) 0%, transparent 100%),
+radial-gradient(1px 1px at 73% 85%, rgba(255,255,255,.4) 0%, transparent 100%),
+radial-gradient(1px 1px at 83% 78%, rgba(255,255,255,.3) 0%, transparent 100%),
+radial-gradient(1px 1px at 93% 88%, rgba(255,255,255,.5) 0%, transparent 100%),
+radial-gradient(1px 1px at 10% 90%, rgba(255,255,255,.4) 0%, transparent 100%),
+radial-gradient(2px 2px at 50% 95%, rgba(255,255,255,.3) 0%, transparent 100%),
+radial-gradient(1px 1px at 70% 92%, rgba(255,255,255,.5) 0%, transparent 100%),
+radial-gradient(1px 1px at 90% 96%, rgba(255,255,255,.4) 0%, transparent 100%);
+}
 
-/* ── Clouds ── */
-#clouds{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.cloud{position:absolute;background:rgba(255,255,255,.04);border-radius:60px;
-animation:drift linear infinite}
-@keyframes drift{from{transform:translateX(-260px)}to{transform:translateX(calc(100vw+260px))}}
+/* Twinkling animation via overlay */
+body::after{
+content:’’;
+position:fixed;inset:0;
+pointer-events:none;z-index:0;
+background-image:
+radial-gradient(1px 1px at 20% 12%, rgba(255,255,255,.8) 0%,transparent 100%),
+radial-gradient(1px 1px at 40%  4%, rgba(255,255,255,.6) 0%,transparent 100%),
+radial-gradient(1px 1px at 60% 25%, rgba(255,255,255,.7) 0%,transparent 100%),
+radial-gradient(1px 1px at 80%  9%, rgba(255,255,255,.5) 0%,transparent 100%),
+radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,.6) 0%,transparent 100%),
+radial-gradient(1px 1px at 70% 55%, rgba(255,255,255,.4) 0%,transparent 100%);
+animation:twinkle 4s ease-in-out infinite alternate;
+}
+@keyframes twinkle{0%{opacity:.2}100%{opacity:.9}}
 
-/* ════════════════════════════════════
-HEADER — one row, never wraps
-════════════════════════════════════ */
+/* All content above pseudo elements */
+header,main,.wrap,footer{position:relative;z-index:1}
+
+/* ══════════════════════════════════════
+HEADER — single row, never breaks
+══════════════════════════════════════ */
 header{
 position:sticky;top:0;z-index:100;
-background:rgba(4,16,31,.9);
-backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-border-bottom:1px solid var(–border);
+background:rgba(3,9,26,.92);
+backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+border-bottom:1px solid var(–bdr);
 }
 .hdr{
 max-width:1280px;margin:0 auto;
-display:grid;
-/* RTL: right=logo, left=badges */
-grid-template-columns:1fr auto;
-align-items:center;
-gap:.75rem;
-padding:.75rem 1.1rem;
-padding-top:calc(.75rem + var(–sat));
-}
-.logo{display:flex;align-items:center;gap:.5rem;min-width:0}
-.logo-ico{font-size:1.65rem;flex-shrink:0;line-height:1}
-.logo-texts{min-width:0}
-.logo-texts h1{font-size:.98rem;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.logo-texts p{font-size:.62rem;color:var(–muted);margin-top:.05rem;white-space:nowrap}
-.hdr-badges{display:flex;align-items:center;gap:.4rem;flex-shrink:0}
-.live-pill{
-display:flex;align-items:center;gap:.28rem;
-background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);
-border-radius:9999px;padding:.25rem .65rem;white-space:nowrap;
-}
-.live-pill .dot{width:6px;height:6px;background:var(–green);border-radius:50%;flex-shrink:0;
-animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
-.live-pill span{font-size:.64rem;color:var(–green)}
-.ios-pill{
-display:flex;align-items:center;gap:.22rem;
-background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.22);
-border-radius:9999px;padding:.25rem .65rem;
-color:var(–accent);font-size:.64rem;text-decoration:none;white-space:nowrap;
-cursor:pointer;transition:background .18s;
-}
-.ios-pill:hover{background:rgba(96,165,250,.2)}
-
-/* ════════════════════════════════════
-HERO
-════════════════════════════════════ */
-.hero{
-position:relative;z-index:1;
-text-align:center;
-padding:2rem 1.1rem 1.4rem;
-}
-.hero-badge{
-display:inline-flex;align-items:center;gap:.35rem;
-background:rgba(96,165,250,.09);border:1px solid rgba(96,165,250,.2);
-border-radius:9999px;padding:.28rem .9rem;font-size:.72rem;
-color:var(–accent);margin-bottom:.9rem;
-}
-.hero-desc{font-size:.85rem;color:var(–muted);line-height:1.7;max-width:480px;margin:0 auto}
-
-/* ════════════════════════════════════
-TABS — single row, scroll if needed
-════════════════════════════════════ */
-.tabs-wrap{
-position:relative;z-index:1;
-padding:.65rem 1.1rem .1rem;
-overflow-x:auto;
--webkit-overflow-scrolling:touch;
-scrollbar-width:none;
-}
-.tabs-wrap::-webkit-scrollbar{display:none}
-.tabs{
 display:flex;
-flex-direction:row;       /* RTL handles order */
-gap:.38rem;
-width:max-content;        /* shrink to content so row never wraps */
+flex-direction:row;
+align-items:center;
+justify-content:space-between;
+gap:.6rem;
+padding:.7rem 1.1rem;
+padding-top:calc(.7rem + var(–si-top));
+min-height:0;
+}
+
+/* Logo — right side in RTL */
+.logo{
+display:flex;align-items:center;gap:.45rem;
+min-width:0;flex:1;overflow:hidden;
+}
+.logo-ico{font-size:1.6rem;flex-shrink:0;line-height:1}
+.logo-txt{min-width:0;overflow:hidden}
+.logo-txt h1{
+font-size:.95rem;font-weight:800;
+white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+line-height:1.2;
+}
+.logo-txt p{font-size:.6rem;color:var(–mut);white-space:nowrap;margin-top:.05rem}
+
+/* Badges — left side in RTL */
+.hdr-end{
+display:flex;align-items:center;gap:.35rem;
+flex-shrink:0;
+}
+.live-pill{
+display:flex;align-items:center;gap:.25rem;
+background:rgba(52,211,153,.09);
+border:1px solid rgba(52,211,153,.2);
+border-radius:9999px;padding:.22rem .6rem;
+white-space:nowrap;
+}
+.live-dot{
+width:5px;height:5px;background:var(–green);border-radius:50%;flex-shrink:0;
+animation:bl 2s ease-in-out infinite;
+}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.2}}
+#ts{font-size:.62rem;color:var(–green)}
+.ios-hpill{
+display:flex;align-items:center;gap:.2rem;
+background:rgba(96,165,250,.09);border:1px solid rgba(96,165,250,.2);
+border-radius:9999px;padding:.22rem .58rem;
+color:var(–accent);font-size:.61rem;text-decoration:none;
+white-space:nowrap;cursor:pointer;transition:background .18s;
+}
+.ios-hpill:hover{background:rgba(96,165,250,.18)}
+
+/* ══════════════════════════════════════
+HERO
+══════════════════════════════════════ */
+.hero{text-align:center;padding:2rem 1.1rem 1.3rem}
+.hero-badge{
+display:inline-flex;align-items:center;gap:.3rem;
+background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.18);
+border-radius:9999px;padding:.26rem .85rem;font-size:.7rem;
+color:var(–accent);margin-bottom:.85rem;
+}
+.hero p{font-size:.83rem;color:var(–mut);line-height:1.7;max-width:460px;margin:0 auto}
+
+/* ══════════════════════════════════════
+TABS — always one row
+══════════════════════════════════════ */
+.tabs-outer{
+overflow-x:auto;-webkit-overflow-scrolling:touch;
+scrollbar-width:none;padding:.6rem 1.1rem .15rem;
+}
+.tabs-outer::-webkit-scrollbar{display:none}
+.tabs-inner{
+display:flex;flex-direction:row;
+gap:.35rem;
+width:max-content;   /* never wraps */
 margin:0 auto;
 }
 .tab{
-background:var(–card);border:1px solid var(–border);
-border-radius:9999px;padding:.38rem 1rem;
-color:var(–muted);font-family:inherit;font-size:.8rem;
+background:var(–card);border:1px solid var(–bdr);
+border-radius:9999px;padding:.36rem .95rem;
+color:var(–mut);font-family:inherit;font-size:.78rem;
 cursor:pointer;transition:all .2s;flex-shrink:0;white-space:nowrap;
 }
 .tab:hover{border-color:var(–accent);color:var(–accent)}
 .tab.on{background:var(–accent);border-color:var(–accent);color:#fff;font-weight:700}
 
-/* ════════════════════════════════════
-CONTAINER
-════════════════════════════════════ */
-.wrap{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:1.4rem 1.1rem}
+/* ══════════════════════════════════════
+MAIN WRAP
+══════════════════════════════════════ */
+.wrap{max-width:1280px;margin:0 auto;padding:1.3rem 1.1rem}
 
-.sec-title{
-font-size:1.05rem;font-weight:700;
-margin-bottom:.95rem;
-display:flex;align-items:center;gap:.4rem;
+.sec-ttl{
+font-size:1rem;font-weight:700;
+margin-bottom:.9rem;
+display:flex;align-items:center;gap:.38rem;
 }
-.sec-title::after{
-content:’’;flex:1;height:1px;
-background:var(–border);margin-right:.35rem;
-}
+.sec-ttl::after{content:’’;flex:1;height:1px;background:var(–bdr);margin-right:.3rem}
 
-/* ════════════════════════════════════
-CITY CARDS — icon always on LEFT (start in RTL = right visually)
-════════════════════════════════════ */
+/* ══════════════════════════════════════
+CITY GRID + CARDS
+══════════════════════════════════════ */
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
-gap:.9rem;
-margin-bottom:2rem;
+grid-template-columns:repeat(auto-fill,minmax(245px,1fr));
+gap:.85rem;margin-bottom:1.9rem;
 }
 
 .card{
-background:var(–card);
-border:1px solid var(–border);
-border-radius:1.1rem;
-padding:1.15rem;
-backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+background:var(–card);border:1px solid var(–bdr);
+border-radius:1.05rem;padding:1.1rem;
+backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
 cursor:pointer;
-transition:transform .26s,box-shadow .26s,border-color .26s;
+transition:transform .25s,box-shadow .25s,border-color .25s;
 position:relative;overflow:hidden;
 }
 .card::before{
 content:’’;position:absolute;inset:0;
-background:linear-gradient(135deg,rgba(96,165,250,.05) 0%,transparent 60%);
+background:linear-gradient(135deg,rgba(96,165,250,.04) 0%,transparent 60%);
 pointer-events:none;
 }
-.card:hover{transform:translateY(-5px);box-shadow:0 18px 45px rgba(0,0,0,.4);border-color:rgba(96,165,250,.32)}
+.card:hover{transform:translateY(-5px);box-shadow:0 16px 42px rgba(0,0,0,.5);border-color:rgba(96,165,250,.3)}
 .card:active{transform:translateY(-2px)}
 
-/* card top: name/sub on RIGHT (reading side), icon on LEFT */
-.card-top{
+.ctop{
 display:flex;
-flex-direction:row;          /* in RTL: first child = right */
+flex-direction:row;          /* RTL: first child = right */
 justify-content:space-between;
 align-items:flex-start;
-margin-bottom:.7rem;
+margin-bottom:.65rem;
+gap:.5rem;
 }
-.card-name{font-size:1.1rem;font-weight:700;line-height:1.2}
-.card-sub{font-size:.68rem;color:var(–muted);margin-top:.1rem}
-.card-icon{
-font-size:2.65rem;line-height:1;
-filter:drop-shadow(0 2px 8px rgba(0,0,0,.4));
-flex-shrink:0;
-/* push to left in RTL naturally since it’s the second child */
+.cname{font-size:1.08rem;font-weight:700;line-height:1.2}
+.csub{font-size:.66rem;color:var(–mut);margin-top:.1rem}
+.cico{
+font-size:2.6rem;line-height:1;flex-shrink:0;
+filter:drop-shadow(0 2px 8px rgba(0,0,0,.5));
 }
 
-.temp{font-size:2.55rem;font-weight:800;line-height:1}
-.temp sup{font-size:.88rem;font-weight:400}
-.range{font-size:.72rem;color:var(–muted);margin:.25rem 0 .55rem}
-.wdesc{font-size:.8rem;color:var(–accent);font-weight:500;margin-bottom:.72rem}
-
-.pills{display:flex;gap:.3rem;flex-wrap:wrap}
+.temp{font-size:2.5rem;font-weight:800;line-height:1}
+.temp sup{font-size:.85rem;font-weight:400}
+.range{font-size:.7rem;color:var(–mut);margin:.22rem 0 .52rem}
+.wdesc{font-size:.78rem;color:var(–accent);font-weight:500;margin-bottom:.68rem}
+.pills{display:flex;gap:.28rem;flex-wrap:wrap}
 .pill{
-display:flex;align-items:center;gap:.18rem;
-background:rgba(255,255,255,.055);border-radius:9999px;
-padding:.2rem .55rem;font-size:.68rem;color:var(–muted);
+display:flex;align-items:center;gap:.16rem;
+background:rgba(255,255,255,.05);border-radius:9999px;
+padding:.18rem .5rem;font-size:.67rem;color:var(–mut);
 }
-
-.card-ios{
-display:inline-flex;align-items:center;gap:.2rem;
-margin-top:.65rem;
-background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.18);
-border-radius:9999px;padding:.18rem .55rem;
-color:var(–accent);font-size:.65rem;text-decoration:none;transition:background .18s;
+.ciosbtn{
+display:inline-flex;align-items:center;gap:.18rem;
+margin-top:.6rem;
+background:rgba(96,165,250,.07);border:1px solid rgba(96,165,250,.16);
+border-radius:9999px;padding:.17rem .52rem;
+color:var(–accent);font-size:.63rem;text-decoration:none;transition:background .18s;
 }
-.card-ios:hover{background:rgba(96,165,250,.18)}
+.ciosbtn:hover{background:rgba(96,165,250,.16)}
 
-/* Skeleton */
+/* skeleton */
 .skel{
-background:linear-gradient(90deg,rgba(255,255,255,.05) 25%,rgba(255,255,255,.1) 50%,rgba(255,255,255,.05) 75%);
-background-size:200% 100%;animation:sk 1.6s infinite;
-border-radius:5px;margin:.28rem 0;
+background:linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.09) 50%,rgba(255,255,255,.04) 75%);
+background-size:200% 100%;animation:sk 1.6s infinite;border-radius:5px;margin:.26rem 0;
 }
 @keyframes sk{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-/* ════════════════════════════════════
-STATS BAR
-════════════════════════════════════ */
+/* ══════════════════════════════════════
+STATS
+══════════════════════════════════════ */
 .stats{
 display:grid;
-grid-template-columns:repeat(auto-fill,minmax(175px,1fr));
-gap:.75rem;margin-bottom:2rem;
+grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
+gap:.7rem;margin-bottom:1.9rem;
 }
-.scard{
-background:var(–card);border:1px solid var(–border);
-border-radius:.95rem;padding:.95rem;backdrop-filter:blur(14px);
-text-align:center;
-}
-.scard .si{font-size:1.65rem;margin-bottom:.2rem}
-.scard .sv{font-size:1.35rem;font-weight:800;color:var(–gold)}
-.scard .sl{font-size:.7rem;color:var(–muted);margin-top:.18rem}
+.sc{background:var(–card);border:1px solid var(–bdr);border-radius:.9rem;padding:.9rem;backdrop-filter:blur(14px);text-align:center}
+.sc .si{font-size:1.55rem;margin-bottom:.18rem}
+.sc .sv{font-size:1.3rem;font-weight:800;color:var(–gold)}
+.sc .sl{font-size:.67rem;color:var(–mut);margin-top:.15rem}
 
-/* ════════════════════════════════════
+/* ══════════════════════════════════════
 iOS SECTION
-════════════════════════════════════ */
+══════════════════════════════════════ */
 .ios-sec{
-background:var(–card);border:1px solid rgba(96,165,250,.15);
-border-radius:1.05rem;padding:1.2rem;margin-bottom:2rem;
-backdrop-filter:blur(14px);
+background:var(–card);border:1px solid rgba(96,165,250,.14);
+border-radius:1rem;padding:1.15rem;margin-bottom:1.9rem;backdrop-filter:blur(14px);
 }
-.ios-sec h3{font-size:.95rem;font-weight:700;display:flex;align-items:center;gap:.35rem;margin-bottom:.35rem}
-.ios-sec p{font-size:.77rem;color:var(–muted);line-height:1.65;margin-bottom:.85rem}
-.ios-links{display:flex;gap:.38rem;flex-wrap:wrap}
+.ios-sec h3{font-size:.92rem;font-weight:700;display:flex;align-items:center;gap:.32rem;margin-bottom:.32rem}
+.ios-sec p{font-size:.75rem;color:var(–mut);line-height:1.65;margin-bottom:.8rem}
+.ios-lnks{display:flex;gap:.35rem;flex-wrap:wrap}
 .ios-lnk{
-display:inline-flex;align-items:center;gap:.22rem;
-background:rgba(96,165,250,.09);border:1px solid rgba(96,165,250,.22);
-border-radius:9999px;padding:.32rem .8rem;
-color:var(–accent);font-family:inherit;font-size:.75rem;
+display:inline-flex;align-items:center;gap:.2rem;
+background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);
+border-radius:9999px;padding:.3rem .75rem;
+color:var(–accent);font-family:inherit;font-size:.73rem;
 text-decoration:none;cursor:pointer;transition:all .18s;
 }
-.ios-lnk:hover{background:rgba(96,165,250,.2);transform:translateY(-1px)}
+.ios-lnk:hover{background:rgba(96,165,250,.18);transform:translateY(-1px)}
 
-/* ════════════════════════════════════
-MODAL — bottom-sheet mobile, centered desktop
-════════════════════════════════════ */
-.overlay{
+/* ══════════════════════════════════════
+MODAL — bottom sheet mobile / centered desktop
+══════════════════════════════════════ */
+.ov{
 position:fixed;inset:0;z-index:200;
-background:rgba(0,0,0,.8);
-backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+background:rgba(0,0,0,.82);
+backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
 display:flex;align-items:flex-end;justify-content:center;
-opacity:0;pointer-events:none;transition:opacity .28s;
+opacity:0;pointer-events:none;transition:opacity .25s;
 }
-.overlay.on{opacity:1;pointer-events:all}
-
+.ov.on{opacity:1;pointer-events:all}
 .modal{
-background:linear-gradient(155deg,#091b38,#122d56);
-border:1px solid var(–border);
-border-radius:1.35rem 1.35rem 0 0;
-width:100%;max-width:680px;
-max-height:91vh;overflow-y:auto;
-padding:1.3rem 1.15rem calc(1.3rem + var(–sab));
-transform:translateY(50px);
-transition:transform .35s cubic-bezier(.32,1.3,.6,1);
+background:linear-gradient(160deg,#070f22,#0f2040);
+border:1px solid var(–bdr);
+border-radius:1.3rem 1.3rem 0 0;
+width:100%;max-width:660px;
+max-height:90vh;overflow-y:auto;
 -webkit-overflow-scrolling:touch;
+padding:1.25rem 1.1rem calc(1.25rem + var(–si-bot));
+transform:translateY(60px);
+transition:transform .32s cubic-bezier(.33,1.4,.6,1);
 }
-.overlay.on .modal{transform:translateY(0)}
-
+.ov.on .modal{transform:translateY(0)}
 @media(min-width:640px){
-.overlay{align-items:center;padding:1rem}
-.modal{
-border-radius:1.35rem;
-padding:1.8rem;
-transform:scale(.93) translateY(0);
+.ov{align-items:center;padding:1rem}
+.modal{border-radius:1.3rem;padding:1.75rem;transform:scale(.94)}
+.ov.on .modal{transform:scale(1)}
 }
-.overlay.on .modal{transform:scale(1)}
-}
-
-.mhandle{width:36px;height:4px;background:rgba(255,255,255,.16);border-radius:2px;margin:0 auto 1.1rem}
-.mclose{
-float:left;background:rgba(255,255,255,.09);border:none;
-color:var(–text);border-radius:9999px;width:1.85rem;height:1.85rem;
-cursor:pointer;font-size:.9rem;transition:background .18s;
-}
-.mclose:hover{background:rgba(255,255,255,.18)}
-
-.mname{font-size:1.6rem;font-weight:800}
-.msub{font-size:.76rem;color:var(–muted);margin-top:.15rem .08rem}
-.mico{font-size:3.6rem;line-height:1;margin:.45rem 0}
-.mtemp{font-size:3.4rem;font-weight:800;line-height:1}
-.mdesc{font-size:.88rem;color:var(–accent);font-weight:500;margin:.32rem 0 1.1rem}
-
-.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1.1rem}
-.di{
-background:rgba(255,255,255,.05);border-radius:.68rem;
-padding:.72rem .8rem;display:flex;align-items:center;gap:.48rem;
-}
-.di-i{font-size:1.2rem;flex-shrink:0}
-.di-l{font-size:.63rem;color:var(–muted)}
-.di-v{font-size:.88rem;font-weight:600}
-
-.fstrip h4,.mchart h4{color:var(–muted);font-weight:500;margin-bottom:.58rem;font-size:.8rem}
-.fstrip{margin-bottom:1.1rem}
-.fdays{display:flex;gap:.38rem;overflow-x:auto;padding-bottom:.28rem;-webkit-overflow-scrolling:touch}
-.fday{
-flex:0 0 auto;background:rgba(255,255,255,.05);
-border-radius:.65rem;padding:.58rem .7rem;text-align:center;min-width:60px;
-}
-.fn{font-size:.62rem;color:var(–muted);margin-bottom:.15rem}
-.fi{font-size:1.25rem;margin-bottom:.15rem}
-.fh{font-size:.8rem;font-weight:600}
-.fl{font-size:.65rem;color:var(–muted)}
-
-.mchart{margin-bottom:1.1rem}
-.bars{display:flex;gap:.2rem;align-items:flex-end;height:72px}
-.bw{flex:1;display:flex;flex-direction:column;align-items:center;gap:.14rem}
+.mhandle{width:34px;height:3px;background:rgba(255,255,255,.15);border-radius:2px;margin:0 auto 1rem}
+.mcls{float:left;background:rgba(255,255,255,.08);border:none;color:var(–txt);border-radius:9999px;width:1.8rem;height:1.8rem;cursor:pointer;font-size:.88rem;transition:background .18s}
+.mcls:hover{background:rgba(255,255,255,.16)}
+.mname{font-size:1.55rem;font-weight:800}
+.msub{font-size:.73rem;color:var(–mut);margin:.12rem 0 .7rem}
+.mico{font-size:3.5rem;line-height:1;margin:.4rem 0}
+.mtemp{font-size:3.3rem;font-weight:800;line-height:1}
+.mdesc{font-size:.85rem;color:var(–accent);font-weight:500;margin:.28rem 0 1rem}
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:.48rem;margin-bottom:1rem}
+.di{background:rgba(255,255,255,.05);border-radius:.65rem;padding:.68rem .75rem;display:flex;align-items:center;gap:.45rem}
+.di-i{font-size:1.15rem;flex-shrink:0}
+.di-l{font-size:.62rem;color:var(–mut)}
+.di-v{font-size:.85rem;font-weight:600}
+.fstrip{margin-bottom:1rem}
+.fstrip h4,.mchart h4{color:var(–mut);font-weight:500;margin-bottom:.55rem;font-size:.78rem}
+.fdays{display:flex;gap:.35rem;overflow-x:auto;padding-bottom:.25rem;-webkit-overflow-scrolling:touch}
+.fday{flex:0 0 auto;background:rgba(255,255,255,.05);border-radius:.62rem;padding:.55rem .65rem;text-align:center;min-width:58px}
+.fn{font-size:.6rem;color:var(–mut);margin-bottom:.12rem}
+.fi{font-size:1.2rem;margin-bottom:.12rem}
+.fh{font-size:.78rem;font-weight:600}
+.fl{font-size:.63rem;color:var(–mut)}
+.mchart{margin-bottom:1rem}
+.bars{display:flex;gap:.18rem;align-items:flex-end;height:68px}
+.bw{flex:1;display:flex;flex-direction:column;align-items:center;gap:.12rem}
 .b{width:100%;border-radius:3px 3px 0 0;background:linear-gradient(to top,#1d4ed8,#60a5fa);min-height:3px;transition:height .6s ease}
-.bl{font-size:.52rem;color:var(–muted)}
-
+.bl{font-size:.5rem;color:var(–mut)}
 .mios{
-display:flex;align-items:center;justify-content:center;gap:.32rem;
-background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);
-border-radius:.75rem;padding:.68rem;margin-top:1rem;
-color:var(–accent);text-decoration:none;font-size:.8rem;font-weight:500;
+display:flex;align-items:center;justify-content:center;gap:.3rem;
+background:rgba(96,165,250,.07);border:1px solid rgba(96,165,250,.18);
+border-radius:.72rem;padding:.65rem;margin-top:.95rem;
+color:var(–accent);text-decoration:none;font-size:.78rem;font-weight:500;
 cursor:pointer;transition:background .18s;
 }
-.mios:hover{background:rgba(96,165,250,.17)}
+.mios:hover{background:rgba(96,165,250,.16)}
 
 /* footer */
-footer{
-position:relative;z-index:1;
-text-align:center;padding:1.5rem 1.1rem;
-border-top:1px solid var(–border);
-color:var(–muted);font-size:.73rem;
-}
+footer{text-align:center;padding:1.4rem 1.1rem;border-top:1px solid var(–bdr);color:var(–mut);font-size:.7rem}
 
-/* ── Responsive overrides ── */
+/* ── Responsive ── */
 @media(max-width:400px){
 .grid{grid-template-columns:1fr}
 .stats{grid-template-columns:1fr 1fr}
 .dgrid{grid-template-columns:1fr}
-.logo-texts p{display:none}      /* hide subtitle on tiny phones */
+.logo-txt p{display:none}
 }
-@media(max-width:520px){
-.ios-pill{display:none}           /* shown in its own section instead */
-}
+@media(max-width:500px){.ios-hpill{display:none}}
 
-::-webkit-scrollbar{width:4px;height:4px}
-::-webkit-scrollbar-track{background:rgba(255,255,255,.03)}
-::-webkit-scrollbar-thumb{background:rgba(255,255,255,.13);border-radius:2px}
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:rgba(255,255,255,.02)}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:2px}
 </style>
 
 </head>
 <body>
 
-<div id="stars"></div>
-<div id="clouds"></div>
-
-<!-- ══════════ HEADER ══════════ -->
+<!-- ══ HEADER ══ -->
 
 <header>
   <div class="hdr">
-    <!-- RIGHT side (RTL): logo -->
     <div class="logo">
-      <div class="logo-ico">⛅</div>
-      <div class="logo-texts">
+      <span class="logo-ico">⛅</span>
+      <div class="logo-txt">
         <h1>کەش و هەوای کوردستان</h1>
         <p>داتای ڕاستەقینە — نوێکراوەتەوە بە خودکاری</p>
       </div>
     </div>
-    <!-- LEFT side (RTL): badges -->
-    <div class="hdr-badges">
-      <div class="live-pill">
-        <div class="dot"></div>
-        <span id="updateTime">بارکردن...</span>
-      </div>
-      <a class="ios-pill" href="#ios-sec">🍎 Weather</a>
+    <div class="hdr-end">
+      <div class="live-pill"><div class="live-dot"></div><span id="ts">بارکردن...</span></div>
+      <a class="ios-hpill" href="#ios-sec">🍎 Weather</a>
     </div>
   </div>
 </header>
 
-<!-- ══════════ HERO ══════════ -->
+<!-- ══ HERO ══ -->
 
 <div class="hero">
   <div class="hero-badge">🛰️ Open-Meteo API &middot; داتای ئەمڕۆ &middot; خودکاری</div>
-  <p class="hero-desc">زانیاری ڕاستەقینە و نوێی کەش و هەوای شارەکانی هەرێمی کوردستان — هەموو ڕۆژێک نوێدەبێتەوە</p>
+  <p>زانیاری ڕاستەقینە و نوێی کەش و هەوای شارەکانی هەرێمی کوردستان — هەموو ڕۆژێک نوێدەبێتەوە</p>
 </div>
 
-<!-- ══════════ TABS (single row, scrollable) ══════════ -->
+<!-- ══ TABS ══ -->
 
-<div class="tabs-wrap">
-  <div class="tabs" id="tabs">
-    <button class="tab on"  onclick="filter('all',this)">🌍 هەموو</button>
-    <button class="tab"     onclick="filter('hewler',this)">هەولێر</button>
-    <button class="tab"     onclick="filter('slemani',this)">سلێمانی</button>
-    <button class="tab"     onclick="filter('duhok',this)">دهۆک</button>
-    <button class="tab"     onclick="filter('other',this)">شارەکانی تر</button>
+<div class="tabs-outer">
+  <div class="tabs-inner">
+    <button class="tab on"  onclick="flt('all',this)">🌍 هەموو</button>
+    <button class="tab"     onclick="flt('hewler',this)">هەولێر</button>
+    <button class="tab"     onclick="flt('slemani',this)">سلێمانی</button>
+    <button class="tab"     onclick="flt('duhok',this)">دهۆک</button>
+    <button class="tab"     onclick="flt('other',this)">شارەکانی تر</button>
   </div>
 </div>
 
-<!-- ══════════ MAIN ══════════ -->
+<!-- ══ MAIN ══ -->
 
 <div class="wrap">
-
-  <div class="sec-title">🏙️ شارەکانی کوردستان</div>
+  <div class="sec-ttl">🏙️ شارەکانی کوردستان</div>
   <div class="grid" id="grid"></div>
 
-  <div class="sec-title">📊 ئامارەکانی ئەمڕۆ</div>
+  <div class="sec-ttl">📊 ئامارەکانی ئەمڕۆ</div>
   <div class="stats">
-    <div class="scard"><div class="si">🌡️</div><div class="sv" id="sHot">—</div><div class="sl">گەرمترین شار</div></div>
-    <div class="scard"><div class="si">❄️</div><div class="sv" id="sCold">—</div><div class="sl">سارترین شار</div></div>
-    <div class="scard"><div class="si">💧</div><div class="sv" id="sHum">—</div><div class="sl">شێوداترین شار</div></div>
-    <div class="scard"><div class="si">💨</div><div class="sv" id="sWind">—</div><div class="sl">بایی زۆرترین</div></div>
+    <div class="sc"><div class="si">🌡️</div><div class="sv" id="sH">—</div><div class="sl">گەرمترین شار</div></div>
+    <div class="sc"><div class="si">❄️</div><div class="sv" id="sC">—</div><div class="sl">سارترین شار</div></div>
+    <div class="sc"><div class="si">💧</div><div class="sv" id="sHm">—</div><div class="sl">شێوداترین شار</div></div>
+    <div class="sc"><div class="si">💨</div><div class="sv" id="sW">—</div><div class="sl">بایی زۆرترین</div></div>
   </div>
 
-  <div class="sec-title" id="ios-sec">📱 ئەپی Weather ئەپڵ</div>
+  <div class="sec-ttl" id="ios-sec">📱 ئەپی Weather ئەپڵ</div>
   <div class="ios-sec">
     <h3>🍎 کرانەوە لە iOS Weather App</h3>
-    <p>کلیک بکە لەسەر ناوی شار بۆ ئەوەی ڕاستەوخۆ بکرێتەوە لە ئەپی کەش و هەوای ئەپڵ. تەنها لە ئایفۆن و ئایپاد کاردەکات.</p>
-    <div class="ios-links" id="iosLinks"></div>
+    <p>کلیک بکە لەسەر ناوی شار — ڕاستەوخۆ ئەپی کەش و هەوای ئەپڵ دەکرێتەوە. تەنها لە ئایفۆن و ئایپاد کاردەکات.</p>
+    <div class="ios-lnks" id="iosLnks"></div>
   </div>
+</div>
 
-</div><!-- /wrap -->
+<!-- ══ MODAL ══ -->
 
-<!-- ══════════ MODAL ══════════ -->
-
-<div class="overlay" id="ov" onclick="closeCheck(event)">
+<div class="ov" id="ov" onclick="ovClick(event)">
   <div class="modal" id="mb"><div class="mhandle"></div></div>
 </div>
 
 <footer>
   <p>© ٢٠٢٥ کەش و هەوای کوردستان &middot; داتا لە <strong>Open-Meteo.com</strong></p>
-  <p style="margin-top:.25rem;font-size:.65rem">هەر ٣٠ خولەک نوێدەبێتەوە بە خودکاری</p>
+  <p style="margin-top:.22rem;font-size:.62rem">هەر ٣٠ خولەک نوێدەبێتەوە بە خودکاری</p>
 </footer>
 
 <script>
-/* ── Data ── */
 const CITIES=[
   {id:'hewler', n:'هەولێر',  s:'پایتەختی کوردستان',    g:'hewler',  lat:36.191,lon:44.009,el:426, pop:'١.٥ ملیۆن'},
   {id:'slemani',n:'سلێمانی', s:'پایتەختی کەلتووری',    g:'slemani', lat:35.557,lon:45.435,el:831, pop:'٧٢٣ هەزار'},
@@ -468,57 +486,27 @@ const CITIES=[
 const DKU=['یەکشەممە','دووشەممە','سێشەممە','چوارشەممە','پێنجشەممە','هەینی','شەممە'];
 const MS=['ک.د','شو','ئا','نی','ئی','حو','تم','ئب','ئل','ت.ی','ت.د','ک.ی'];
 const MA={
-  hewler:[11,13,18,24,31,38,43,42,36,27,18,12],
-  slemani:[5,7,11,17,23,30,34,33,28,20,12,7],
-  duhok:[7,9,14,20,27,34,39,38,33,24,15,9],
-  zakho:[6,8,13,20,28,35,40,39,34,25,14,8],
-  halabja:[4,6,10,16,22,29,33,32,27,19,11,6],
-  soran:[3,5,9,15,21,28,32,31,26,18,10,5],
-  kirkuk:[9,11,16,22,30,37,43,42,36,27,17,11],
-  rania:[4,6,10,16,22,29,33,32,27,19,11,6],
+  hewler:[11,13,18,24,31,38,43,42,36,27,18,12],slemani:[5,7,11,17,23,30,34,33,28,20,12,7],
+  duhok:[7,9,14,20,27,34,39,38,33,24,15,9],zakho:[6,8,13,20,28,35,40,39,34,25,14,8],
+  halabja:[4,6,10,16,22,29,33,32,27,19,11,6],soran:[3,5,9,15,21,28,32,31,26,18,10,5],
+  kirkuk:[9,11,16,22,30,37,43,42,36,27,17,11],rania:[4,6,10,16,22,29,33,32,27,19,11,6],
 };
-
 function wmo(c){
-  if(c===0) return{d:'ئاسمانی روون',e:'☀️'};
-  if(c<=2)  return{d:'نیوەوەر',e:'🌤️'};
-  if(c===3) return{d:'داپۆشراو',e:'☁️'};
-  if(c<=48) return{d:'مەڵبەندی',e:'🌫️'};
-  if(c<=55) return{d:'نمی کەم',e:'🌦️'};
-  if(c<=67) return{d:'باران',e:'🌧️'};
-  if(c<=77) return{d:'بەفر',e:'🌨️'};
-  if(c<=82) return{d:'باران بووندەرە',e:'🌧️'};
+  if(c===0)return{d:'ئاسمانی روون',e:'☀️'};if(c<=2)return{d:'نیوەوەر',e:'🌤️'};
+  if(c===3)return{d:'داپۆشراو',e:'☁️'};if(c<=48)return{d:'مەڵبەندی',e:'🌫️'};
+  if(c<=55)return{d:'نمی کەم',e:'🌦️'};if(c<=67)return{d:'باران',e:'🌧️'};
+  if(c<=77)return{d:'بەفر',e:'🌨️'};if(c<=82)return{d:'باران بووندەرە',e:'🌧️'};
   return{d:'گەوزە',e:'⛈️'};
 }
+function openIOS(n,lat,lon){window.location.href=`maps://maps.apple.com/?ll=${lat},${lon}&q=${encodeURIComponent(n)}`;}
+const pad=n=>String(n).padStart(2,'0');
 
-function openIOS(name,lat,lon){
-  window.location.href=`maps://maps.apple.com/?ll=${lat},${lon}&q=${encodeURIComponent(name)}`;
-}
+let WD={},FD={},CF='all';
 
-/* state */
-let WD={}, FD={}, CF='all';
+// iOS links
+document.getElementById('iosLnks').innerHTML=
+  CITIES.map(c=>`<a class="ios-lnk" onclick="openIOS('${c.n}',${c.lat},${c.lon})" href="#">📍 ${c.n}</a>`).join('');
 
-/* ── Background ── */
-(()=>{
-  const s=document.getElementById('stars');
-  for(let i=0;i<120;i++){
-    const e=document.createElement('div');e.className='star';
-    const z=Math.random()*2.3+.5;
-    e.style.cssText=`width:${z}px;height:${z}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${(Math.random()*3+2).toFixed(1)}s;animation-delay:-${(Math.random()*5).toFixed(1)}s`;
-    s.appendChild(e);
-  }
-  const cl=document.getElementById('clouds');
-  for(let i=0;i<7;i++){
-    const e=document.createElement('div');e.className='cloud';
-    const w=100+Math.random()*220,dur=65+Math.random()*90;
-    e.style.cssText=`width:${w}px;height:${(w*.28).toFixed(0)}px;top:${3+Math.random()*28}%;animation-duration:${dur}s;animation-delay:-${Math.random()*dur}s`;
-    cl.appendChild(e);
-  }
-  /* iOS links */
-  document.getElementById('iosLinks').innerHTML=
-    CITIES.map(c=>`<a class="ios-lnk" onclick="openIOS('${c.n}',${c.lat},${c.lon})" href="#">📍 ${c.n}</a>`).join('');
-})();
-
-/* ── Fetch ── */
 async function fetchAll(){
   skel();
   await Promise.all(CITIES.map(async c=>{
@@ -529,52 +517,40 @@ async function fetchAll(){
       FD[c.id]=d.daily;
     }catch{WD[c.id]=null;}
   }));
-  draw();stats();
+  draw();sts();
   const n=new Date();
-  document.getElementById('updateTime').textContent=`نوێ: ${pad(n.getHours())}:${pad(n.getMinutes())}`;
+  document.getElementById('ts').textContent=`نوێ: ${pad(n.getHours())}:${pad(n.getMinutes())}`;
 }
-const pad=n=>String(n).padStart(2,'0');
 
-/* ── Skeleton ── */
 function skel(){
   const list=CITIES.filter(c=>CF==='all'||c.g===CF);
   document.getElementById('grid').innerHTML=list.map(()=>`
-    <div class="card" style="opacity:.4;pointer-events:none">
-      <div class="card-top">
-        <div style="flex:1">
-          <div class="skel" style="width:58%;height:16px"></div>
-          <div class="skel" style="width:38%;height:9px;margin-top:.28rem"></div>
-        </div>
-        <div class="skel" style="width:44px;height:44px;border-radius:50%;margin-right:.5rem"></div>
+    <div class="card" style="opacity:.38;pointer-events:none">
+      <div class="ctop">
+        <div style="flex:1"><div class="skel" style="width:55%;height:15px"></div><div class="skel" style="width:36%;height:8px;margin-top:.25rem"></div></div>
+        <div class="skel" style="width:42px;height:42px;border-radius:50%"></div>
       </div>
-      <div class="skel" style="width:80px;height:36px;margin:.35rem 0"></div>
-      <div class="skel" style="width:50%;height:9px"></div>
-      <div class="skel" style="width:65%;height:9px;margin-top:.25rem"></div>
+      <div class="skel" style="width:75px;height:34px;margin:.32rem 0"></div>
+      <div class="skel" style="width:48%;height:8px"></div>
+      <div class="skel" style="width:62%;height:8px;margin-top:.22rem"></div>
     </div>`).join('');
 }
 
-/* ── Draw cards ── */
 function draw(){
   const list=CITIES.filter(c=>CF==='all'||c.g===CF);
-  if(!list.length){
-    document.getElementById('grid').innerHTML='<p style="color:var(--muted);grid-column:1/-1;text-align:center;padding:2rem">هیچ شارێک نەدۆزرایەوە</p>';
-    return;
-  }
+  if(!list.length){document.getElementById('grid').innerHTML='<p style="color:var(--mut);grid-column:1/-1;text-align:center;padding:2rem">هیچ شارێک نەدۆزرایەوە</p>';return;}
   document.getElementById('grid').innerHTML=list.map(city=>{
     const w=WD[city.id];
-    if(!w) return`<div class="card" style="border-color:rgba(248,113,113,.28)">
-      <div class="card-name">${city.n}</div>
-      <p style="color:var(--red);font-size:.75rem;margin-top:.45rem">❌ هەڵەی پەیوەندی</p>
-      <button onclick="fetchAll()" style="margin-top:.65rem;background:rgba(248,113,113,.09);border:1px solid rgba(248,113,113,.25);color:var(--red);border-radius:9999px;padding:.22rem .65rem;cursor:pointer;font-family:inherit;font-size:.7rem">دووبارە</button>
+    if(!w)return`<div class="card" style="border-color:rgba(248,113,113,.25)">
+      <div class="cname">${city.n}</div>
+      <p style="color:var(--red);font-size:.73rem;margin-top:.42rem">❌ هەڵەی پەیوەندی</p>
+      <button onclick="fetchAll()" style="margin-top:.6rem;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.22);color:var(--red);border-radius:9999px;padding:.2rem .6rem;cursor:pointer;font-family:inherit;font-size:.68rem">دووبارە</button>
     </div>`;
     const{d,e}=wmo(w.c);const fd=FD[city.id];
-    return`<div class="card" onclick="modal('${city.id}')">
-      <div class="card-top">
-        <div>
-          <div class="card-name">${city.n}</div>
-          <div class="card-sub">${city.s}</div>
-        </div>
-        <div class="card-icon">${e}</div>
+    return`<div class="card" onclick="openModal('${city.id}')">
+      <div class="ctop">
+        <div><div class="cname">${city.n}</div><div class="csub">${city.s}</div></div>
+        <div class="cico">${e}</div>
       </div>
       <div class="temp">${w.t}<sup>°C</sup></div>
       <div class="range">${fd?`کەمترین ${Math.round(fd.temperature_2m_min[0])}° &middot; زۆرترین ${Math.round(fd.temperature_2m_max[0])}°`:''}</div>
@@ -584,78 +560,61 @@ function draw(){
         <div class="pill">💨 ${w.w} km/h</div>
         <div class="pill">🌡️ هەست ${w.f}°</div>
       </div>
-      <a class="card-ios" onclick="event.stopPropagation();openIOS('${city.n}',${city.lat},${city.lon})" href="#">🍎 Weather App</a>
+      <a class="ciosbtn" onclick="event.stopPropagation();openIOS('${city.n}',${city.lat},${city.lon})" href="#">🍎 Weather App</a>
     </div>`;
   }).join('');
 }
 
-/* ── Stats ── */
-function stats(){
+function sts(){
   const ok=CITIES.filter(c=>WD[c.id]);if(!ok.length)return;
-  const hot =ok.reduce((a,b)=>WD[a.id].t>WD[b.id].t?a:b);
-  const cold=ok.reduce((a,b)=>WD[a.id].t<WD[b.id].t?a:b);
-  const hum =ok.reduce((a,b)=>WD[a.id].h>WD[b.id].h?a:b);
-  const wind=ok.reduce((a,b)=>WD[a.id].w>WD[b.id].w?a:b);
-  document.getElementById('sHot').textContent =`${hot.n} ${WD[hot.id].t}°`;
-  document.getElementById('sCold').textContent=`${cold.n} ${WD[cold.id].t}°`;
-  document.getElementById('sHum').textContent =`${hum.n} ${WD[hum.id].h}٪`;
-  document.getElementById('sWind').textContent=`${wind.n} ${WD[wind.id].w}km/h`;
+  const hot=ok.reduce((a,b)=>WD[a.id].t>WD[b.id].t?a:b);
+  const cld=ok.reduce((a,b)=>WD[a.id].t<WD[b.id].t?a:b);
+  const hum=ok.reduce((a,b)=>WD[a.id].h>WD[b.id].h?a:b);
+  const wnd=ok.reduce((a,b)=>WD[a.id].w>WD[b.id].w?a:b);
+  document.getElementById('sH').textContent=`${hot.n} ${WD[hot.id].t}°`;
+  document.getElementById('sC').textContent=`${cld.n} ${WD[cld.id].t}°`;
+  document.getElementById('sHm').textContent=`${hum.n} ${WD[hum.id].h}٪`;
+  document.getElementById('sW').textContent=`${wnd.n} ${WD[wnd.id].w}km/h`;
 }
 
-/* ── Filter ── */
-function filter(g,btn){
-  CF=g;
-  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  draw();
+function flt(g,btn){
+  CF=g;document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));btn.classList.add('on');draw();
 }
 
-/* ── Modal ── */
-function modal(id){
+function openModal(id){
   const city=CITIES.find(c=>c.id===id);const w=WD[id];if(!w)return;
   const{d,e}=wmo(w.c);const fd=FD[id];const mon=MA[id]||MA.hewler;const mx=Math.max(...mon);
   const today=new Date();
   const fcH=fd?fd.temperature_2m_max.slice(0,7).map((_,i)=>{
-    const dd=new Date(today);dd.setDate(dd.getDate()+i);
-    const fi=wmo(fd.weather_code[i]);
-    return`<div class="fday">
-      <div class="fn">${i===0?'ئەمڕۆ':DKU[dd.getDay()]}</div>
-      <div class="fi">${fi.e}</div>
-      <div class="fh">${Math.round(fd.temperature_2m_max[i])}°</div>
-      <div class="fl">${Math.round(fd.temperature_2m_min[i])}°</div>
-    </div>`;
+    const dd=new Date(today);dd.setDate(dd.getDate()+i);const fi=wmo(fd.weather_code[i]);
+    return`<div class="fday"><div class="fn">${i===0?'ئەمڕۆ':DKU[dd.getDay()]}</div><div class="fi">${fi.e}</div><div class="fh">${Math.round(fd.temperature_2m_max[i])}°</div><div class="fl">${Math.round(fd.temperature_2m_min[i])}°</div></div>`;
   }).join(''):'';
-  const bH=mon.map((t,i)=>`<div class="bw"><div class="b" style="height:${(t/mx*65+7).toFixed(0)}px"></div><div class="bl">${MS[i]}</div></div>`).join('');
-
+  const bH=mon.map((t,i)=>`<div class="bw"><div class="b" style="height:${(t/mx*62+6).toFixed(0)}px"></div><div class="bl">${MS[i]}</div></div>`).join('');
   document.getElementById('mb').innerHTML=`
     <div class="mhandle"></div>
-    <button class="mclose" onclick="closeM()">✕</button>
+    <button class="mcls" onclick="closeM()">✕</button>
     <div class="mname">${city.n}</div>
     <div class="msub">${city.s} &middot; بەرزی ${city.el}م &middot; نووفوس ${city.pop}</div>
     <div class="mico">${e}</div>
-    <div class="mtemp">${w.t}°<span style="font-size:1.2rem;font-weight:400">C</span></div>
+    <div class="mtemp">${w.t}°<span style="font-size:1.15rem;font-weight:400">C</span></div>
     <div class="mdesc">${d}</div>
     <div class="dgrid">
       <div class="di"><span class="di-i">🌡️</span><div><div class="di-l">هەستی پلە</div><div class="di-v">${w.f}°C</div></div></div>
       <div class="di"><span class="di-i">💧</span><div><div class="di-l">شێوی ئاو</div><div class="di-v">${w.h}٪</div></div></div>
       <div class="di"><span class="di-i">💨</span><div><div class="di-l">بایەزگا</div><div class="di-v">${w.w} km/h</div></div></div>
       <div class="di"><span class="di-i">🌧️</span><div><div class="di-l">باران</div><div class="di-v">${w.p} mm</div></div></div>
-      ${fd?`
-      <div class="di"><span class="di-i">☀️</span><div><div class="di-l">زۆرترین ئەمڕۆ</div><div class="di-v">${Math.round(fd.temperature_2m_max[0])}°C</div></div></div>
-      <div class="di"><span class="di-i">🌙</span><div><div class="di-l">کەمترین ئەمڕۆ</div><div class="di-v">${Math.round(fd.temperature_2m_min[0])}°C</div></div></div>`:''}
+      ${fd?`<div class="di"><span class="di-i">☀️</span><div><div class="di-l">زۆرترین ئەمڕۆ</div><div class="di-v">${Math.round(fd.temperature_2m_max[0])}°C</div></div></div><div class="di"><span class="di-i">🌙</span><div><div class="di-l">کەمترین ئەمڕۆ</div><div class="di-v">${Math.round(fd.temperature_2m_min[0])}°C</div></div></div>`:''}
     </div>
     ${fd?`<div class="fstrip"><h4>📅 پێشبینی ٧ ڕۆژ</h4><div class="fdays">${fcH}</div></div>`:''}
     <div class="mchart"><h4>📊 نێرگەی پلەی گەرمی مانگ بە مانگ</h4><div class="bars">${bH}</div></div>
     <a class="mios" onclick="openIOS('${city.n}',${city.lat},${city.lon})" href="#">🍎 کرانەوە لە Weather App — ${city.n}</a>
   `;
-  document.getElementById('ov').classList.add('on');
-  document.body.style.overflow='hidden';
+  document.getElementById('ov').classList.add('on');document.body.style.overflow='hidden';
 }
 function closeM(){document.getElementById('ov').classList.remove('on');document.body.style.overflow='';}
-function closeCheck(e){if(e.target===document.getElementById('ov'))closeM();}
+function ovClick(e){if(e.target===document.getElementById('ov'))closeM();}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM();});
 
-/* ── Init ── */
 fetchAll();
 setInterval(fetchAll,30*60*1000);
 </script>
