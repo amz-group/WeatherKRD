@@ -6,484 +6,389 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
 <title>کەش و هەوای کوردستان</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;700;800&display=swap" rel="stylesheet"/>
 <style>
-/* ══════════════════════════════════════
-   RESET + TOKENS
-══════════════════════════════════════ */
+/* ─── RESET ─── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
 :root{
-–c1:#03091a;
-–c2:#071430;
-–c3:#0d2250;
-–card:rgba(255,255,255,0.06);
-–bdr:rgba(255,255,255,0.10);
-–accent:#60a5fa;
-–gold:#fbbf24;
-–green:#34d399;
-–red:#f87171;
-–txt:#ddeeff;
-–mut:rgba(221,238,255,0.48);
-–si-top:env(safe-area-inset-top,0px);
-–si-bot:env(safe-area-inset-bottom,0px);
+  --bg:#050e20;
+  --card:rgba(255,255,255,.07);
+  --bdr:rgba(255,255,255,.10);
+  --accent:#60a5fa;
+  --gold:#fbbf24;
+  --green:#34d399;
+  --red:#f87171;
+  --txt:#ddeeff;
+  --mut:rgba(200,220,255,.5);
+  --sit:env(safe-area-inset-top,0px);
+  --sib:env(safe-area-inset-bottom,0px);
+  --r:1rem;          /* border-radius base */
 }
 
-/* ══════════════════════════════════════
-BODY — dark background hardcoded, no JS needed
-══════════════════════════════════════ */
-html{scroll-behavior:smooth;background:var(–c1)}   /* fallback */
-
+/* ─── BASE ─── */
+html{background:var(–bg)}
 body{
-font-family:‘Noto Sans Arabic’,‘Segoe UI’,Tahoma,sans-serif;
+font-family:‘Noto Sans Arabic’,‘Segoe UI’,sans-serif;
 color:var(–txt);
 min-height:100vh;
 overflow-x:hidden;
-padding-bottom:calc(2.5rem + var(–si-bot));
-/* Full dark gradient — pure CSS, no JS, always renders */
+padding-bottom:calc(2rem + var(–sib));
+/* Dark sky — pure CSS, no JS dependency */
 background:
-radial-gradient(ellipse 80% 50% at 70% -10%, rgba(30,60,140,.55) 0%, transparent 70%),
-radial-gradient(ellipse 60% 40% at 10% 80%,  rgba(10,40,100,.4)  0%, transparent 65%),
-linear-gradient(180deg, #03091a 0%, #071430 40%, #0d2250 80%, #122860 100%);
+radial-gradient(ellipse 120% 60% at 60% 0%,  #0a2560 0%,transparent 55%),
+radial-gradient(ellipse 80%  50% at 0%  80%,  #071840 0%,transparent 60%),
+linear-gradient(180deg,#040c1c 0%,#071630 45%,#0c2248 75%,#102856 100%);
 background-attachment:fixed;
 }
 
-/* ══════════════════════════════════════
-CSS-ONLY STARS (no JS)
-══════════════════════════════════════ */
+/* CSS stars */
 body::before{
-content:’’;
-position:fixed;inset:0;
-pointer-events:none;
-z-index:0;
+content:’’;position:fixed;inset:0;pointer-events:none;z-index:0;
 background-image:
-radial-gradient(1px 1px at  5%  8%, rgba(255,255,255,.7) 0%, transparent 100%),
-radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,.5) 0%, transparent 100%),
-radial-gradient(2px 2px at 25%  5%, rgba(255,255,255,.6) 0%, transparent 100%),
-radial-gradient(1px 1px at 35% 15%, rgba(255,255,255,.4) 0%, transparent 100%),
-radial-gradient(1px 1px at 45% 28%, rgba(255,255,255,.6) 0%, transparent 100%),
-radial-gradient(2px 2px at 55%  3%, rgba(255,255,255,.5) 0%, transparent 100%),
-radial-gradient(1px 1px at 65% 18%, rgba(255,255,255,.7) 0%, transparent 100%),
-radial-gradient(1px 1px at 75% 10%, rgba(255,255,255,.4) 0%, transparent 100%),
-radial-gradient(2px 2px at 85% 22%, rgba(255,255,255,.6) 0%, transparent 100%),
-radial-gradient(1px 1px at 92%  7%, rgba(255,255,255,.5) 0%, transparent 100%),
-radial-gradient(1px 1px at  8% 35%, rgba(255,255,255,.4) 0%, transparent 100%),
-radial-gradient(1px 1px at 18% 45%, rgba(255,255,255,.6) 0%, transparent 100%),
-radial-gradient(2px 2px at 28% 38%, rgba(255,255,255,.3) 0%, transparent 100%),
-radial-gradient(1px 1px at 38% 52%, rgba(255,255,255,.5) 0%, transparent 100%),
-radial-gradient(1px 1px at 48% 42%, rgba(255,255,255,.4) 0%, transparent 100%),
-radial-gradient(1px 1px at 58% 55%, rgba(255,255,255,.6) 0%, transparent 100%),
-radial-gradient(2px 2px at 68% 40%, rgba(255,255,255,.5) 0%, transparent 100%),
-radial-gradient(1px 1px at 78% 48%, rgba(255,255,255,.3) 0%, transparent 100%),
-radial-gradient(1px 1px at 88% 35%, rgba(255,255,255,.6) 0%, transparent 100%),
-radial-gradient(1px 1px at 95% 50%, rgba(255,255,255,.4) 0%, transparent 100%),
-radial-gradient(1px 1px at  3% 62%, rgba(255,255,255,.5) 0%, transparent 100%),
-radial-gradient(2px 2px at 13% 70%, rgba(255,255,255,.3) 0%, transparent 100%),
-radial-gradient(1px 1px at 23% 65%, rgba(255,255,255,.5) 0%, transparent 100%),
-radial-gradient(1px 1px at 33% 75%, rgba(255,255,255,.4) 0%, transparent 100%),
-radial-gradient(1px 1px at 43% 68%, rgba(255,255,255,.6) 0%, transparent 100%),
-radial-gradient(2px 2px at 53% 80%, rgba(255,255,255,.3) 0%, transparent 100%),
-radial-gradient(1px 1px at 63% 72%, rgba(255,255,255,.5) 0%, transparent 100%),
-radial-gradient(1px 1px at 73% 85%, rgba(255,255,255,.4) 0%, transparent 100%),
-radial-gradient(1px 1px at 83% 78%, rgba(255,255,255,.3) 0%, transparent 100%),
-radial-gradient(1px 1px at 93% 88%, rgba(255,255,255,.5) 0%, transparent 100%),
-radial-gradient(1px 1px at 10% 90%, rgba(255,255,255,.4) 0%, transparent 100%),
-radial-gradient(2px 2px at 50% 95%, rgba(255,255,255,.3) 0%, transparent 100%),
-radial-gradient(1px 1px at 70% 92%, rgba(255,255,255,.5) 0%, transparent 100%),
-radial-gradient(1px 1px at 90% 96%, rgba(255,255,255,.4) 0%, transparent 100%);
+radial-gradient(1.5px 1.5px at  4%  6%,#fff 0%,transparent 100%),
+radial-gradient(1px   1px   at 12% 18%,#fff 0%,transparent 100%),
+radial-gradient(2px   2px   at 22%  3%,#fff 0%,transparent 100%),
+radial-gradient(1px   1px   at 31% 13%,#fff 0%,transparent 100%),
+radial-gradient(1.5px 1.5px at 42% 25%,#fff 0%,transparent 100%),
+radial-gradient(1px   1px   at 54%  7%,#fff 0%,transparent 100%),
+radial-gradient(2px   2px   at 63% 19%,#fff 0%,transparent 100%),
+radial-gradient(1px   1px   at 74%  9%,#fff 0%,transparent 100%),
+radial-gradient(1.5px 1.5px at 84% 22%,#fff 0%,transparent 100%),
+radial-gradient(1px   1px   at 93%  5%,#fff 0%,transparent 100%),
+radial-gradient(1px   1px   at  7% 38%,#fff 0%,transparent 100%),
+radial-gradient(1.5px 1.5px at 19% 48%,#fff 0%,transparent 100%),
+radial-gradient(1px   1px   at 29% 33%,#fff 0%,transparent 100%),
+radial-gradient(1px   1px   at 37% 55%,#fff 0%,transparent 100%),
+radial-gradient(2px   2px   at 47% 42%,#fff 0%,transparent 100%),
+radial-gradient(1px   1px   at 57% 60%,#fff 0%,transparent 100%),
+radial-gradient(1.5px 1.5px at 67% 36%,#fff 0%,transparent 100%),
+radial-gradient(1px   1px   at 77% 50%,#fff 0%,transparent 100%),
+radial-gradient(1px   1px   at 87% 40%,#fff 0%,transparent 100%),
+radial-gradient(1px   1px   at 96% 55%,#fff 0%,transparent 100%),
+radial-gradient(1px   1px   at  2% 65%,#fff 0%,transparent 100%),
+radial-gradient(1.5px 1.5px at 14% 72%,#fff 0%,transparent 100%),
+radial-gradient(1px   1px   at 24% 68%,#fff 0%,transparent 100%),
+radial-gradient(1px   1px   at 35% 78%,#fff 0%,transparent 100%),
+radial-gradient(1px   1px   at 44% 62%,#fff 0%,transparent 100%),
+radial-gradient(2px   2px   at 52% 85%,#fff 0%,transparent 100%),
+radial-gradient(1px   1px   at 62% 70%,#fff 0%,transparent 100%),
+radial-gradient(1px   1px   at 72% 88%,#fff 0%,transparent 100%),
+radial-gradient(1.5px 1.5px at 82% 75%,#fff 0%,transparent 100%),
+radial-gradient(1px   1px   at 91% 92%,#fff 0%,transparent 100%);
+opacity:.55;
 }
-
-/* Twinkling animation via overlay */
 body::after{
-content:’’;
-position:fixed;inset:0;
-pointer-events:none;z-index:0;
+content:’’;position:fixed;inset:0;pointer-events:none;z-index:0;
 background-image:
-radial-gradient(1px 1px at 20% 12%, rgba(255,255,255,.8) 0%,transparent 100%),
-radial-gradient(1px 1px at 40%  4%, rgba(255,255,255,.6) 0%,transparent 100%),
-radial-gradient(1px 1px at 60% 25%, rgba(255,255,255,.7) 0%,transparent 100%),
-radial-gradient(1px 1px at 80%  9%, rgba(255,255,255,.5) 0%,transparent 100%),
-radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,.6) 0%,transparent 100%),
-radial-gradient(1px 1px at 70% 55%, rgba(255,255,255,.4) 0%,transparent 100%);
-animation:twinkle 4s ease-in-out infinite alternate;
+radial-gradient(2px 2px at 18% 11%,#fff 0%,transparent 100%),
+radial-gradient(1px 1px at 38%  4%,#fff 0%,transparent 100%),
+radial-gradient(2px 2px at 58% 28%,#fff 0%,transparent 100%),
+radial-gradient(1px 1px at 79%  8%,#fff 0%,transparent 100%),
+radial-gradient(1px 1px at 28% 58%,#fff 0%,transparent 100%),
+radial-gradient(2px 2px at 68% 52%,#fff 0%,transparent 100%);
+animation:tw 5s ease-in-out infinite alternate;
 }
-@keyframes twinkle{0%{opacity:.2}100%{opacity:.9}}
+@keyframes tw{0%{opacity:.15}100%{opacity:.75}}
 
-/* All content above pseudo elements */
-header,main,.wrap,footer{position:relative;z-index:1}
-
-/* ══════════════════════════════════════
-HEADER — single row, never breaks
-══════════════════════════════════════ */
+/* ─── HEADER ─── */
 header{
 position:sticky;top:0;z-index:100;
-background:rgba(3,9,26,.92);
+background:rgba(4,12,28,.93);
 backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
 border-bottom:1px solid var(–bdr);
 }
 .hdr{
+position:relative;z-index:1;
 max-width:1280px;margin:0 auto;
-display:flex;
-flex-direction:row;
-align-items:center;
-justify-content:space-between;
-gap:.6rem;
-padding:.7rem 1.1rem;
-padding-top:calc(.7rem + var(–si-top));
-min-height:0;
+display:flex;align-items:center;justify-content:space-between;
+gap:.5rem;
+padding:.65rem 1rem;
+padding-top:calc(.65rem + var(–sit));
 }
+.logo{display:flex;align-items:center;gap:.4rem;min-width:0;flex:1}
+.logo-i{font-size:1.55rem;flex-shrink:0;line-height:1}
+.logo-t{min-width:0}
+.logo-t h1{font-size:.92rem;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.logo-t p{font-size:.58rem;color:var(–mut);white-space:nowrap}
+.hdr-r{display:flex;align-items:center;gap:.3rem;flex-shrink:0}
+.lpill{
+display:flex;align-items:center;gap:.22rem;
+background:rgba(52,211,153,.09);border:1px solid rgba(52,211,153,.18);
+border-radius:9999px;padding:.2rem .55rem;
+}
+.ldot{width:5px;height:5px;background:var(–green);border-radius:50%;flex-shrink:0;animation:bl 2s ease-in-out infinite}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.15}}
+#ts{font-size:.6rem;color:var(–green);white-space:nowrap}
 
-/* Logo — right side in RTL */
-.logo{
-display:flex;align-items:center;gap:.45rem;
-min-width:0;flex:1;overflow:hidden;
+/* ─── HERO ─── */
+.hero{position:relative;z-index:1;text-align:center;padding:1.6rem 1rem 1.1rem}
+.hbadge{
+display:inline-flex;align-items:center;gap:.28rem;
+background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.16);
+border-radius:9999px;padding:.24rem .8rem;font-size:.68rem;
+color:var(–accent);margin-bottom:.7rem;
 }
-.logo-ico{font-size:1.6rem;flex-shrink:0;line-height:1}
-.logo-txt{min-width:0;overflow:hidden}
-.logo-txt h1{
-font-size:.95rem;font-weight:800;
-white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-line-height:1.2;
-}
-.logo-txt p{font-size:.6rem;color:var(–mut);white-space:nowrap;margin-top:.05rem}
+.hero p{font-size:.8rem;color:var(–mut);line-height:1.65;max-width:420px;margin:0 auto}
 
-/* Badges — left side in RTL */
-.hdr-end{
-display:flex;align-items:center;gap:.35rem;
-flex-shrink:0;
-}
-.live-pill{
-display:flex;align-items:center;gap:.25rem;
-background:rgba(52,211,153,.09);
-border:1px solid rgba(52,211,153,.2);
-border-radius:9999px;padding:.22rem .6rem;
-white-space:nowrap;
-}
-.live-dot{
-width:5px;height:5px;background:var(–green);border-radius:50%;flex-shrink:0;
-animation:bl 2s ease-in-out infinite;
-}
-@keyframes bl{0%,100%{opacity:1}50%{opacity:.2}}
-#ts{font-size:.62rem;color:var(–green)}
-.ios-hpill{
-display:flex;align-items:center;gap:.2rem;
-background:rgba(96,165,250,.09);border:1px solid rgba(96,165,250,.2);
-border-radius:9999px;padding:.22rem .58rem;
-color:var(–accent);font-size:.61rem;text-decoration:none;
-white-space:nowrap;cursor:pointer;transition:background .18s;
-}
-.ios-hpill:hover{background:rgba(96,165,250,.18)}
-
-/* ══════════════════════════════════════
-HERO
-══════════════════════════════════════ */
-.hero{text-align:center;padding:2rem 1.1rem 1.3rem}
-.hero-badge{
-display:inline-flex;align-items:center;gap:.3rem;
-background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.18);
-border-radius:9999px;padding:.26rem .85rem;font-size:.7rem;
-color:var(–accent);margin-bottom:.85rem;
-}
-.hero p{font-size:.83rem;color:var(–mut);line-height:1.7;max-width:460px;margin:0 auto}
-
-/* ══════════════════════════════════════
-TABS — always one row
-══════════════════════════════════════ */
-.tabs-outer{
-overflow-x:auto;-webkit-overflow-scrolling:touch;
-scrollbar-width:none;padding:.6rem 1.1rem .15rem;
-}
-.tabs-outer::-webkit-scrollbar{display:none}
-.tabs-inner{
-display:flex;flex-direction:row;
-gap:.35rem;
-width:max-content;   /* never wraps */
-margin:0 auto;
-}
+/* ─── TABS ─── */
+.tabs-s{position:relative;z-index:1;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:.55rem 1rem .1rem}
+.tabs-s::-webkit-scrollbar{display:none}
+.tabs-r{display:flex;flex-direction:row;gap:.3rem;width:max-content;margin:0 auto}
 .tab{
 background:var(–card);border:1px solid var(–bdr);
-border-radius:9999px;padding:.36rem .95rem;
-color:var(–mut);font-family:inherit;font-size:.78rem;
-cursor:pointer;transition:all .2s;flex-shrink:0;white-space:nowrap;
+border-radius:9999px;padding:.32rem .85rem;
+color:var(–mut);font-family:inherit;font-size:.75rem;
+cursor:pointer;transition:all .18s;flex-shrink:0;white-space:nowrap;
 }
 .tab:hover{border-color:var(–accent);color:var(–accent)}
 .tab.on{background:var(–accent);border-color:var(–accent);color:#fff;font-weight:700}
 
-/* ══════════════════════════════════════
-MAIN WRAP
-══════════════════════════════════════ */
-.wrap{max-width:1280px;margin:0 auto;padding:1.3rem 1.1rem}
+/* ─── WRAP ─── */
+.wrap{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:1.1rem 1rem}
 
-.sec-ttl{
-font-size:1rem;font-weight:700;
-margin-bottom:.9rem;
-display:flex;align-items:center;gap:.38rem;
-}
-.sec-ttl::after{content:’’;flex:1;height:1px;background:var(–bdr);margin-right:.3rem}
+.sttl{font-size:.95rem;font-weight:700;margin-bottom:.8rem;display:flex;align-items:center;gap:.35rem}
+.sttl::after{content:’’;flex:1;height:1px;background:var(–bdr);margin-right:.3rem}
 
-/* ══════════════════════════════════════
-CITY GRID + CARDS
-══════════════════════════════════════ */
+/* ─── CARDS GRID ─── */
+/* Mobile: 1 col. Tablet+: 2 col. Desktop: 3-4 col */
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fill,minmax(245px,1fr));
-gap:.85rem;margin-bottom:1.9rem;
+grid-template-columns:1fr;          /* mobile default: 1 column */
+gap:.75rem;
+margin-bottom:1.75rem;
 }
+@media(min-width:540px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1200px){.grid{grid-template-columns:repeat(4,1fr)}}
 
+/* ─── SINGLE CARD ─── */
 .card{
-background:var(–card);border:1px solid var(–bdr);
-border-radius:1.05rem;padding:1.1rem;
-backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+background:var(–card);
+border:1px solid var(–bdr);
+border-radius:var(–r);
+padding:1rem;
+backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
 cursor:pointer;
-transition:transform .25s,box-shadow .25s,border-color .25s;
+transition:transform .22s,box-shadow .22s,border-color .22s;
 position:relative;overflow:hidden;
+/* no min-height — let content decide */
 }
 .card::before{
 content:’’;position:absolute;inset:0;
-background:linear-gradient(135deg,rgba(96,165,250,.04) 0%,transparent 60%);
+background:linear-gradient(135deg,rgba(96,165,250,.04) 0%,transparent 55%);
 pointer-events:none;
 }
-.card:hover{transform:translateY(-5px);box-shadow:0 16px 42px rgba(0,0,0,.5);border-color:rgba(96,165,250,.3)}
-.card:active{transform:translateY(-2px)}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 38px rgba(0,0,0,.55);border-color:rgba(96,165,250,.28)}
+.card:active{transform:translateY(-1px)}
 
-.ctop{
-display:flex;
-flex-direction:row;          /* RTL: first child = right */
-justify-content:space-between;
-align-items:flex-start;
-margin-bottom:.65rem;
-gap:.5rem;
-}
-.cname{font-size:1.08rem;font-weight:700;line-height:1.2}
-.csub{font-size:.66rem;color:var(–mut);margin-top:.1rem}
-.cico{
-font-size:2.6rem;line-height:1;flex-shrink:0;
-filter:drop-shadow(0 2px 8px rgba(0,0,0,.5));
+/* card layout: row — text RIGHT, icon LEFT (RTL) */
+.ctop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem;gap:.4rem}
+.ctxt{min-width:0;flex:1}
+.cn{font-size:1rem;font-weight:700;line-height:1.2}
+.cs{font-size:.62rem;color:var(–mut);margin-top:.08rem}
+.ci{font-size:2.4rem;line-height:1;flex-shrink:0;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+
+/* temp row: big number left-aligned in RTL = right of screen */
+.tmp{font-size:2.3rem;font-weight:800;line-height:1}
+.tmp sup{font-size:.8rem;font-weight:400}
+.rng{font-size:.68rem;color:var(–mut);margin:.2rem 0 .48rem}
+.wd{font-size:.76rem;color:var(–accent);font-weight:500;margin-bottom:.62rem}
+
+/* stat pills row */
+.pills{display:flex;gap:.25rem;flex-wrap:wrap}
+.pil{
+display:flex;align-items:center;gap:.15rem;
+background:rgba(255,255,255,.055);border-radius:9999px;
+padding:.17rem .48rem;font-size:.65rem;color:var(–mut);
 }
 
-.temp{font-size:2.5rem;font-weight:800;line-height:1}
-.temp sup{font-size:.85rem;font-weight:400}
-.range{font-size:.7rem;color:var(–mut);margin:.22rem 0 .52rem}
-.wdesc{font-size:.78rem;color:var(–accent);font-weight:500;margin-bottom:.68rem}
-.pills{display:flex;gap:.28rem;flex-wrap:wrap}
-.pill{
-display:flex;align-items:center;gap:.16rem;
-background:rgba(255,255,255,.05);border-radius:9999px;
-padding:.18rem .5rem;font-size:.67rem;color:var(–mut);
+/* iOS mini button */
+.cbtn{
+display:inline-flex;align-items:center;gap:.16rem;
+margin-top:.55rem;
+background:rgba(96,165,250,.07);border:1px solid rgba(96,165,250,.15);
+border-radius:9999px;padding:.15rem .48rem;
+color:var(–accent);font-size:.62rem;text-decoration:none;transition:background .16s;
 }
-.ciosbtn{
-display:inline-flex;align-items:center;gap:.18rem;
-margin-top:.6rem;
-background:rgba(96,165,250,.07);border:1px solid rgba(96,165,250,.16);
-border-radius:9999px;padding:.17rem .52rem;
-color:var(–accent);font-size:.63rem;text-decoration:none;transition:background .18s;
-}
-.ciosbtn:hover{background:rgba(96,165,250,.16)}
+.cbtn:hover{background:rgba(96,165,250,.15)}
 
 /* skeleton */
-.skel{
-background:linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.09) 50%,rgba(255,255,255,.04) 75%);
-background-size:200% 100%;animation:sk 1.6s infinite;border-radius:5px;margin:.26rem 0;
-}
+.sk{background:linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.09) 50%,rgba(255,255,255,.04) 75%);background-size:200% 100%;animation:sk 1.6s infinite;border-radius:4px;margin:.22rem 0}
 @keyframes sk{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-/* ══════════════════════════════════════
-STATS
-══════════════════════════════════════ */
-.stats{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
-gap:.7rem;margin-bottom:1.9rem;
-}
-.sc{background:var(–card);border:1px solid var(–bdr);border-radius:.9rem;padding:.9rem;backdrop-filter:blur(14px);text-align:center}
-.sc .si{font-size:1.55rem;margin-bottom:.18rem}
-.sc .sv{font-size:1.3rem;font-weight:800;color:var(–gold)}
-.sc .sl{font-size:.67rem;color:var(–mut);margin-top:.15rem}
+/* ─── STATS BAR ─── */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:1.75rem}
+@media(min-width:540px){.stats{grid-template-columns:repeat(4,1fr)}}
+.sc{background:var(–card);border:1px solid var(–bdr);border-radius:var(–r);padding:.85rem .7rem;backdrop-filter:blur(14px);text-align:center}
+.sc .si{font-size:1.5rem;margin-bottom:.16rem}
+.sc .sv{font-size:1.25rem;font-weight:800;color:var(–gold)}
+.sc .sl{font-size:.63rem;color:var(–mut);margin-top:.12rem}
 
-/* ══════════════════════════════════════
-iOS SECTION
-══════════════════════════════════════ */
-.ios-sec{
-background:var(–card);border:1px solid rgba(96,165,250,.14);
-border-radius:1rem;padding:1.15rem;margin-bottom:1.9rem;backdrop-filter:blur(14px);
+/* ─── iOS SECTION ─── */
+.ios-sec{background:var(–card);border:1px solid rgba(96,165,250,.13);border-radius:var(–r);padding:1.05rem;margin-bottom:1.75rem;backdrop-filter:blur(14px)}
+.ios-sec h3{font-size:.88rem;font-weight:700;display:flex;align-items:center;gap:.3rem;margin-bottom:.28rem}
+.ios-sec p{font-size:.72rem;color:var(–mut);line-height:1.62;margin-bottom:.72rem}
+.ilnks{display:flex;gap:.3rem;flex-wrap:wrap}
+.ilnk{
+display:inline-flex;align-items:center;gap:.18rem;
+background:rgba(96,165,250,.07);border:1px solid rgba(96,165,250,.18);
+border-radius:9999px;padding:.28rem .7rem;
+color:var(–accent);font-family:inherit;font-size:.7rem;
+text-decoration:none;cursor:pointer;transition:all .16s;
 }
-.ios-sec h3{font-size:.92rem;font-weight:700;display:flex;align-items:center;gap:.32rem;margin-bottom:.32rem}
-.ios-sec p{font-size:.75rem;color:var(–mut);line-height:1.65;margin-bottom:.8rem}
-.ios-lnks{display:flex;gap:.35rem;flex-wrap:wrap}
-.ios-lnk{
-display:inline-flex;align-items:center;gap:.2rem;
-background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);
-border-radius:9999px;padding:.3rem .75rem;
-color:var(–accent);font-family:inherit;font-size:.73rem;
-text-decoration:none;cursor:pointer;transition:all .18s;
-}
-.ios-lnk:hover{background:rgba(96,165,250,.18);transform:translateY(-1px)}
+.ilnk:hover{background:rgba(96,165,250,.17);transform:translateY(-1px)}
 
-/* ══════════════════════════════════════
-MODAL — bottom sheet mobile / centered desktop
-══════════════════════════════════════ */
+/* ─── MODAL ─── */
 .ov{
 position:fixed;inset:0;z-index:200;
-background:rgba(0,0,0,.82);
-backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+background:rgba(0,0,0,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
 display:flex;align-items:flex-end;justify-content:center;
-opacity:0;pointer-events:none;transition:opacity .25s;
+opacity:0;pointer-events:none;transition:opacity .22s;
 }
 .ov.on{opacity:1;pointer-events:all}
 .modal{
-background:linear-gradient(160deg,#070f22,#0f2040);
+background:linear-gradient(160deg,#060f22,#0d2040);
 border:1px solid var(–bdr);
-border-radius:1.3rem 1.3rem 0 0;
-width:100%;max-width:660px;
-max-height:90vh;overflow-y:auto;
--webkit-overflow-scrolling:touch;
-padding:1.25rem 1.1rem calc(1.25rem + var(–si-bot));
+border-radius:1.2rem 1.2rem 0 0;
+width:100%;max-width:640px;
+max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;
+padding:1.15rem 1rem calc(1.15rem + var(–sib));
 transform:translateY(60px);
-transition:transform .32s cubic-bezier(.33,1.4,.6,1);
+transition:transform .3s cubic-bezier(.33,1.35,.6,1);
 }
 .ov.on .modal{transform:translateY(0)}
 @media(min-width:640px){
 .ov{align-items:center;padding:1rem}
-.modal{border-radius:1.3rem;padding:1.75rem;transform:scale(.94)}
+.modal{border-radius:1.2rem;padding:1.6rem;transform:scale(.94)}
 .ov.on .modal{transform:scale(1)}
 }
-.mhandle{width:34px;height:3px;background:rgba(255,255,255,.15);border-radius:2px;margin:0 auto 1rem}
-.mcls{float:left;background:rgba(255,255,255,.08);border:none;color:var(–txt);border-radius:9999px;width:1.8rem;height:1.8rem;cursor:pointer;font-size:.88rem;transition:background .18s}
-.mcls:hover{background:rgba(255,255,255,.16)}
-.mname{font-size:1.55rem;font-weight:800}
-.msub{font-size:.73rem;color:var(–mut);margin:.12rem 0 .7rem}
-.mico{font-size:3.5rem;line-height:1;margin:.4rem 0}
-.mtemp{font-size:3.3rem;font-weight:800;line-height:1}
-.mdesc{font-size:.85rem;color:var(–accent);font-weight:500;margin:.28rem 0 1rem}
-.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:.48rem;margin-bottom:1rem}
-.di{background:rgba(255,255,255,.05);border-radius:.65rem;padding:.68rem .75rem;display:flex;align-items:center;gap:.45rem}
-.di-i{font-size:1.15rem;flex-shrink:0}
-.di-l{font-size:.62rem;color:var(–mut)}
-.di-v{font-size:.85rem;font-weight:600}
-.fstrip{margin-bottom:1rem}
-.fstrip h4,.mchart h4{color:var(–mut);font-weight:500;margin-bottom:.55rem;font-size:.78rem}
-.fdays{display:flex;gap:.35rem;overflow-x:auto;padding-bottom:.25rem;-webkit-overflow-scrolling:touch}
-.fday{flex:0 0 auto;background:rgba(255,255,255,.05);border-radius:.62rem;padding:.55rem .65rem;text-align:center;min-width:58px}
-.fn{font-size:.6rem;color:var(–mut);margin-bottom:.12rem}
-.fi{font-size:1.2rem;margin-bottom:.12rem}
-.fh{font-size:.78rem;font-weight:600}
-.fl{font-size:.63rem;color:var(–mut)}
-.mchart{margin-bottom:1rem}
-.bars{display:flex;gap:.18rem;align-items:flex-end;height:68px}
-.bw{flex:1;display:flex;flex-direction:column;align-items:center;gap:.12rem}
-.b{width:100%;border-radius:3px 3px 0 0;background:linear-gradient(to top,#1d4ed8,#60a5fa);min-height:3px;transition:height .6s ease}
-.bl{font-size:.5rem;color:var(–mut)}
-.mios{
-display:flex;align-items:center;justify-content:center;gap:.3rem;
-background:rgba(96,165,250,.07);border:1px solid rgba(96,165,250,.18);
-border-radius:.72rem;padding:.65rem;margin-top:.95rem;
-color:var(–accent);text-decoration:none;font-size:.78rem;font-weight:500;
-cursor:pointer;transition:background .18s;
+.mh{width:32px;height:3px;background:rgba(255,255,255,.14);border-radius:2px;margin:0 auto .95rem}
+.mcl{float:left;background:rgba(255,255,255,.08);border:none;color:var(–txt);border-radius:9999px;width:1.75rem;height:1.75rem;cursor:pointer;font-size:.85rem;transition:background .16s}
+.mcl:hover{background:rgba(255,255,255,.15)}
+.mn{font-size:1.5rem;font-weight:800}
+.msb{font-size:.7rem;color:var(–mut);margin:.1rem 0 .65rem}
+.mwi{font-size:3.2rem;line-height:1;margin:.35rem 0}
+.mtp{font-size:3rem;font-weight:800;line-height:1}
+.mds{font-size:.82rem;color:var(–accent);font-weight:500;margin:.25rem 0 .9rem}
+.dg{display:grid;grid-template-columns:1fr 1fr;gap:.42rem;margin-bottom:.9rem}
+.di{background:rgba(255,255,255,.05);border-radius:.6rem;padding:.62rem .7rem;display:flex;align-items:center;gap:.4rem}
+.dii{font-size:1.1rem;flex-shrink:0}
+.dil{font-size:.6rem;color:var(–mut)}
+.div{font-size:.82rem;font-weight:600}
+.fst{margin-bottom:.9rem}
+.fst h4,.mch h4{color:var(–mut);font-weight:500;margin-bottom:.5rem;font-size:.75rem}
+.fds{display:flex;gap:.32rem;overflow-x:auto;padding-bottom:.22rem;-webkit-overflow-scrolling:touch}
+.fd{flex:0 0 auto;background:rgba(255,255,255,.05);border-radius:.58rem;padding:.5rem .6rem;text-align:center;min-width:55px}
+.fdn{font-size:.58rem;color:var(–mut);margin-bottom:.1rem}
+.fdi{font-size:1.1rem;margin-bottom:.1rem}
+.fdh{font-size:.74rem;font-weight:600}
+.fdl{font-size:.6rem;color:var(–mut)}
+.mch{margin-bottom:.9rem}
+.bs{display:flex;gap:.16rem;align-items:flex-end;height:64px}
+.bw{flex:1;display:flex;flex-direction:column;align-items:center;gap:.1rem}
+.b{width:100%;border-radius:3px 3px 0 0;background:linear-gradient(to top,#1d4ed8,#60a5fa);min-height:3px;transition:height .55s ease}
+.bl{font-size:.48rem;color:var(–mut)}
+.mib{
+display:flex;align-items:center;justify-content:center;gap:.28rem;
+background:rgba(96,165,250,.07);border:1px solid rgba(96,165,250,.16);
+border-radius:.68rem;padding:.6rem;margin-top:.88rem;
+color:var(–accent);text-decoration:none;font-size:.75rem;font-weight:500;
+cursor:pointer;transition:background .16s;
 }
-.mios:hover{background:rgba(96,165,250,.16)}
+.mib:hover{background:rgba(96,165,250,.15)}
 
-/* footer */
-footer{text-align:center;padding:1.4rem 1.1rem;border-top:1px solid var(–bdr);color:var(–mut);font-size:.7rem}
-
-/* ── Responsive ── */
-@media(max-width:400px){
-.grid{grid-template-columns:1fr}
-.stats{grid-template-columns:1fr 1fr}
-.dgrid{grid-template-columns:1fr}
-.logo-txt p{display:none}
-}
-@media(max-width:500px){.ios-hpill{display:none}}
+/* ─── FOOTER ─── */
+footer{position:relative;z-index:1;text-align:center;padding:1.25rem 1rem;border-top:1px solid var(–bdr);color:var(–mut);font-size:.67rem}
 
 ::-webkit-scrollbar{width:3px;height:3px}
 ::-webkit-scrollbar-track{background:rgba(255,255,255,.02)}
-::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:2px}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.11);border-radius:2px}
 </style>
 
 </head>
 <body>
 
-<!-- ══ HEADER ══ -->
+<!-- HEADER -->
 
 <header>
   <div class="hdr">
     <div class="logo">
-      <span class="logo-ico">⛅</span>
-      <div class="logo-txt">
+      <span class="logo-i">⛅</span>
+      <div class="logo-t">
         <h1>کەش و هەوای کوردستان</h1>
         <p>داتای ڕاستەقینە — نوێکراوەتەوە بە خودکاری</p>
       </div>
     </div>
-    <div class="hdr-end">
-      <div class="live-pill"><div class="live-dot"></div><span id="ts">بارکردن...</span></div>
-      <a class="ios-hpill" href="#ios-sec">🍎 Weather</a>
+    <div class="hdr-r">
+      <div class="lpill"><div class="ldot"></div><span id="ts">بارکردن...</span></div>
     </div>
   </div>
 </header>
 
-<!-- ══ HERO ══ -->
+<!-- HERO -->
 
 <div class="hero">
-  <div class="hero-badge">🛰️ Open-Meteo API &middot; داتای ئەمڕۆ &middot; خودکاری</div>
+  <div class="hbadge">🛰️ Open-Meteo API &middot; داتای ئەمڕۆ</div>
   <p>زانیاری ڕاستەقینە و نوێی کەش و هەوای شارەکانی هەرێمی کوردستان — هەموو ڕۆژێک نوێدەبێتەوە</p>
 </div>
 
-<!-- ══ TABS ══ -->
+<!-- TABS -->
 
-<div class="tabs-outer">
-  <div class="tabs-inner">
-    <button class="tab on"  onclick="flt('all',this)">🌍 هەموو</button>
-    <button class="tab"     onclick="flt('hewler',this)">هەولێر</button>
-    <button class="tab"     onclick="flt('slemani',this)">سلێمانی</button>
-    <button class="tab"     onclick="flt('duhok',this)">دهۆک</button>
-    <button class="tab"     onclick="flt('other',this)">شارەکانی تر</button>
+<div class="tabs-s">
+  <div class="tabs-r">
+    <button class="tab on" onclick="flt('all',this)">🌍 هەموو</button>
+    <button class="tab"    onclick="flt('hewler',this)">هەولێر</button>
+    <button class="tab"    onclick="flt('slemani',this)">سلێمانی</button>
+    <button class="tab"    onclick="flt('duhok',this)">دهۆک</button>
+    <button class="tab"    onclick="flt('other',this)">شارەکانی تر</button>
   </div>
 </div>
 
-<!-- ══ MAIN ══ -->
+<!-- MAIN -->
 
 <div class="wrap">
-  <div class="sec-ttl">🏙️ شارەکانی کوردستان</div>
+  <div class="sttl">🏙️ شارەکانی کوردستان</div>
   <div class="grid" id="grid"></div>
 
-  <div class="sec-ttl">📊 ئامارەکانی ئەمڕۆ</div>
+  <div class="sttl">📊 ئامارەکانی ئەمڕۆ</div>
   <div class="stats">
-    <div class="sc"><div class="si">🌡️</div><div class="sv" id="sH">—</div><div class="sl">گەرمترین شار</div></div>
-    <div class="sc"><div class="si">❄️</div><div class="sv" id="sC">—</div><div class="sl">سارترین شار</div></div>
-    <div class="sc"><div class="si">💧</div><div class="sv" id="sHm">—</div><div class="sl">شێوداترین شار</div></div>
-    <div class="sc"><div class="si">💨</div><div class="sv" id="sW">—</div><div class="sl">بایی زۆرترین</div></div>
+    <div class="sc"><div class="si">🌡️</div><div class="sv" id="sH">—</div><div class="sl">گەرمترین</div></div>
+    <div class="sc"><div class="si">❄️</div><div class="sv" id="sC">—</div><div class="sl">سارترین</div></div>
+    <div class="sc"><div class="si">💧</div><div class="sv" id="sHm">—</div><div class="sl">شێوداترین</div></div>
+    <div class="sc"><div class="si">💨</div><div class="sv" id="sW">—</div><div class="sl">بایی زۆر</div></div>
   </div>
 
-  <div class="sec-ttl" id="ios-sec">📱 ئەپی Weather ئەپڵ</div>
+  <div class="sttl" id="ios-sec">📱 ئەپی Weather ئەپڵ</div>
   <div class="ios-sec">
     <h3>🍎 کرانەوە لە iOS Weather App</h3>
-    <p>کلیک بکە لەسەر ناوی شار — ڕاستەوخۆ ئەپی کەش و هەوای ئەپڵ دەکرێتەوە. تەنها لە ئایفۆن و ئایپاد کاردەکات.</p>
-    <div class="ios-lnks" id="iosLnks"></div>
+    <p>کلیک بکە لەسەر ناوی شار — ڕاستەوخۆ ئەپی کەش و هەوای ئەپڵ دەکرێتەوە. تەنها لە ئایفۆن کاردەکات.</p>
+    <div class="ilnks" id="ilnks"></div>
   </div>
 </div>
 
-<!-- ══ MODAL ══ -->
+<!-- MODAL -->
 
-<div class="ov" id="ov" onclick="ovClick(event)">
-  <div class="modal" id="mb"><div class="mhandle"></div></div>
+<div class="ov" id="ov" onclick="ovck(event)">
+  <div class="modal" id="mb"><div class="mh"></div></div>
 </div>
 
 <footer>
   <p>© ٢٠٢٥ کەش و هەوای کوردستان &middot; داتا لە <strong>Open-Meteo.com</strong></p>
-  <p style="margin-top:.22rem;font-size:.62rem">هەر ٣٠ خولەک نوێدەبێتەوە بە خودکاری</p>
+  <p style="margin-top:.18rem;font-size:.6rem">هەر ٣٠ خولەک نوێدەبێتەوە</p>
 </footer>
 
 <script>
-const CITIES=[
-  {id:'hewler', n:'هەولێر',  s:'پایتەختی کوردستان',    g:'hewler',  lat:36.191,lon:44.009,el:426, pop:'١.٥ ملیۆن'},
-  {id:'slemani',n:'سلێمانی', s:'پایتەختی کەلتووری',    g:'slemani', lat:35.557,lon:45.435,el:831, pop:'٧٢٣ هەزار'},
-  {id:'duhok',  n:'دهۆک',    s:'گەورەترین شاری باکوور',g:'duhok',   lat:36.867,lon:42.983,el:630, pop:'٣٨٠ هەزار'},
-  {id:'zakho',  n:'زاخۆ',    s:'دەروازەی کوردستان',    g:'other',   lat:37.144,lon:42.685,el:430, pop:'١٥٠ هەزار'},
-  {id:'halabja',n:'هەڵەبجە', s:'شاری یاداوەری',        g:'other',   lat:35.178,lon:45.986,el:720, pop:'١١٠ هەزار'},
-  {id:'soran',  n:'سۆران',   s:'کرستاڵی کوردستان',     g:'other',   lat:36.651,lon:44.541,el:850, pop:'١٠٠ هەزار'},
-  {id:'kirkuk', n:'کەرکووک', s:'شاری نەفت و کولتووری', g:'other',   lat:35.468,lon:44.392,el:331, pop:'٩٠٠ هەزار'},
-  {id:'rania',  n:'ڕانیە',   s:'شاری چیا و دەریاچە',   g:'other',   lat:36.258,lon:44.714,el:750, pop:'٦٠ هەزار'},
+const C=[
+  {id:'hewler', n:'هەولێر',  s:'پایتەختی کوردستان',    g:'hewler',  lat:36.191,lon:44.009,el:426, p:'١.٥ ملیۆن'},
+  {id:'slemani',n:'سلێمانی', s:'پایتەختی کەلتووری',    g:'slemani', lat:35.557,lon:45.435,el:831, p:'٧٢٣ هەزار'},
+  {id:'duhok',  n:'دهۆک',    s:'گەورەترین شاری باکوور',g:'duhok',   lat:36.867,lon:42.983,el:630, p:'٣٨٠ هەزار'},
+  {id:'zakho',  n:'زاخۆ',    s:'دەروازەی کوردستان',    g:'other',   lat:37.144,lon:42.685,el:430, p:'١٥٠ هەزار'},
+  {id:'halabja',n:'هەڵەبجە', s:'شاری یاداوەری',        g:'other',   lat:35.178,lon:45.986,el:720, p:'١١٠ هەزار'},
+  {id:'soran',  n:'سۆران',   s:'کرستاڵی کوردستان',     g:'other',   lat:36.651,lon:44.541,el:850, p:'١٠٠ هەزار'},
+  {id:'kirkuk', n:'کەرکووک', s:'شاری نەفت و کولتووری', g:'other',   lat:35.468,lon:44.392,el:331, p:'٩٠٠ هەزار'},
+  {id:'rania',  n:'ڕانیە',   s:'شاری چیا و دەریاچە',   g:'other',   lat:36.258,lon:44.714,el:750, p:'٦٠ هەزار'},
 ];
-const DKU=['یەکشەممە','دووشەممە','سێشەممە','چوارشەممە','پێنجشەممە','هەینی','شەممە'];
+const DK=['یەکشەممە','دووشەممە','سێشەممە','چوارشەممە','پێنجشەممە','هەینی','شەممە'];
 const MS=['ک.د','شو','ئا','نی','ئی','حو','تم','ئب','ئل','ت.ی','ت.د','ک.ی'];
 const MA={
   hewler:[11,13,18,24,31,38,43,42,36,27,18,12],slemani:[5,7,11,17,23,30,34,33,28,20,12,7],
@@ -491,29 +396,34 @@ const MA={
   halabja:[4,6,10,16,22,29,33,32,27,19,11,6],soran:[3,5,9,15,21,28,32,31,26,18,10,5],
   kirkuk:[9,11,16,22,30,37,43,42,36,27,17,11],rania:[4,6,10,16,22,29,33,32,27,19,11,6],
 };
+
 function wmo(c){
-  if(c===0)return{d:'ئاسمانی روون',e:'☀️'};if(c<=2)return{d:'نیوەوەر',e:'🌤️'};
-  if(c===3)return{d:'داپۆشراو',e:'☁️'};if(c<=48)return{d:'مەڵبەندی',e:'🌫️'};
-  if(c<=55)return{d:'نمی کەم',e:'🌦️'};if(c<=67)return{d:'باران',e:'🌧️'};
-  if(c<=77)return{d:'بەفر',e:'🌨️'};if(c<=82)return{d:'باران بووندەرە',e:'🌧️'};
+  if(c===0)return{d:'ئاسمانی روون',e:'☀️'};
+  if(c<=2)return{d:'نیوەوەر',e:'🌤️'};
+  if(c===3)return{d:'داپۆشراو',e:'☁️'};
+  if(c<=48)return{d:'مەڵبەندی',e:'🌫️'};
+  if(c<=55)return{d:'نمی کەم',e:'🌦️'};
+  if(c<=67)return{d:'باران',e:'🌧️'};
+  if(c<=77)return{d:'بەفر',e:'🌨️'};
+  if(c<=82)return{d:'باران بووندەرە',e:'🌧️'};
   return{d:'گەوزە',e:'⛈️'};
 }
-function openIOS(n,lat,lon){window.location.href=`maps://maps.apple.com/?ll=${lat},${lon}&q=${encodeURIComponent(n)}`;}
+function ios(n,lat,lon){window.location.href=`maps://maps.apple.com/?ll=${lat},${lon}&q=${encodeURIComponent(n)}`;}
 const pad=n=>String(n).padStart(2,'0');
 
 let WD={},FD={},CF='all';
 
 // iOS links
-document.getElementById('iosLnks').innerHTML=
-  CITIES.map(c=>`<a class="ios-lnk" onclick="openIOS('${c.n}',${c.lat},${c.lon})" href="#">📍 ${c.n}</a>`).join('');
+document.getElementById('ilnks').innerHTML=
+  C.map(c=>`<a class="ilnk" onclick="ios('${c.n}',${c.lat},${c.lon})" href="#">📍 ${c.n}</a>`).join('');
 
 async function fetchAll(){
   skel();
-  await Promise.all(CITIES.map(async c=>{
+  await Promise.all(C.map(async c=>{
     try{
-      const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,apparent_temperature,precipitation&daily=temperature_2m_max,temperature_2m_min,weather_code,precipitation_sum&timezone=Asia%2FBaghdad&forecast_days=7`);
-      const d=await r.json();
-      WD[c.id]={t:Math.round(d.current.temperature_2m),f:Math.round(d.current.apparent_temperature),h:d.current.relative_humidity_2m,w:Math.round(d.current.wind_speed_10m),c:d.current.weather_code,p:d.current.precipitation};
+      const u=`https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,apparent_temperature,precipitation&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=Asia%2FBaghdad&forecast_days=7`;
+      const d=await(await fetch(u)).json();
+      WD[c.id]={t:Math.round(d.current.temperature_2m),f:Math.round(d.current.apparent_temperature),h:d.current.relative_humidity_2m,w:Math.round(d.current.wind_speed_10m),c:d.current.weather_code,pr:d.current.precipitation};
       FD[c.id]=d.daily;
     }catch{WD[c.id]=null;}
   }));
@@ -523,96 +433,100 @@ async function fetchAll(){
 }
 
 function skel(){
-  const list=CITIES.filter(c=>CF==='all'||c.g===CF);
+  const list=C.filter(c=>CF==='all'||c.g===CF);
   document.getElementById('grid').innerHTML=list.map(()=>`
-    <div class="card" style="opacity:.38;pointer-events:none">
+    <div class="card" style="opacity:.35;pointer-events:none">
       <div class="ctop">
-        <div style="flex:1"><div class="skel" style="width:55%;height:15px"></div><div class="skel" style="width:36%;height:8px;margin-top:.25rem"></div></div>
-        <div class="skel" style="width:42px;height:42px;border-radius:50%"></div>
+        <div class="ctxt">
+          <div class="sk" style="width:55%;height:14px"></div>
+          <div class="sk" style="width:35%;height:8px;margin-top:.2rem"></div>
+        </div>
+        <div class="sk" style="width:38px;height:38px;border-radius:50%"></div>
       </div>
-      <div class="skel" style="width:75px;height:34px;margin:.32rem 0"></div>
-      <div class="skel" style="width:48%;height:8px"></div>
-      <div class="skel" style="width:62%;height:8px;margin-top:.22rem"></div>
+      <div class="sk" style="width:70px;height:32px;margin:.28rem 0"></div>
+      <div class="sk" style="width:45%;height:8px"></div>
+      <div class="sk" style="width:58%;height:8px;margin-top:.2rem"></div>
     </div>`).join('');
 }
 
 function draw(){
-  const list=CITIES.filter(c=>CF==='all'||c.g===CF);
-  if(!list.length){document.getElementById('grid').innerHTML='<p style="color:var(--mut);grid-column:1/-1;text-align:center;padding:2rem">هیچ شارێک نەدۆزرایەوە</p>';return;}
+  const list=C.filter(c=>CF==='all'||c.g===CF);
+  if(!list.length){
+    document.getElementById('grid').innerHTML='<p style="color:var(--mut);text-align:center;padding:2rem;grid-column:1/-1">هیچ شارێک نەدۆزرایەوە</p>';
+    return;
+  }
   document.getElementById('grid').innerHTML=list.map(city=>{
     const w=WD[city.id];
-    if(!w)return`<div class="card" style="border-color:rgba(248,113,113,.25)">
-      <div class="cname">${city.n}</div>
-      <p style="color:var(--red);font-size:.73rem;margin-top:.42rem">❌ هەڵەی پەیوەندی</p>
-      <button onclick="fetchAll()" style="margin-top:.6rem;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.22);color:var(--red);border-radius:9999px;padding:.2rem .6rem;cursor:pointer;font-family:inherit;font-size:.68rem">دووبارە</button>
+    if(!w)return`<div class="card" style="border-color:rgba(248,113,113,.22)">
+      <div class="cn">${city.n}</div>
+      <p style="color:var(--red);font-size:.7rem;margin-top:.4rem">❌ هەڵەی پەیوەندی</p>
+      <button onclick="fetchAll()" style="margin-top:.55rem;background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.2);color:var(--red);border-radius:9999px;padding:.18rem .55rem;cursor:pointer;font-family:inherit;font-size:.65rem">دووبارە</button>
     </div>`;
     const{d,e}=wmo(w.c);const fd=FD[city.id];
-    return`<div class="card" onclick="openModal('${city.id}')">
+    return`<div class="card" onclick="openM('${city.id}')">
       <div class="ctop">
-        <div><div class="cname">${city.n}</div><div class="csub">${city.s}</div></div>
-        <div class="cico">${e}</div>
+        <div class="ctxt"><div class="cn">${city.n}</div><div class="cs">${city.s}</div></div>
+        <div class="ci">${e}</div>
       </div>
-      <div class="temp">${w.t}<sup>°C</sup></div>
-      <div class="range">${fd?`کەمترین ${Math.round(fd.temperature_2m_min[0])}° &middot; زۆرترین ${Math.round(fd.temperature_2m_max[0])}°`:''}</div>
-      <div class="wdesc">${d}</div>
+      <div class="tmp">${w.t}<sup>°C</sup></div>
+      <div class="rng">${fd?`کەمترین ${Math.round(fd.temperature_2m_min[0])}° &middot; زۆرترین ${Math.round(fd.temperature_2m_max[0])}°`:''}</div>
+      <div class="wd">${d}</div>
       <div class="pills">
-        <div class="pill">💧 ${w.h}٪</div>
-        <div class="pill">💨 ${w.w} km/h</div>
-        <div class="pill">🌡️ هەست ${w.f}°</div>
+        <div class="pil">💧 ${w.h}٪</div>
+        <div class="pil">💨 ${w.w} km/h</div>
+        <div class="pil">🌡️ ${w.f}°</div>
       </div>
-      <a class="ciosbtn" onclick="event.stopPropagation();openIOS('${city.n}',${city.lat},${city.lon})" href="#">🍎 Weather App</a>
+      <a class="cbtn" onclick="event.stopPropagation();ios('${city.n}',${city.lat},${city.lon})" href="#">🍎 Weather</a>
     </div>`;
   }).join('');
 }
 
 function sts(){
-  const ok=CITIES.filter(c=>WD[c.id]);if(!ok.length)return;
-  const hot=ok.reduce((a,b)=>WD[a.id].t>WD[b.id].t?a:b);
-  const cld=ok.reduce((a,b)=>WD[a.id].t<WD[b.id].t?a:b);
-  const hum=ok.reduce((a,b)=>WD[a.id].h>WD[b.id].h?a:b);
-  const wnd=ok.reduce((a,b)=>WD[a.id].w>WD[b.id].w?a:b);
-  document.getElementById('sH').textContent=`${hot.n} ${WD[hot.id].t}°`;
-  document.getElementById('sC').textContent=`${cld.n} ${WD[cld.id].t}°`;
-  document.getElementById('sHm').textContent=`${hum.n} ${WD[hum.id].h}٪`;
-  document.getElementById('sW').textContent=`${wnd.n} ${WD[wnd.id].w}km/h`;
+  const ok=C.filter(c=>WD[c.id]);if(!ok.length)return;
+  const h=ok.reduce((a,b)=>WD[a.id].t>WD[b.id].t?a:b);
+  const cl=ok.reduce((a,b)=>WD[a.id].t<WD[b.id].t?a:b);
+  const hm=ok.reduce((a,b)=>WD[a.id].h>WD[b.id].h?a:b);
+  const wn=ok.reduce((a,b)=>WD[a.id].w>WD[b.id].w?a:b);
+  document.getElementById('sH').textContent=`${h.n} ${WD[h.id].t}°`;
+  document.getElementById('sC').textContent=`${cl.n} ${WD[cl.id].t}°`;
+  document.getElementById('sHm').textContent=`${hm.n} ${WD[hm.id].h}٪`;
+  document.getElementById('sW').textContent=`${wn.n} ${WD[wn.id].w}km/h`;
 }
 
-function flt(g,btn){
-  CF=g;document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));btn.classList.add('on');draw();
-}
+function flt(g,btn){CF=g;document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));btn.classList.add('on');draw();}
 
-function openModal(id){
-  const city=CITIES.find(c=>c.id===id);const w=WD[id];if(!w)return;
+function openM(id){
+  const city=C.find(c=>c.id===id);const w=WD[id];if(!w)return;
   const{d,e}=wmo(w.c);const fd=FD[id];const mon=MA[id]||MA.hewler;const mx=Math.max(...mon);
-  const today=new Date();
+  const t0=new Date();
   const fcH=fd?fd.temperature_2m_max.slice(0,7).map((_,i)=>{
-    const dd=new Date(today);dd.setDate(dd.getDate()+i);const fi=wmo(fd.weather_code[i]);
-    return`<div class="fday"><div class="fn">${i===0?'ئەمڕۆ':DKU[dd.getDay()]}</div><div class="fi">${fi.e}</div><div class="fh">${Math.round(fd.temperature_2m_max[i])}°</div><div class="fl">${Math.round(fd.temperature_2m_min[i])}°</div></div>`;
+    const dd=new Date(t0);dd.setDate(dd.getDate()+i);const fi=wmo(fd.weather_code[i]);
+    return`<div class="fd"><div class="fdn">${i===0?'ئەمڕۆ':DK[dd.getDay()]}</div><div class="fdi">${fi.e}</div><div class="fdh">${Math.round(fd.temperature_2m_max[i])}°</div><div class="fdl">${Math.round(fd.temperature_2m_min[i])}°</div></div>`;
   }).join(''):'';
-  const bH=mon.map((t,i)=>`<div class="bw"><div class="b" style="height:${(t/mx*62+6).toFixed(0)}px"></div><div class="bl">${MS[i]}</div></div>`).join('');
+  const bH=mon.map((v,i)=>`<div class="bw"><div class="b" style="height:${(v/mx*58+6).toFixed(0)}px"></div><div class="bl">${MS[i]}</div></div>`).join('');
   document.getElementById('mb').innerHTML=`
-    <div class="mhandle"></div>
-    <button class="mcls" onclick="closeM()">✕</button>
-    <div class="mname">${city.n}</div>
-    <div class="msub">${city.s} &middot; بەرزی ${city.el}م &middot; نووفوس ${city.pop}</div>
-    <div class="mico">${e}</div>
-    <div class="mtemp">${w.t}°<span style="font-size:1.15rem;font-weight:400">C</span></div>
-    <div class="mdesc">${d}</div>
-    <div class="dgrid">
-      <div class="di"><span class="di-i">🌡️</span><div><div class="di-l">هەستی پلە</div><div class="di-v">${w.f}°C</div></div></div>
-      <div class="di"><span class="di-i">💧</span><div><div class="di-l">شێوی ئاو</div><div class="di-v">${w.h}٪</div></div></div>
-      <div class="di"><span class="di-i">💨</span><div><div class="di-l">بایەزگا</div><div class="di-v">${w.w} km/h</div></div></div>
-      <div class="di"><span class="di-i">🌧️</span><div><div class="di-l">باران</div><div class="di-v">${w.p} mm</div></div></div>
-      ${fd?`<div class="di"><span class="di-i">☀️</span><div><div class="di-l">زۆرترین ئەمڕۆ</div><div class="di-v">${Math.round(fd.temperature_2m_max[0])}°C</div></div></div><div class="di"><span class="di-i">🌙</span><div><div class="di-l">کەمترین ئەمڕۆ</div><div class="di-v">${Math.round(fd.temperature_2m_min[0])}°C</div></div></div>`:''}
+    <div class="mh"></div>
+    <button class="mcl" onclick="closeM()">✕</button>
+    <div class="mn">${city.n}</div>
+    <div class="msb">${city.s} &middot; ${city.el}م &middot; ${city.p}</div>
+    <div class="mwi">${e}</div>
+    <div class="mtp">${w.t}°<span style="font-size:1.1rem;font-weight:400">C</span></div>
+    <div class="mds">${d}</div>
+    <div class="dg">
+      <div class="di"><span class="dii">🌡️</span><div><div class="dil">هەستی پلە</div><div class="div">${w.f}°C</div></div></div>
+      <div class="di"><span class="dii">💧</span><div><div class="dil">شێوی ئاو</div><div class="div">${w.h}٪</div></div></div>
+      <div class="di"><span class="dii">💨</span><div><div class="dil">بایەزگا</div><div class="div">${w.w} km/h</div></div></div>
+      <div class="di"><span class="dii">🌧️</span><div><div class="dil">باران</div><div class="div">${w.pr} mm</div></div></div>
+      ${fd?`<div class="di"><span class="dii">☀️</span><div><div class="dil">زۆرترین ئەمڕۆ</div><div class="div">${Math.round(fd.temperature_2m_max[0])}°</div></div></div><div class="di"><span class="dii">🌙</span><div><div class="dil">کەمترین ئەمڕۆ</div><div class="div">${Math.round(fd.temperature_2m_min[0])}°</div></div></div>`:''}
     </div>
-    ${fd?`<div class="fstrip"><h4>📅 پێشبینی ٧ ڕۆژ</h4><div class="fdays">${fcH}</div></div>`:''}
-    <div class="mchart"><h4>📊 نێرگەی پلەی گەرمی مانگ بە مانگ</h4><div class="bars">${bH}</div></div>
-    <a class="mios" onclick="openIOS('${city.n}',${city.lat},${city.lon})" href="#">🍎 کرانەوە لە Weather App — ${city.n}</a>
+    ${fd?`<div class="fst"><h4>📅 پێشبینی ٧ ڕۆژ</h4><div class="fds">${fcH}</div></div>`:''}
+    <div class="mch"><h4>📊 نێرگەی پلەی گەرمی مانگ بە مانگ</h4><div class="bs">${bH}</div></div>
+    <a class="mib" onclick="ios('${city.n}',${city.lat},${city.lon})" href="#">🍎 کرانەوە لە Weather App — ${city.n}</a>
   `;
   document.getElementById('ov').classList.add('on');document.body.style.overflow='hidden';
 }
 function closeM(){document.getElementById('ov').classList.remove('on');document.body.style.overflow='';}
-function ovClick(e){if(e.target===document.getElementById('ov'))closeM();}
+function ovck(e){if(e.target===document.getElementById('ov'))closeM();}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM();});
 
 fetchAll();
